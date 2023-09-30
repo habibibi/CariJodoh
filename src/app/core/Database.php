@@ -16,9 +16,9 @@ class Database
         }
 
         try {
+            $this->db_connection->exec(Tables::USER_TABLE);
             $this->db_connection->exec(Tables::PROFILE_TABLE);
-            $this->db_connection->exec(Tables::PROFILE_DESC_TABLE);
-            $this->db_connection->exec(Tables::PROFILE_CONTACT_TABLE);
+            $this->db_connection->exec(Tables::USER_CONTACT_TABLE);
             $this->db_connection->exec(Tables::DATE_TABLE);
             $this->db_connection->exec(Tables::NOTIFICATION_TABLE);
         } catch (PDOException) {
