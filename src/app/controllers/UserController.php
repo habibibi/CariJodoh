@@ -10,4 +10,14 @@ class UserController extends Controller {
         $loginView = $this->view('user', 'LoginView');
         $loginView->render();
     }
+
+    public function register(){
+        $registerView = $this->view('user', 'RegisterView');
+        $registerView->render();
+    }
+
+    public function profile(){
+        $profileView = $this->view('user', 'ProfileView');
+        $profileView->render();
+    }
 }
