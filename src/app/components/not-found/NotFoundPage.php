@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@300&family=Poppins:wght@400;600;700&family=Sofadi+One&display=swap" rel="stylesheet">
     <title>Page Not Found!</title>
 </head>
 <body>
@@ -10,7 +14,11 @@
         include(__DIR__ . '/../main/navbar/Navbar.php');
     ?>
 
-    <p>Sorry, we couldn't find the page that you were looking for!</p>
+    <div class="not-found">
+        <img src="<?= BASE_URL ?>/images/assets/404.png" alt="404"/>
+        <h1>NOT FOUND</h1>
+        <p>Sorry, we couldn't find the page that you were looking for!</p>
+    </div>
 
     <?php
         include(__DIR__ . '/../main/Footer/Footer.php');
