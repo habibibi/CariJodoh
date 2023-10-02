@@ -17,9 +17,25 @@ body {
   text-align: center;
 }
 
-.admin-sidebar img,
-.admin > img {
+.logout-admin {
+  margin: 0 auto;
+  background-color: #ff91a4;
+  font-family: "Poppins";
+  border: 0;
+  padding: 1rem;
+  cursor: pointer;
+  color: white;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.admin-sidebar img {
   width: 30rem;
+}
+
+.admin > img {
+  margin: 0 auto;
+  width: 25rem;
 }
 
 .admin-notif-outer {

@@ -14,13 +14,34 @@
     <?php
         include(__DIR__ . '/../main/navbar/NavbarAdmin.php');
     ?>
-    <main class="admin">
+    <main class="admin flex-col">
         <h1>Admin Dashboard</h1>
         <p>Welcome to admin's dashboard!</p>
         <img src="<?= BASE_URL ?>/images/assets/admin.png" alt="admin" />
+        <button class="logout-admin">Logout</button>
     </main>
     <?php
         include(__DIR__ . '/../main/Footer/Footer.php');
     ?>
+    <script>
+        const logout = document.querySelector(".logout-admin");
+        logout.addEventListener("click", async function(e) {
+            e.preventDefault();
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "/public/user/logout");
+            xhr.send();
+
+            xhr.onreadystatechange = function () {
+                if (this.readyState === XMLHttpRequest.DONE) {
+                    if (this.status === 201) {
+                        const data = JSON.parse(this.responseText);
+                        location.replace(data.redirect_url);
+                    } else {
+                        alert("An error occured, please try again!");
+                    }
+                }
+            };
+        })
+    </script>
 </body>
 </html>

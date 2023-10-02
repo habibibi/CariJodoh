@@ -45,7 +45,7 @@
             e.preventDefault();
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
-            console.log(username, password)
+
             const xhr = new XMLHttpRequest();
             xhr.open("POST", "/public/user/login");
 
