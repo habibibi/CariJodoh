@@ -1,3 +1,3 @@
 <footer>
-    <p>Created by Kelompok 35</p>
+    <span>Created by Kelompok 35</span>
 </footer>
