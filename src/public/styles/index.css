@@ -58,7 +58,7 @@ footer {
 }
 
 main {
-  min-height: 74vh;
+  min-height: 82.5vh;
 }
 
 footer span {
@@ -72,7 +72,10 @@ footer span {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 4rem;
+  padding-top: 4rem;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
 
 .not-found p {
