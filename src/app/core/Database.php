@@ -5,9 +5,13 @@ class Database
     private $db_connection;
     private $statement;
 
-    public function __construct()
+    public function __construct($port=3306)
     {
-        $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";user=" . DB_USER . ";password=" . DB_PASSWORD;
+        if($port == 3306){
+            $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";user=" . DB_USER . ";password=" . DB_PASSWORD;
+        } else {
+            $dsn = "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";user=" . DB_USER . ";password=" . DB_PASSWORD;
+        }
 
         try {
             $this->db_connection = new PDO($dsn);
