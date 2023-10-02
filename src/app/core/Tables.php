@@ -8,13 +8,14 @@ class Tables
         username            VARCHAR(20)     NOT NULL,
         password            VARCHAR(64)     NOT NULL,
         role                VARCHAR(20)     NOT NULL
-    ";
+    );";
 
     public const PROFILE_TABLE =
     "CREATE TABLE IF NOT EXISTS profile (
         user_id             INT             PRIMARY KEY,
         nama_panggilan      VARCHAR(64),
         nama_lengkap        VARCHAR(128),
+        gender              VARCHAR(64),
         umur                INT,
         hobi                VARCHAR(256),
         interest            VARCHAR(256),
@@ -35,7 +36,7 @@ class Tables
         user_id             INT             PRIMARY KEY,
         contact_person      VARCHAR(255),
         FOREIGN KEY (user_id) REFERENCES user(user_id)
-    ";
+    );";
 
     public const DATE_TABLE =
     "CREATE TABLE IF NOT EXISTS date (
