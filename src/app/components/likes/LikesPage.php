@@ -13,7 +13,7 @@
     <?php
         include(__DIR__ . '/../main/navbar/Navbar.php');
     ?>
-
+    <main></main>
     <?php
         include(__DIR__ . '/../main/Footer/Footer.php');
     ?>
