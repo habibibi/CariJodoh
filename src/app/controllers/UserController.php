@@ -17,7 +17,9 @@ class UserController extends Controller {
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
-                    if ($this->middleware->checkAuthenticated()) {
+                    if($this->middleware->checkAdmin()){
+                        header('Location: ' . BASE_URL . '/user/admin');
+                    } else if ($this->middleware->checkAuthenticated()) {
                         header('Location: ' . BASE_URL . '/recommendation');
                     } else {
                         $loginView = $this->view('user', 'LoginView');
@@ -31,7 +33,12 @@ class UserController extends Controller {
 
                     header('Content-Type: application/json');
                     http_response_code(201);
-                    echo json_encode(["redirect_url" => BASE_URL . "/recommendation"]);
+
+                    if($this->middleware->checkAdmin()){
+                        echo json_encode(["redirect_url" => BASE_URL . "/user/admin"]);
+                    } else {
+                        echo json_encode(["redirect_url" => BASE_URL . "/recommendation"]);
+                    }        
                     break;
                 default:
                     throw new Exception('Method Not Allowed', 405);
@@ -46,7 +53,9 @@ class UserController extends Controller {
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
-                    if ($this->middleware->checkAuthenticated()) {
+                    if($this->middleware->checkAdmin()){
+                        header('Location: ' . BASE_URL . '/user/admin');
+                    } else if ($this->middleware->checkAuthenticated()) {
                         header('Location: ' . BASE_URL . '/recommendation');
                     } else {
                         $registerView = $this->view('user', 'RegisterView');
@@ -116,5 +125,71 @@ class UserController extends Controller {
     public function profile(){
         $profileView = $this->view('user', 'ProfileView');
         $profileView->render();
+    }
+
+    public function admin(){
+        try {
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'GET':
+                    if($this->middleware->checkAdmin()){
+                        $adminView = $this->view('user', 'AdminView');
+                        $adminView->render();
+                    } else if($this->middleware->checkAuthenticated()) {
+                        header('Location: ' . BASE_URL . '/recommendation');
+                    } else {
+                        header('Location: ' . BASE_URL . '/user/login');
+                    }
+                    break;
+                default:
+                    throw new Exception('Method Not Allowed', 405);
+            }
+        } catch (Exception $e) {
+            http_response_code($e->getCode());
+            exit;
+        }
+    }
+
+    public function admin_notifications(){
+        try {
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'GET':
+                    if($this->middleware->checkAdmin()){
+                        $adminNotificationsView = $this->view('user', 'AdminNotificationsView');
+                        $adminNotificationsView->render();
+                    } else if($this->middleware->checkAuthenticated()) {
+                        header('Location: ' . BASE_URL . '/recommendation');
+                    } else {
+                        header('Location: ' . BASE_URL . '/user/login');
+                    }
+                    break;
+                default:
+                    throw new Exception('Method Not Allowed', 405);
+            }
+        } catch (Exception $e) {
+            http_response_code($e->getCode());
+            exit;
+        }
+    }
+
+    public function admin_likes(){
+        try {
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'GET':
+                    if($this->middleware->checkAdmin()){
+                        $adminLikesView = $this->view('user', 'AdminLikesView');
+                        $adminLikesView->render();
+                    } else if($this->middleware->checkAuthenticated()) {
+                        header('Location: ' . BASE_URL . '/recommendation');
+                    } else {
+                        header('Location: ' . BASE_URL . '/user/login');
+                    }
+                    break;
+                default:
+                    throw new Exception('Method Not Allowed', 405);
+            }
+        } catch (Exception $e) {
+            http_response_code($e->getCode());
+            exit;
+        }
     }
 }

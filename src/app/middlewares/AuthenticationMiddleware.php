@@ -29,6 +29,26 @@ class AuthenticationMiddleware
         return true;
     }
 
+    public function checkAdmin()
+    {
+        if (!isset($_SESSION['user_id'])) {
+            return false;
+        }
+
+        $query = 'SELECT role FROM user WHERE user_id = :user_id LIMIT 1';
+
+        $this->database->query($query);
+        $this->database->bind('user_id', $_SESSION['user_id']);
+
+        $user = $this->database->fetch();
+
+        if ($user->role != "admin") {
+            return false;
+        }
+
+        return true;
+    }
+
     public function isAuthenticated()
     {
         if (!isset($_SESSION['user_id'])) {
