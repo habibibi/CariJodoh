@@ -192,4 +192,23 @@ class UserController extends Controller {
             exit;
         }
     }
+
+    public function logout(){
+        try {
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'POST':
+                    unset($_SESSION['user_id']);
+
+                    header('Content-Type: application/json');
+                    http_response_code(201);
+                    echo json_encode(["redirect_url" => BASE_URL . "/user/login"]);
+                    break;
+                default:
+                    throw new Exception('Method Not Allowed', 405);
+            }
+        } catch (Exception $e){
+            http_response_code($e->getCode());
+            exit;
+        }
+    }
 }
