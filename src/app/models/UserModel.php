@@ -45,6 +45,15 @@ class UserModel
             'cost' => 10,
         ];
 
+        // Check if user already exists
+        $query = 'SELECT user_id FROM user WHERE username = :username LIMIT 1';
+        $this->database->query($query);
+        $this->database->bind('username', $username);
+        $user = $this->database->fetch();
+        if($user){
+            throw new Exception('Username already exists', 409);
+        }
+
         // Insert user data into the 'user' table
         $query = 'INSERT INTO user (username, password, role) VALUES (:username, :password, :role)';
         $this->database->query($query);

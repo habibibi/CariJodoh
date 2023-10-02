@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     <div class="register-form-container" id="section2">
-                        <h1>CariJodoh</h1>
+                        <h3>Lengkapi Data Anda</h3>
                         <div class="main-form-register">
                             <input id="fullName" type="text" placeholder="Nama Lengkap"/>
                             <div class="flex-row">
@@ -347,6 +347,8 @@
                     if (this.status === 201) {
                         const data = JSON.parse(this.responseText);
                         location.replace(data.redirect_url);
+                    } else if(this.status == 409) {
+                        alert("Username sudah ada!");
                     } else {
                         alert("An error occured, please try again!");
                     }
