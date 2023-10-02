@@ -1,8 +1,30 @@
 <?php
 
 class NotificationController extends Controller {
+    private $middleware;
+
+    public function __construct()
+    {
+        $this->middleware = $this->middleware("AuthenticationMiddleware");
+    }
+
     public function index(){
-        $notificationView = $this->view('notification', 'NotificationView');
-        $notificationView->render();
+        try {
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'GET':
+                    if (!$this->middleware->checkAuthenticated()) {
+                        header('Location: ' . BASE_URL . '/user/login');
+                    } else {
+                        $notificationView = $this->view('notification', 'NotificationView');
+                        $notificationView->render();
+                    }
+                    break;
+                default:
+                    throw new Exception('Method Not Allowed', 405);
+            }
+        } catch (Exception $e) {
+            http_response_code($e->getCode());
+            exit;
+        }
     }
 }
