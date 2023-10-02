@@ -1,0 +1,57 @@
+.recommend {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.recommend h1 {
+  text-align: center;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.recommend-container {
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.card-profile {
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  background-color: #ff91a4;
+  border: 1px solid black;
+  border-radius: 20px;
+  align-items: center;
+  padding: 1rem;
+}
+
+.desc-profile {
+  width: 100%;
+}
+
+.gap-1 {
+  gap: 1.5rem;
+}
+
+.img-profile {
+  width: 100%;
+  display: flex;
+}
+
+.img-profile img {
+  margin: 0 auto;
+}
+
+.detail-info {
+  width: 33%;
+}
+
+.card-nama {
+  text-align: center;
+}
