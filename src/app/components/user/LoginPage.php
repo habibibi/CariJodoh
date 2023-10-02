@@ -19,9 +19,9 @@
                         <h1>CariJodoh</h1>
                         <h2>Selamat datang kembali!</h2>
                         <form class="main-form-login">
-                            <input type="username" placeholder="Username"/>
-                            <input type="password" placeholder="Password"/>
-                            <button>MASUK</button>
+                            <input type="username" placeholder="Username" id="username"/>
+                            <input type="password" placeholder="Password" id="password"/>
+                            <button type="submit">MASUK</button>
                         </form>
                         <div class="login-register">
                             Belum punya akun? <a href="/public/user/register">Daftar</a>
@@ -37,5 +37,36 @@
             </div>
         </div>
     </div>
+    <script>
+        const formLogin = document.querySelector(".main-form-login");
+
+        // AJAX
+        formLogin.addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            console.log(username, password)
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "/public/user/login");
+
+            const formData = new FormData();
+            formData.append("username", username);
+            formData.append("password", password);
+
+            xhr.send(formData);
+            xhr.onreadystatechange = function () {
+                if (this.readyState === XMLHttpRequest.DONE) {
+                    if (this.status === 201) {
+                        const data = JSON.parse(this.responseText);
+                        location.replace(data.redirect_url);
+                    } else if(this.status === 401){
+                        alert("Username atau password salah!");
+                    } else {
+                        alert("An error occured, please try again!");
+                    }
+                }
+            };
+        })
+    </script>
 </body>
 </html>

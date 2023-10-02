@@ -63,13 +63,15 @@
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
-  width: 50%;
+  width: 70%;
 }
 
-.main-form-register input {
+input {
   width: 100%;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   padding: 1rem;
-  font-size: larger;
 }
 
 .main-form-register button {
@@ -82,4 +84,41 @@
 .login-register {
   margin-top: 1rem;
   font-size: larger;
+}
+
+#section2,
+#section3 {
+  display: none;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 1rem;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.w-half {
+  width: 50%;
+}
+
+.select-option {
+  width: 100%;
+  padding: 1rem;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.input-statis {
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
