@@ -12,7 +12,9 @@ class RecommendationController extends Controller {
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
-                    if (!$this->middleware->checkAuthenticated()) {
+                    if($this->middleware->checkAdmin()){
+                        header('Location: ' . BASE_URL . '/user/admin');
+                    } else if (!$this->middleware->checkAuthenticated()) {
                         header('Location: ' . BASE_URL . '/user/login');
                     } else {
                         $recommendationView = $this->view('recommendation', 'RecommendationView');
