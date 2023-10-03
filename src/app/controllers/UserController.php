@@ -35,8 +35,10 @@ class UserController extends Controller {
                     http_response_code(201);
 
                     if($this->middleware->checkAdmin()){
+                        $_SESSION['role'] = 'admin';
                         echo json_encode(["redirect_url" => BASE_URL . "/user/admin"]);
                     } else {
+                        $_SESSION['role'] = 'user';
                         echo json_encode(["redirect_url" => BASE_URL . "/recommendation"]);
                     }        
                     break;
@@ -91,6 +93,7 @@ class UserController extends Controller {
                     // Call the register method with the extracted data
                     $userId = $userModel->register($username, $password, $fullName, $name, $age, $contact, $hobby, $interest, $tinggiBadan, $agama, $domisili, $loveLanguage, $mbti, $zodiac, $ketidaksukaan, $imageFile, $videoFile, $gender);
                     $_SESSION['user_id'] = $userId;
+                    $_SESSION['role'] = 'user';
 
                     header('Content-Type: application/json');
                     http_response_code(201);
@@ -112,10 +115,11 @@ class UserController extends Controller {
                     $userModel = $this->model('UserModel');
                     $userId = $userModel->register_admin($_POST['username'], $_POST['password']);
                     $_SESSION['user_id'] = $userId;
-
+                    $_SESSION['role'] = 'admin';
+    
                     header('Content-Type: application/json');
                     http_response_code(201);
-                    echo json_encode(["redirect_url" => BASE_URL . "/recommendation"]);
+                    echo json_encode(["redirect_url" => BASE_URL . "/user/admin"]);
                     break;
                 default:
                     throw new Exception('Method Not Allowed', 405);
@@ -219,7 +223,7 @@ class UserController extends Controller {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'POST':
                     unset($_SESSION['user_id']);
-
+                    unset($_SESSION['role']);
                     header('Content-Type: application/json');
                     http_response_code(201);
                     echo json_encode(["redirect_url" => BASE_URL . "/user/login"]);

@@ -65,6 +65,8 @@ class AuthenticationMiddleware
         if (!$user) {
             throw new Exception('Unauthorized', 401);
         }
+
+        return true;
     }
 
     public function isAdmin()
@@ -83,5 +85,7 @@ class AuthenticationMiddleware
         if ($user->role != "admin") {
             throw new Exception('Unauthorized', 401);
         }
+
+        return true;
     }
 }
