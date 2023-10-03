@@ -70,8 +70,13 @@ class UserModel
         $userId = $user->user_id;
 
         // Insert additional profile data into the 'profile' table
-        $query = 'INSERT INTO profile (user_id, nama_panggilan, nama_lengkap, umur, hobi, interest, tinggi_badan, agama, domisili, love_language, mbti, zodiak, ketidaksukaan, gambar_profile, video_perkenalan, gender) 
+        if($videoFile){
+            $query = 'INSERT INTO profile (user_id, nama_panggilan, nama_lengkap, umur, hobi, interest, tinggi_badan, agama, domisili, love_language, mbti, zodiak, ketidaksukaan, gambar_profile, video_perkenalan, gender) 
                 VALUES (:user_id, :nama_panggilan, :nama_lengkap, :umur, :hobi, :interest, :tinggi_badan, :agama, :domisili, :love_language, :mbti, :zodiak, :ketidaksukaan, :gambar_profile, :video_perkenalan, :gender)';
+        } else {
+            $query = 'INSERT INTO profile (user_id, nama_panggilan, nama_lengkap, umur, hobi, interest, tinggi_badan, agama, domisili, love_language, mbti, zodiak, ketidaksukaan, gambar_profile, gender) 
+                VALUES (:user_id, :nama_panggilan, :nama_lengkap, :umur, :hobi, :interest, :tinggi_badan, :agama, :domisili, :love_language, :mbti, :zodiak, :ketidaksukaan, :gambar_profile, :gender)';
+        }
         $this->database->query($query);
         $this->database->bind('user_id', $userId);
         $this->database->bind('nama_panggilan', $name);
