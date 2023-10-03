@@ -81,7 +81,11 @@ class UserController extends Controller {
                     $zodiac = $formData['zodiac'];
                     $ketidaksukaan = $formData['ketidaksukaan'];
                     $imageFile = $_FILES['imageFile'];
-                    $videoFile = $_FILES['videoFile'];
+                    if(isset($_FILES['videoFile'])){
+                        $videoFile = $_FILES['videoFile'];
+                    } else {
+                        $videoFile = null;
+                    }
                     $gender = $formData['gender'];
 
                     // Call the register method with the extracted data
@@ -123,8 +127,25 @@ class UserController extends Controller {
     }
 
     public function profile(){
-        $profileView = $this->view('user', 'ProfileView');
-        $profileView->render();
+        try {
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'GET':
+                    if($this->middleware->checkAdmin()){
+                        header('Location: ' . BASE_URL . '/user/admin');
+                    } else if($this->middleware->checkAuthenticated()) {
+                        $profileView = $this->view('user', 'ProfileView');
+                        $profileView->render();
+                    } else {
+                        header('Location: ' . BASE_URL . '/user/login');
+                    }
+                    break;
+                default:
+                    throw new Exception('Method Not Allowed', 405);
+            }
+        } catch (Exception $e) {
+            http_response_code($e->getCode());
+            exit;
+        }
     }
 
     public function admin(){
