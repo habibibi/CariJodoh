@@ -54,6 +54,8 @@ class NotificationModel
         
         // Execute the query
         $this->database->execute();
+
+        return $this->getPagesCount();
     }
 
     public function getPagesCount($userId=null){
@@ -109,6 +111,20 @@ class NotificationModel
         $this->database->bind('userIdReceiver', $userIdReceiver);
         $this->database->bind('isiNotifikasi', $isiNotifikasi);
         $this->database->bind('sudahDibaca', $sudahDibaca);
+        
+        // Execute the query
+        $this->database->execute();
+    }
+
+    public function readNotification($notificationId){
+        // Define the UPDATE query
+        $query = 'UPDATE notification 
+                SET sudah_dibaca = true 
+                WHERE notification_id = :notificationId';
+        
+        // Bind parameters and execute the query
+        $this->database->query($query);
+        $this->database->bind('notificationId', $notificationId);
         
         // Execute the query
         $this->database->execute();
