@@ -34,18 +34,16 @@ class NotificationController extends Controller {
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
-                    if ($params) {
-                        if($this->middleware->isAuthenticated()){
-                            $notifModel = $this->model('NotificationModel');
-                            $result = $notifModel->getNotificationsByUserId((int) $params, $_GET['page']);
-
-                            header('Content-Type: application/json');
-                            http_response_code(200);
-                            echo json_encode($result);
-                        }
-                    } else if($this->middleware->isAdmin()){
+                    if($this->middleware->checkAdmin()){
                         $notifModel = $this->model('NotificationModel');
                         $result = $notifModel->getNotifications($_GET['page']);
+
+                        header('Content-Type: application/json');
+                        http_response_code(200);
+                        echo json_encode($result);
+                    } else if($this->middleware->isAuthenticated()) {
+                        $notifModel = $this->model('NotificationModel');
+                        $result = $notifModel->getNotificationsByUserId($_SESSION['user_id'], $_GET['page']);
 
                         header('Content-Type: application/json');
                         http_response_code(200);
@@ -66,11 +64,12 @@ class NotificationController extends Controller {
                     if ($params) {
                         if($this->middleware->isAuthenticated()){
                             $notifModel = $this->model('NotificationModel');
-                            $notifModel->readNotifications((int) $params);
+                            $notifModel->readNotification((int) $params);
+                            $result = $notifModel->getNotificationsByUserId($_SESSION['user_id'], 1);
 
                             header('Content-Type: application/json');
                             http_response_code(200);
-                            echo json_encode(["message" => "Update Notifikasi berhasil."]);
+                            echo json_encode($result);
                         }
                     } else {
                         throw new Exception('Not Found', 404);
@@ -113,6 +112,32 @@ class NotificationController extends Controller {
 
                         $notifModel = $this->model('NotificationModel');
                         $notifModel->updateNotification((int) $notificationId, $jenisNotifikasi, $userIdSender, $userIdReceiver, $isiNotifikasi, $sudahDibaca);
+
+                        header('Content-Type: application/json');
+                        http_response_code(201);
+                        echo json_encode(["message" => "Update Notifikasi berhasil."]);
+                    } else {
+                        throw new Exception('Not Found', 404);
+                    }
+                    break;
+                default:
+                    throw new Exception('Method Not Allowed', 405);
+            }
+        } catch (Exception $e) {
+            http_response_code($e->getCode());
+            exit;
+        }
+    }
+
+    public function likes($notificationId) {
+        try {
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'POST':
+                    if ($notificationId && isset($_POST['user_id'])) {
+                        $userId = $_POST['user_id'];
+
+                        $notifModel = $this->model('NotificationModel');
+                        $notifModel->likeNotification((int) $notificationId, $_SESSION['user_id'], $userId);
 
                         header('Content-Type: application/json');
                         http_response_code(201);

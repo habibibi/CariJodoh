@@ -26,7 +26,14 @@ class LikesModel
 
     public function getLikesByUserId($userId, $page = 1){
         // Define query
-        $query = 'SELECT * FROM date WHERE (user_id_1 = :userId) LIMIT :limit OFFSET :offset';
+        $query = '
+            SELECT date.user_id_2, profile.nama_lengkap, user_contact.contact_person  
+            FROM date
+            JOIN profile on date.user_id_2 = profile.user_id
+            JOIN user_contact on user_contact.user_id = date.user_id_2
+            WHERE (date.user_id_1 = :userId) 
+            LIMIT :limit OFFSET :offset
+        ';
         $this->database->query($query);
         $this->database->bind('limit', 6);
         $this->database->bind('offset', ($page - 1) * 6);

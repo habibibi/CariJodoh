@@ -34,18 +34,16 @@ class LikesController extends Controller {
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
-                    if ($params) {
-                        if($this->middleware->isAuthenticated()){
-                            $likesModel = $this->model('LikesModel');
-                            $result = $likesModel->getLikesByUserId((int) $params, $_GET['page']);
-
-                            header('Content-Type: application/json');
-                            http_response_code(200);
-                            echo json_encode($result);
-                        }
-                    } else if($this->middleware->isAdmin()){
+                    if($this->middleware->checkAdmin()){
                         $likesModel = $this->model('LikesModel');
                         $result = $likesModel->getLikes($_GET['page']);
+
+                        header('Content-Type: application/json');
+                        http_response_code(200);
+                        echo json_encode($result);
+                    } else if($this->middleware->isAuthenticated()){
+                        $likesModel = $this->model('LikesModel');
+                        $result = $likesModel->getLikesByUserId($_SESSION['user_id'], $_GET['page']);
 
                         header('Content-Type: application/json');
                         http_response_code(200);

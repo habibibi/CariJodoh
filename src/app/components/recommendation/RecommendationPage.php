@@ -14,7 +14,7 @@
     <?php
         include(__DIR__ . '/../main/navbar/Navbar.php');
     ?>
-    <div class="recommend">
+    <main class="recommend">
         <h1>Discover Your Matches</h1>
         <div class="flex-row">
             <div class="ml-auto flex-row gap-4">
@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="recommend-container"></div>
-    </div>
+    </main>
     <?php
         include(__DIR__ . '/../main/Footer/Footer.php');
     ?>

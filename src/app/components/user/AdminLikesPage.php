@@ -259,7 +259,7 @@
                 prevButton.disabled = false;
             }
 
-            if (currentPage == totalPages) {
+            if (currentPage == totalPages || totalPages == 0) {
                 nextButton.disabled = true;
             } else {
                 nextButton.disabled = false;

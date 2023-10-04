@@ -2,6 +2,9 @@
   max-width: 1440px;
   margin: 0 auto;
   padding: 1rem;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
 
 .recommend h1 {
@@ -18,7 +21,6 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  min-height: 62vh;
 }
 
 .card-profile {

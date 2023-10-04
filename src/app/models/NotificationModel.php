@@ -26,7 +26,7 @@ class NotificationModel
 
     public function getNotificationsByUserId($userId, $page = 1){
         // Define query
-        $query = 'SELECT * FROM notification WHERE (user_id_receiver = :userId) LIMIT :limit OFFSET :offset';
+        $query = 'SELECT * FROM notification WHERE (user_id_receiver = :userId) AND sudah_dibaca = false LIMIT :limit OFFSET :offset';
         $this->database->query($query);
         $this->database->bind('limit', 6);
         $this->database->bind('offset', ($page - 1) * 6);
@@ -61,7 +61,7 @@ class NotificationModel
     public function getPagesCount($userId=null){
         if($userId != null){
             // Define query
-            $query = 'SELECT COUNT(*) AS count FROM notification WHERE (user_id_receiver = :userId)';
+            $query = 'SELECT COUNT(*) AS count FROM notification WHERE (user_id_receiver = :userId) AND sudah_dibaca = false';
             $this->database->query($query);
             $this->database->bind('userId', $userId);
 
@@ -127,6 +127,24 @@ class NotificationModel
         $this->database->bind('notificationId', $notificationId);
         
         // Execute the query
+        $this->database->execute();
+    }
+
+    public function likeNotification($notificationId, $user_id_1, $user_id_2){
+        // Read notification
+        $this->readNotification($notificationId);
+
+        // Create date for both user
+        $query = 'INSERT INTO date (user_id_1, user_id_2) VALUES (:userId1, :userId2)';
+        $this->database->query($query);
+        $this->database->bind('userId1', $user_id_1);
+        $this->database->bind('userId2', $user_id_2);
+        $this->database->execute();
+
+        $query = 'INSERT INTO date (user_id_1, user_id_2) VALUES (:userId1, :userId2)';
+        $this->database->query($query);
+        $this->database->bind('userId1', $user_id_2);
+        $this->database->bind('userId2', $user_id_1);
         $this->database->execute();
     }
 }
