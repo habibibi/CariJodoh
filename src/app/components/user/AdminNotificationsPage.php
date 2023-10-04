@@ -525,7 +525,7 @@
             xhr.send(formData);
             xhr.onreadystatechange = function () {
                 if (this.readyState === XMLHttpRequest.DONE) {
-                    if (this.status === 200) {
+                    if (this.status === 201) {
                         loadNotifications(1);
                         popupEdit.style.display = 'none';
                         overlay.style.display = 'none';

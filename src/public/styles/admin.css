@@ -38,7 +38,8 @@ body {
   width: 25rem;
 }
 
-.admin-notif-outer {
+.admin-notif-outer,
+.admin-likes-outer {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -53,7 +54,8 @@ body {
   width: 40%;
 }
 
-.admin-notification {
+.admin-notification,
+.admin-likes {
   width: 60%;
   display: flex;
   flex-direction: column;
@@ -169,7 +171,10 @@ body {
 
 .popup-delete-notif,
 .popup-add-notif,
-.popup-edit-notif {
+.popup-edit-notif,
+.popup-delete-likes,
+.popup-add-likes,
+.popup-edit-likes {
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -228,6 +233,10 @@ body {
 .popup-edit-notif input[type="text"],
 .popup-add-notif input[type="number"],
 .popup-edit-notif input[type="number"],
+.popup-add-likes input[type="text"],
+.popup-edit-likes input[type="text"],
+.popup-add-likes input[type="number"],
+.popup-edit-likes input[type="number"],
 select {
   width: 100%;
   padding: 10px;

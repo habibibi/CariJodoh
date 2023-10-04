@@ -51,6 +51,8 @@ class LikesModel
         
         // Execute the query
         $this->database->execute();
+
+        return $this->getPagesCount();
     }
 
     public function getPagesCount($userId=null){
@@ -92,7 +94,7 @@ class LikesModel
         // Define the UPDATE query
         $query = 'UPDATE date 
                 SET user_id_1 = :userId1, 
-                    user_id_2 = :userId2, 
+                    user_id_2 = :userId2 
                 WHERE date_id = :dateId';
         
         // Bind parameters and execute the query
