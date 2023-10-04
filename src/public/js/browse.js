@@ -76,8 +76,11 @@ function loadProfiles(pageNumber) {
             const response = JSON.parse(xhr.responseText);
             let profilesGrid = document.querySelector('.profiles-grid');
             profilesGrid.innerHTML = '';
+
             if (response.pageCount == 0) {
-                document.querySelector('.browser-container').innerHTML += '<h1 class="no-data">Maaf ya, gaada yg cocok :(</h1>';
+                var x = document.querySelector('.no-data');
+                if (!x)
+                    document.querySelector('.browser-container').innerHTML += '<h1 class="no-data">Maaf ya, gaada yg cocok :(</h1>';
                 return;
             } else {
                 var x = document.querySelector('.no-data');
