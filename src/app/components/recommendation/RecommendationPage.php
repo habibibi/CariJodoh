@@ -16,122 +16,78 @@
     ?>
     <div class="recommend">
         <h1>Discover Your Matches</h1>
-        <div class="recommend-container">
-            <div class="flex-row gap-1">
-                <div class="card-profile">
-                    <div class="img-profile">
-                        <img src="<?= BASE_URL ?>/images/icons/profile.png" alt="profile"/>
-                    </div>
-                    <div class="desc-profile">
-                        <p class="card-nama">Test Nama</p>
-                        <p>Lokasi: Tangerang Selatan</p>
-                        <p>Hobi: Main Game</p>
-                        <p>Interest: Coding</p>
-                        <div class="flex-row items-center margin-auto">
-                            <span class="detail-info">Umur: 22 Tahun</span>
-                            <span class="detail-info">Tinggi: 160 cm</span>
-                            <span class="detail-info">Agama: Islam</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-profile">
-                    <div class="img-profile">
-                        <img src="<?= BASE_URL ?>/images/icons/profile.png" alt="profile"/>
-                    </div>
-                    <div class="desc-profile">
-                        <p class="card-nama">Test Nama</p>
-                        <p>Lokasi: Tangerang Selatan</p>
-                        <p>Hobi: Main Game</p>
-                        <p>Interest: Coding</p>
-                        <div class="flex-row items-center margin-auto">
-                            <span class="detail-info">Umur: 22 Tahun</span>
-                            <span class="detail-info">Tinggi: 160 cm</span>
-                            <span class="detail-info">Agama: Islam</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-profile">
-                    <div class="img-profile">
-                        <img src="<?= BASE_URL ?>/images/icons/profile.png" alt="profile"/>
-                    </div>
-                    <div class="desc-profile">
-                        <p class="card-nama">Test Nama</p>
-                        <p>Lokasi: Tangerang Selatan</p>
-                        <p>Hobi: Main Game</p>
-                        <p>Interest: Coding</p>
-                        <div class="flex-row items-center margin-auto">
-                            <span class="detail-info">Umur: 22 Tahun</span>
-                            <span class="detail-info">Tinggi: 160 cm</span>
-                            <span class="detail-info">Agama: Islam</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="flex-row gap-1">
-                <div class="card-profile">
-                    <div class="img-profile">
-                        <img src="<?= BASE_URL ?>/images/icons/profile.png" alt="profile"/>
-                    </div>
-                    <div class="desc-profile">
-                        <p class="card-nama">Test Nama</p>
-                        <p>Lokasi: Tangerang Selatan</p>
-                        <p>Hobi: Main Game</p>
-                        <p>Interest: Coding</p>
-                        <div class="flex-row items-center margin-auto">
-                            <span class="detail-info">Umur: 22 Tahun</span>
-                            <span class="detail-info">Tinggi: 160 cm</span>
-                            <span class="detail-info">Agama: Islam</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-profile">
-                    <div class="img-profile">
-                        <img src="<?= BASE_URL ?>/images/icons/profile.png" alt="profile"/>
-                    </div>
-                    <div class="desc-profile">
-                        <p class="card-nama">Test Nama</p>
-                        <p>Lokasi: Tangerang Selatan</p>
-                        <p>Hobi: Main Game</p>
-                        <p>Interest: Coding</p>
-                        <div class="flex-row items-center margin-auto">
-                            <span class="detail-info">Umur: 22 Tahun</span>
-                            <span class="detail-info">Tinggi: 160 cm</span>
-                            <span class="detail-info">Agama: Islam</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-profile">
-                    <div class="img-profile">
-                        <img src="<?= BASE_URL ?>/images/icons/profile.png" alt="profile"/>
-                    </div>
-                    <div class="desc-profile">
-                        <p class="card-nama">Test Nama</p>
-                        <p>Lokasi: Tangerang Selatan</p>
-                        <p>Hobi: Main Game</p>
-                        <p>Interest: Coding</p>
-                        <div class="flex-row items-center margin-auto">
-                            <span class="detail-info">Umur: 22 Tahun</span>
-                            <span class="detail-info">Tinggi: 160 cm</span>
-                            <span class="detail-info">Agama: Islam</span>
-                        </div>
-                    </div>
-                </div>
+        <div class="flex-row">
+            <div class="ml-auto flex-row gap-4">
+                <span>Cocokkan dengan:</span>
+                <select id="recommend-by">
+                    <option value="mbti" selected>MBTI</option>
+                    <option value="agama">Agama</option>
+                    <option value="zodiak">Zodiak</option>
+                </select>
             </div>
         </div>
-        <div class="pagination">
-            <div class="pagination-tab">
-                <button id="prevPage"><</button>
-                <button>1</button>
-                <button>2</button>
-                <button>...</button>
-                <button>9</button>
-                <button>10</button>
-                <button id="nextPage">></button>
-            </div>
-        </div>
+        <div class="recommend-container"></div>
     </div>
     <?php
         include(__DIR__ . '/../main/Footer/Footer.php');
     ?>
+
+    <script>
+        function card_profile(userId, namaLengkap, domisili, hobi, interest, umur, tinggi, agama) {
+            const result = `
+                <div class="card-profile">
+                    <div class="img-profile">
+                        <img src="<?= BASE_URL ?>/images/profile/${userId}.jpg" alt="profile"/>
+                    </div>
+                    <div class="desc-profile">
+                        <p class="card-nama">${namaLengkap}</p>
+                        <p>Lokasi: ${namaLengkap}</p>
+                        <p>Hobi: ${hobi}</p>
+                        <p>Interest: ${interest}</p>
+                        <div class="flex-row items-center margin-auto">
+                            <span class="detail-info">Umur: ${umur} Tahun</span>
+                            <span class="detail-info">Tinggi: ${tinggi} cm</span>
+                            <span class="detail-info">Agama: ${agama}</span>
+                        </div>
+                    </div>
+                </div>
+            `
+
+            return result;
+        }
+
+        const selector = document.getElementById("recommend-by");
+
+        function loadRecommendations() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', `<?= BASE_URL ?>/user/fetch_recommendation?condition=${selector.value}`, true);
+
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    const recommendationContainer = document.querySelector('.recommend-container');
+                    recommendationContainer.innerHTML = '';
+
+                    if (response.data.length == 0) {
+                        recommendationContainer.innerHTML = "<p class='mx-auto'>No recommendations are available yet.</p>"
+                    }
+
+                    response.data.forEach((recom) => {
+                        recommendationContainer.innerHTML += card_profile(recom.user_id, recom.nama_lengkap, recom.domisili, recom.hobi, recom.interest, recom.umur, recom.tinggi_badan, recom.agama);
+                    });
+                } else {
+                    console.error('XHR request failed');
+                }
+            };
+
+            xhr.send();
+        }
+
+        loadRecommendations();
+
+        selector.addEventListener('change', function() {
+            loadRecommendations();
+        })
+    </script>
 </body>
 </html>
