@@ -82,14 +82,15 @@
                             <img src="<?= BASE_URL ?>/images/icons/profile.png" alt="profile"/>
                         </div>
                         <div class="desc-profile">
-                            <p class="card-nama">Test Nama</p>
+                            <p class="card-nama">Abdul Mamad</p>
                             <p>Lokasi: Tangerang Selatan</p>
                             <p>Hobi: Main Game</p>
                             <p>Interest: Coding</p>
-                            <div class="flex-row items-center margin-auto">
-                                <span class="detail-info">Umur: 22 Tahun</span>
-                                <span class="detail-info">Tinggi: 160 cm</span>
-                                <span class="detail-info">Agama: Islam</span>
+                            <div class="detail-info">
+                                <span>Umur: 22 Tahun</span>
+                                <span>Tinggi: 160 cm</span>
+                                <span>Agama: Islam</span>
+                                <span>MBTI: INFP</span>
                             </div>
                         </div>
                     </div>

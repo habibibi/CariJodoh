@@ -98,3 +98,28 @@ select, input{
   height: 350px;
 }
 
+.desc-profile {
+  width: 100%;
+}
+
+.img-profile {
+  width: 100%;
+  display: flex;
+}
+
+.img-profile img {
+  margin: 0 auto;
+  height: 100px;
+}
+
+.detail-info {
+    display: grid;
+  grid-template-columns: 50% 50%;
+  grid-row: auto auto;
+  gap: 10px;
+}
+
+.card-nama {
+  text-align: center;
+  font-weight: bold;
+}
