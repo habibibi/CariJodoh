@@ -274,4 +274,30 @@ class UserController extends Controller {
             exit;
         }
     }
+
+    public function fetch_recommendation(){
+        try {
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'GET':
+                    if ($this->middleware->isAuthenticated() && isset($_GET['condition'])) {
+                        $userModel = $this->model("UserModel");
+
+                        $condition = $_GET['condition'];
+
+                        $result = $userModel->getRecommendations($_SESSION['user_id'], $condition);
+                        header('Content-Type: application/json');
+                        http_response_code(200);
+                        echo json_encode(["data" => $result]);
+                    } else {
+                        throw new Exception('Method Not Allowed', 405);
+                    }
+                    break;
+                default:
+                    throw new Exception('Method Not Allowed', 405);
+            }
+        } catch (Exception $e){
+            http_response_code($e->getCode());
+            exit;
+        }
+    }
 }
