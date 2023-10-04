@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>CariJodoh</title>
-        <link rel="shortcut icon" href="../images/icons/loveicon.png">
+        <link rel="shortcut icon" href="/public/images/icons/loveicon.png">
     </head>
 
     <style>
