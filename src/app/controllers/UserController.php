@@ -237,6 +237,44 @@ class UserController extends Controller {
         }
     }
 
+    public function profiles(){
+        try{
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'GET':
+                    if ($this->middleware->checkAuthenticated()){
+                        $userModel = $this->model('UserModel');
+                        $exclude_userid = ($this->middleware->checkAdmin() ? null : $_SESSION['user_id']);
+                        $page = $_GET['page'] ?? 1;
+                        $name = $_GET['name'] ?? null;
+                        $interest = $_GET['interest'] ?? null;
+                        $agama = $_GET['agama'] ?? null;
+                        $mbti = $_GET['mbti'] ?? null;
+
+                        $sort = $_GET['sort'] ?? 'nama_lengkap';
+                        $allowed_column = ['nama_lengkap', 'umur'];
+                        if (!in_array($sort, $allowed_column)) {
+                            throw new Exception('Bad Request', 400);
+                        }
+
+                        $isdesc = $_GET['isdesc'] ?? false;
+                        $result = $userModel->getProfiles($page, $exclude_userid, $name, $interest, $agama, $mbti, $sort, $isdesc);
+                        $pageCount = $userModel->getProfilesPageCount($exclude_userid, $name, $interest, $agama, $mbti);
+                        header('Content-Type: application/json');
+                        http_response_code(200);
+                        echo json_encode(["profiles" => $result, "pageCount" => $pageCount], JSON_NUMERIC_CHECK);
+                    } else {
+                        throw new Exception('Unauthorized', 401);
+                    }
+                    break;
+                default:
+                    throw new Exception('Method Not Allowed', 405);
+            }
+        } catch (Exception $e){
+            http_response_code($e->getCode());
+            exit;
+        }
+    }
+
     public function fetch_recommendation(){
         try {
             switch ($_SERVER['REQUEST_METHOD']) {

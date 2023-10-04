@@ -67,46 +67,24 @@
                         <select name="sort" id="sort" class="select-option">
                             <option selected value="name_asc">Nama ↓</option>
                             <option value="name_desc">Nama ↑</option>
-                            <option value="h_asc">Tinggi ↓</option>
-                            <option value="h_desc">Tinggi ↑</option>
+                            <option value="height_asc">Tinggi ↓</option>
+                            <option value="height_desc">Tinggi ↑</option>
                         </select>
                     </div>
-
-                    <button type="submit" id="apply">Apply</button>
                 </div>
             </div>
-            <div class='browse-container'>
-                <div class='profiles-grid'>
-                    <div class="profile-card">
-                        <div class="img-profile">
-                            <img src="<?= BASE_URL ?>/images/icons/profile.png" alt="profile"/>
-                        </div>
-                        <div class="desc-profile">
-                            <p class="card-nama">Test Nama</p>
-                            <p>Lokasi: Tangerang Selatan</p>
-                            <p>Hobi: Main Game</p>
-                            <p>Interest: Coding</p>
-                            <div class="flex-row items-center margin-auto">
-                                <span class="detail-info">Umur: 22 Tahun</span>
-                                <span class="detail-info">Tinggi: 160 cm</span>
-                                <span class="detail-info">Agama: Islam</span>
-                            </div>
-                        </div>
+            <div class='right-container'>
+                <div class='browser-container'>
+                    <div class='profiles-grid'>
                     </div>
-                    <div class="profile-card"></div>
-                    <div class="profile-card"></div>
-                    <div class="profile-card"></div>
                 </div>
-                <div class='pagination'>
-                    <div class='pagination-tab'>
+                <div class="pagination">
+                    <div class="pagination-tab">
                         <button id="prevPage"><</button>
-                        <button>1</button>
-                        <button>2</button>
-                        <button>...</button>
-                        <button>9</button>
-                        <button>10</button>
+                        <div id="button-pagination"></div>
                         <button id="nextPage">></button>
                     </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -114,5 +92,6 @@
     <?php
         include(__DIR__ . '/../main/Footer/Footer.php');
     ?>
+    <script src="<?= BASE_URL ?>/js/browse.js"></script>
 </body>
 </html>
