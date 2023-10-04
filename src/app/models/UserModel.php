@@ -114,4 +114,109 @@ class UserModel
         // Return the user_id of the registered user
         return $userId;
     }
+
+    public function getGender($userId) {
+        $query = '
+            SELECT gender from profile
+            WHERE user_id = :user_id
+        ';
+
+        $this->database->query($query);
+        $this->database->bind('user_id', $userId);
+
+        $user = $this->database->fetch();
+        
+        return $user->gender;
+    }
+
+    public function getMBTI($userId) {
+        $query = '
+            SELECT mbti from profile
+            WHERE user_id = :user_id
+        ';
+
+        $this->database->query($query);
+        $this->database->bind('user_id', $userId);
+
+        $user = $this->database->fetch();
+        
+        return $user->mbti;
+    }
+
+    public function getAgama($userId) {
+        $query = '
+            SELECT agama from profile
+            WHERE user_id = :user_id
+        ';
+
+        $this->database->query($query);
+        $this->database->bind('user_id', $userId);
+
+        $user = $this->database->fetch();
+        
+        return $user->agama;
+    }
+
+    public function getZodiak($userId) {
+        $query = '
+            SELECT zodiak from profile
+            WHERE user_id = :user_id
+        ';
+
+        $this->database->query($query);
+        $this->database->bind('user_id', $userId);
+
+        $user = $this->database->fetch();
+        
+        return $user->zodiak;
+    }
+
+    public function getRecommendations($userId, $condition){
+        // Get gender
+        $gender = $this->getGender($userId);
+
+        if($condition == "mbti"){
+            $query = "
+                SELECT * from profile
+                WHERE mbti = :mbti AND gender <> :gender AND user_id <> :user_id
+                LIMIT 6
+            ";
+
+            $mbti = $this->getMBTI($userId);
+            $this->database->query($query);
+            $this->database->bind('user_id', $userId);
+            $this->database->bind('mbti', $mbti);
+            $this->database->bind('gender', $gender);
+        } else if($condition == "agama"){
+            $query = "
+                SELECT * from profile
+                WHERE agama = :agama AND gender <> :gender AND user_id <> :user_id
+                LIMIT 6
+            ";
+
+            $agama = $this->getAgama($userId);
+            $this->database->query($query);
+            $this->database->bind('user_id', $userId);
+            $this->database->bind('agama', $agama);
+            $this->database->bind('gender', $gender);
+        } else if($condition == "zodiak"){
+            $query = "
+                SELECT * from profile
+                WHERE zodiak = :zodiak AND gender <> :gender AND user_id <> :user_id
+                LIMIT 6
+            ";
+
+            $zodiak = $this->getZodiak($userId);
+            $this->database->query($query);
+            $this->database->bind('user_id', $userId);
+            $this->database->bind('zodiak', $zodiak);
+            $this->database->bind('gender', $gender);
+        } else {
+            throw new Exception('Condition is not valid.', 400);
+        }
+
+        $result = $this->database->fetchAll();
+
+        return $result;
+    }
 }

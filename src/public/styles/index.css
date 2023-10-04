@@ -102,3 +102,20 @@ footer span {
   padding: 0.5rem;
   background-color: white;
 }
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.mx-auto {
+  margin: 0 auto;
+}
