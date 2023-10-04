@@ -115,12 +115,14 @@ class NotificationController extends Controller {
                         $notifModel->updateNotification((int) $notificationId, $jenisNotifikasi, $userIdSender, $userIdReceiver, $isiNotifikasi, $sudahDibaca);
 
                         header('Content-Type: application/json');
-                        http_response_code(200);
+                        http_response_code(201);
                         echo json_encode(["message" => "Update Notifikasi berhasil."]);
                     } else {
                         throw new Exception('Not Found', 404);
                     }
                     break;
+                default:
+                    throw new Exception('Method Not Allowed', 405);
             }
         } catch (Exception $e) {
             http_response_code($e->getCode());
