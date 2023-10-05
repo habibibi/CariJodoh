@@ -4,6 +4,7 @@
   align-items: center;
   padding: 1rem;
   min-width: 750px;
+  padding-bottom: 2rem;
 }
 
 .main-container {
@@ -79,7 +80,6 @@ input {
 
 .browser-container {
   width: 100%;
-  min-height: 800px;
   position: relative;
   align-items: center;
   z-index: -1;

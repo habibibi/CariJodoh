@@ -18,7 +18,7 @@ class UserController extends Controller {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
                     if($this->middleware->checkAdmin()){
-                        header('Location: ' . BASE_URL . '/user/admin');
+                        header('Location: ' . BASE_URL . '/admin');
                     } else if ($this->middleware->checkAuthenticated()) {
                         header('Location: ' . BASE_URL . '/recommendation');
                     } else {
@@ -36,7 +36,7 @@ class UserController extends Controller {
 
                     if($this->middleware->checkAdmin()){
                         $_SESSION['role'] = 'admin';
-                        echo json_encode(["redirect_url" => BASE_URL . "/user/admin"]);
+                        echo json_encode(["redirect_url" => BASE_URL . "/admin"]);
                     } else {
                         $_SESSION['role'] = 'user';
                         echo json_encode(["redirect_url" => BASE_URL . "/recommendation"]);
@@ -56,7 +56,7 @@ class UserController extends Controller {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
                     if($this->middleware->checkAdmin()){
-                        header('Location: ' . BASE_URL . '/user/admin');
+                        header('Location: ' . BASE_URL . '/admin');
                     } else if ($this->middleware->checkAuthenticated()) {
                         header('Location: ' . BASE_URL . '/recommendation');
                     } else {
@@ -119,7 +119,7 @@ class UserController extends Controller {
     
                     header('Content-Type: application/json');
                     http_response_code(201);
-                    echo json_encode(["redirect_url" => BASE_URL . "/user/admin"]);
+                    echo json_encode(["redirect_url" => BASE_URL . "/admin"]);
                     break;
                 default:
                     throw new Exception('Method Not Allowed', 405);
@@ -135,7 +135,7 @@ class UserController extends Controller {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
                     if($this->middleware->checkAdmin()){
-                        header('Location: ' . BASE_URL . '/user/admin');
+                        header('Location: ' . BASE_URL . '/admin');
                     } else if($this->middleware->checkAuthenticated()) {
                         $profileView = $this->view('user', 'ProfileView');
                         $profileView->render();
@@ -251,12 +251,12 @@ class UserController extends Controller {
                         $mbti = $_GET['mbti'] ?? null;
 
                         $sort = $_GET['sort'] ?? 'nama_lengkap';
-                        $allowed_column = ['nama_lengkap', 'umur'];
+                        $allowed_column = ['nama_lengkap', 'tinggi_badan', 'umur'];
                         if (!in_array($sort, $allowed_column)) {
                             throw new Exception('Bad Request', 400);
                         }
 
-                        $isdesc = $_GET['isdesc'] ?? false;
+                        $isdesc = $_GET['isdesc'] ?? null;
                         $result = $userModel->getProfiles($page, $exclude_userid, $name, $interest, $agama, $mbti, $sort, $isdesc);
                         $pageCount = $userModel->getProfilesPageCount($exclude_userid, $name, $interest, $agama, $mbti);
                         header('Content-Type: application/json');

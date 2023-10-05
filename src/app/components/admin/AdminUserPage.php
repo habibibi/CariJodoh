@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/index.css">
-    <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/browse.css">
+    <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/browseAdmin.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@300&family=Poppins:wght@400;600;700&family=Sofadi+One&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/public/images/icons/loveicon.png">
-    <title>Browse</title>
+    <title>Admin's Users</title>
 </head>
 <body>
     <?php
-        include(__DIR__ . '/../main/navbar/Navbar.php');
+        include(__DIR__ . '/../main/navbar/NavbarAdmin.php');
     ?>
-    <div class='container'>
-        <h1>Find Your Matches</h1>
+    <main class='container'>
+        <h1>Users</h1>
         <div class='main-container'>
             <div class='left-container'>
                 <h1>Opsi</h1>
@@ -91,7 +91,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </main>
     <?php
         include(__DIR__ . '/../main/Footer/Footer.php');
     ?>

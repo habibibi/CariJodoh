@@ -153,7 +153,7 @@ class UserModel
 
         $query .= " ORDER BY " . $sortAttr;
 
-        if ($isDesc) {
+        if ($isDesc && $isDesc == "true") {
             $query .= " DESC";
         } else {
             $query .= " ASC";
