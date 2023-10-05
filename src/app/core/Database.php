@@ -15,7 +15,8 @@ class Database
 
         try {
             $this->db_connection = new PDO($dsn);
-        } catch (PDOException) {
+        } catch (PDOException $e) {
+            echo 'PDO Connection failed: ' . $e->getMessage();
             throw new Exception('Bad Gateway', 502);
         }
 
