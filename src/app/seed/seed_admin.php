@@ -56,6 +56,7 @@ try {
         $db->bind(':role', 'admin');
         $db->execute();
     }
-} catch (PDOException) {
+} catch (PDOException $e) {
     // Database failed
+    echo $e->getMessage();
 }

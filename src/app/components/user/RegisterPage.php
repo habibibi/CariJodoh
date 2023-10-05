@@ -69,11 +69,11 @@
                         <div class="main-form-register">
                             <select id="loveLanguage" name="loveLanguage" class="select-option">
                                 <option value="">Love Language</option>
-                                <option value="wordsOfAffirmation">Words of Affirmation</option>
-                                <option value="actsOfService">Acts of Service</option>
-                                <option value="receivingGifts">Receiving Gifts</option>
-                                <option value="qualityTime">Quality Time</option>
-                                <option value="physicalTouch">Physical Touch</option>
+                                <option value="Words of Affirmation">Words of Affirmation</option>
+                                <option value="Acts of Service">Acts of Service</option>
+                                <option value="Receiving Gifts">Receiving Gifts</option>
+                                <option value="Quality Time">Quality Time</option>
+                                <option value="Physical Touch">Physical Touch</option>
                             </select>
 
                             <select id="mbti" name="mbti" class="select-option">
