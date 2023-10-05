@@ -14,6 +14,8 @@ services:
       - 3307:3306
     hostname: db-tubes-1
     env_file: .env
+    volumes:
+      - ./mysql:/var/lib/mysql
 networks:
   web-mysql:
     driver: bridge
