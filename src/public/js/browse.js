@@ -155,7 +155,7 @@ function updatePaginationButtons() {
 
       button.addEventListener("click", function () {
         currentPage = i;
-        loadLikes(currentPage);
+        loadProfiles(currentPage);
       });
 
       pagination.appendChild(button);
@@ -171,7 +171,7 @@ function updatePaginationButtons() {
 
         button.addEventListener("click", function () {
           currentPage = i;
-          loadLikes(currentPage);
+          loadProfiles(currentPage);
         });
 
         pagination.appendChild(button);
@@ -184,7 +184,7 @@ function updatePaginationButtons() {
       buttonDot.addEventListener("click", function () {
         currentPage = 6;
         paginationOffset += 1;
-        loadLikes(currentPage);
+        loadProfiles(currentPage);
       });
 
       pagination.appendChild(buttonDot);
@@ -195,7 +195,7 @@ function updatePaginationButtons() {
 
       buttonEnd.addEventListener("click", function () {
         currentPage = totalPages;
-        loadLikes(currentPage);
+        loadProfiles(currentPage);
       });
 
       pagination.appendChild(buttonEnd);
@@ -206,7 +206,7 @@ function updatePaginationButtons() {
 
       buttonStart.addEventListener("click", function () {
         currentPage = 1;
-        loadLikes(currentPage);
+        loadProfiles(currentPage);
       });
 
       pagination.appendChild(buttonStart);
@@ -218,7 +218,7 @@ function updatePaginationButtons() {
       buttonDotBack.addEventListener("click", function () {
         paginationOffset -= 1;
         currentPage = paginationOffset == 1 ? 1 : paginationOffset * 3;
-        loadLikes(currentPage);
+        loadProfiles(currentPage);
       });
 
       pagination.appendChild(buttonDotBack);
@@ -230,7 +230,7 @@ function updatePaginationButtons() {
 
         button.addEventListener("click", function () {
           currentPage = i;
-          loadLikes(currentPage);
+          loadProfiles(currentPage);
         });
 
         pagination.appendChild(button);
@@ -243,7 +243,7 @@ function updatePaginationButtons() {
       buttonDotNext.addEventListener("click", function () {
         paginationOffset += 1;
         currentPage = paginationOffset == 1 ? 1 : paginationOffset * 3;
-        loadLikes(currentPage);
+        loadProfiles(currentPage);
       });
 
       pagination.appendChild(buttonDotNext);
@@ -254,7 +254,7 @@ function updatePaginationButtons() {
 
       buttonEnd.addEventListener("click", function () {
         currentPage = totalPages;
-        loadLikes(currentPage);
+        loadProfiles(currentPage);
       });
 
       pagination.appendChild(buttonEnd);
@@ -265,7 +265,7 @@ function updatePaginationButtons() {
 
       buttonStart.addEventListener("click", function () {
         currentPage = 1;
-        loadLikes(currentPage);
+        loadProfiles(currentPage);
       });
 
       pagination.appendChild(buttonStart);
@@ -277,7 +277,7 @@ function updatePaginationButtons() {
       buttonDotBack.addEventListener("click", function () {
         paginationOffset -= 1;
         currentPage = paginationOffset == 1 ? 1 : paginationOffset * 3;
-        loadLikes(currentPage);
+        loadProfiles(currentPage);
       });
 
       pagination.appendChild(buttonDotBack);
@@ -289,7 +289,7 @@ function updatePaginationButtons() {
 
         button.addEventListener("click", function () {
           currentPage = i;
-          loadLikes(currentPage);
+          loadProfiles(currentPage);
         });
 
         pagination.appendChild(button);
@@ -339,4 +339,20 @@ mbtiSelect.addEventListener("change", function () {
 sortSelect.addEventListener("change", function () {
   currentPage = 1;
   debouncedLoadProfiles();
+});
+
+prevButton.addEventListener("click", () => {
+  currentPage -= 1;
+  if (paginationOffset * 3 > currentPage) {
+    paginationOffset -= 1;
+  }
+  loadProfiles(currentPage);
+});
+
+nextButton.addEventListener("click", () => {
+  currentPage += 1;
+  if ((paginationOffset + 1) * 3 <= currentPage) {
+    paginationOffset += 1;
+  }
+  loadProfiles(currentPage);
 });
