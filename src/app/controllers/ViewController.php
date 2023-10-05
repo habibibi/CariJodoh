@@ -26,7 +26,9 @@ class ViewController extends Controller {
                         if($this->genderMiddleware->isDifferentGender($userId)){
                             $userModel = $this->model("UserModel");
                             $profile = $userModel->getProfile($userId);
-                            $viewView = $this->view('view', 'ViewView', ['profile' => $profile]);
+                            $notificationModel = $this->model("NotificationModel");
+                            $liked = $notificationModel->checkLikeNotification($_SESSION['user_id'], $userId);
+                            $viewView = $this->view('view', 'ViewView', ['profile' => $profile, 'liked' => $liked]);
                             $viewView->render();
                         } else {
                             throw new Exception('Method Not Allowed', 405);
@@ -38,27 +40,27 @@ class ViewController extends Controller {
                 default:
                     throw new Exception('Method Not Allowed', 405);
             }
-        } catch (Exception $e) {
+        } catch (Exception) {
             $notFoundView = $this->view('not-found', 'NotFoundView');
             $notFoundView->render();
             exit;
         }
     }
 
-    public function like($userId) {
+    public function like($userId){
         try {
-            switch ($_SERVER['REQUEST METHOD']) {
+            switch ($_SERVER['REQUEST_METHOD']) {
                 case 'POST':
-                    if ($this->authMiddlewar->checkAdmin()) {
+                    if($this->authMiddleware->checkAdmin()){
                         throw new Exception('Method Not Allowed', 405);
-                    } else if ($this->authMiddleware->checkAutheticated() && $userId) {
-                        if ($this->genderMiddleware->isDifferentGender($userId)) {
+                    } else if($this->authMiddleware->checkAuthenticated() && $userId) {
+                        if($this->genderMiddleware->isDifferentGender($userId)){
                             $notificationModel = $this->model("NotificationModel");
                             $notificationModel->likeUser($_SESSION['user_id'], $userId);
 
                             header('Content-Type: application/json');
                             http_response_code(201);
-                            echo json_encode(["message" => "Berhasil menyukai user!"]);
+                            echo json_encode(["message" => "Berhasil like user!"]);
                         } else {
                             throw new Exception('Method Not Allowed', 405);
                         }
