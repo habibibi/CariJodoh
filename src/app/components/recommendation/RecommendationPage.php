@@ -82,7 +82,7 @@
                         recommendationContainer.innerHTML += card_profile(recom.user_id, recom.nama_lengkap, recom.domisili, recom.hobi, recom.interest, recom.umur, recom.tinggi_badan, recom.agama);
                     });
                 } else {
-                    console.error('XHR request failed');
+                    showToast("Gagal load recommendation!");
                 }
             };
 

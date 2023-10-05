@@ -126,7 +126,7 @@
 
                     updatePaginationButtons();
                 } else {
-                    console.error('XHR request failed');
+                    showToast("Gagal load notifications!");
                 }
             };
 
@@ -388,8 +388,10 @@
 
                     popupIgnore.style.display = 'none';
                     overlay.style.display = 'none';
+
+                    showToast("Berhasil ignore notifikasi!");
                 } else {
-                    console.error('XHR request failed');
+                    showToast("Gagal ignore notifikasi!");
                 }
             };
 
@@ -411,8 +413,10 @@
                     loadNotifications(1);
                     popupLike.style.display = 'none';
                     overlay.style.display = 'none';
+
+                    showToast("Berhasil like back!");
                 } else {
-                    console.error('XHR request failed');
+                    showToast("Gagal like back!");
                 }
             };
 

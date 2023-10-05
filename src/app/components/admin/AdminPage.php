@@ -37,8 +37,9 @@
                     if (this.status === 201) {
                         const data = JSON.parse(this.responseText);
                         location.replace(data.redirect_url);
+                        showToast("Berhasil logout!");
                     } else {
-                        alert("An error occured, please try again!");
+                        showToast("Gagal logout!");
                     }
                 }
             };

@@ -84,10 +84,10 @@
                 xhr.onreadystatechange = function () {
                     if (this.readyState === XMLHttpRequest.DONE) {
                         if (this.status === 201) {
-                            alert("Berhasil!");
+                            showToast("Berhasil like!");
                             likeButton.disabled = true;
                         } else {
-                            alert("An error occured, please try again!");
+                            showToast("Gagal like!");
                         }
                     }
                 };
