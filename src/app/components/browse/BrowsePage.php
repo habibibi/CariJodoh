@@ -96,7 +96,7 @@
         include(__DIR__ . '/../main/Footer/Footer.php');
     ?>
     <?php
-        echo '<script>const BASE_URL = ' . BASE_URL . ';</script>';
+        echo '<script>const BASE_URL = "' . BASE_URL . '";</script>';
     ?>
     <script src="<?= BASE_URL ?>/js/browse.js"></script>
 </body>
