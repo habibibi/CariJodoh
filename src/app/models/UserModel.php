@@ -345,4 +345,84 @@ class UserModel
 
         return $result;
     }
+
+    public function updateProfile(
+        $user_id,
+        $fullName, 
+        $name, 
+        $age, 
+        $contact, 
+        $hobby, 
+        $interest, 
+        $tinggiBadan, 
+        $agama, 
+        $domisili, 
+        $loveLanguage, 
+        $mbti, 
+        $zodiac, 
+        $ketidaksukaan, 
+        $imageFile, 
+        $videoFile,
+        $gender)
+    {
+        $query = 'UPDATE profile SET 
+            nama_panggilan = :nama_panggilan, 
+            nama_lengkap = :nama_lengkap, 
+            umur = :umur, 
+            hobi = :hobi,
+            interest = :interest,
+            tinggi_badan = :tinggi_badan,
+            agama = :agama, 
+            domisili = :domisili, 
+            love_language = :love_language, 
+            mbti = :mbti, 
+            zodiak = :zodiak, 
+            ketidaksukaan = :ketidaksukaan, 
+            gender = :gender
+            WHERE user_id = :user_id';
+        $this->database->query($query);
+        $this->database->bind('user_id', $user_id);
+        $this->database->bind('nama_panggilan', $name);
+        $this->database->bind('nama_lengkap', $fullName);
+        $this->database->bind('umur', $age);
+        $this->database->bind('hobi', $hobby);
+        $this->database->bind('interest', $interest);
+        $this->database->bind('tinggi_badan', $tinggiBadan);
+        $this->database->bind('agama', $agama);
+        $this->database->bind('domisili', $domisili);
+        $this->database->bind('love_language', $loveLanguage);
+        $this->database->bind('mbti', $mbti);
+        $this->database->bind('zodiak', $zodiac);
+        $this->database->bind('ketidaksukaan', $ketidaksukaan);
+        $this->database->bind('gender', $gender);
+
+        // Handle file uploads (image and video) and move them to the desired location
+
+        if ($imageFile) {
+            $imageUploadPath = $user_id . '.jpg';
+            move_uploaded_file($imageFile['tmp_name'], __DIR__ . '/../../public/images/profile/' . $imageUploadPath);
+        }
+        if ($videoFile) {
+            $videoUploadPath = $user_id . '.mp4';
+            move_uploaded_file($videoFile['tmp_name'], __DIR__ . '/../../public/videos/' . $videoUploadPath);
+        }
+
+        $this->database->execute();
+
+        // Insert contact data into the 'user_contact' table
+        $query = 'UPDATE user_contact SET contact_person = :contact_person WHERE user_id = :user_id';
+        $this->database->query($query);
+        $this->database->bind('user_id', $user_id);
+        $this->database->bind('contact_person', $contact);
+        $this->database->execute();
+    }
+
+    public function getProfile($user_id)
+    {
+        $query = 'SELECT * FROM profile JOIN (SELECT user_id, contact_person FROM user_contact WHERE user_id = :user_id) ct USING (user_id)';
+        $this->database->query($query);
+        $this->database->bind('user_id', $user_id);
+        $profile = $this->database->fetch();
+        return $profile;
+    }
 }
