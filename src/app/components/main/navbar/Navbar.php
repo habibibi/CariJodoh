@@ -1,7 +1,7 @@
 <nav class="navbar">
     <div class="navbar-container">
         <span>
-            <a href="<?= BASE_URL ?>/recommendation"><img src="<?= BASE_URL ?>/images/assets/logo.png" alt="logo" class="logo-nav"/></a>
+            <a href="<?= BASE_URL ?>/recommendation"><img src="<?= BASE_URL ?>/images/assets/logo.webp" alt="logo" class="logo-nav"/></a>
         </span>
         <ul>
             <li><a href="<?= BASE_URL ?>/recommendation">Recommendation</a></li>

@@ -20,7 +20,7 @@
             <div class="admin-sidebar">
                 <h1>Admin Dashboard</h1>
                 <h3>Likes</h3>
-                <img src="<?= BASE_URL ?>/images/assets/admin.png" alt="admin" />
+                <img src="<?= BASE_URL ?>/images/assets/admin.webp" alt="admin" />
             </div>
             <div class="admin-likes">
                 <div class="flex-row header">
