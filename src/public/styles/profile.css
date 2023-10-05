@@ -1,0 +1,7 @@
+input, select, .form-buttons {
+    display: none;
+}
+
+p {
+    display: block;
+}
