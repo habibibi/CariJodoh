@@ -10,7 +10,13 @@ class ViewController extends Controller {
         $this->genderMiddleware = $this->middleware("GenderMiddleware");
     }
 
-    public function index($userId){
+    public function index()
+    {
+        $notFoundView = $this->view('not-found', 'NotFoundView');
+        $notFoundView->render();
+    }
+
+    public function profile($userId){
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
@@ -20,7 +26,7 @@ class ViewController extends Controller {
                         if($this->genderMiddleware->isDifferentGender($userId)){
                             $userModel = $this->model("UserModel");
                             $profile = $userModel->getProfile($userId);
-                            $viewView = $this->view('view', 'ViewView', ['user_id' => $userId], $profile);
+                            $viewView = $this->view('view', 'ViewView', ['profile' => $profile]);
                             $viewView->render();
                         } else {
                             throw new Exception('Method Not Allowed', 405);
@@ -33,7 +39,8 @@ class ViewController extends Controller {
                     throw new Exception('Method Not Allowed', 405);
             }
         } catch (Exception $e) {
-            http_response_code($e->getCode());
+            $notFoundView = $this->view('not-found', 'NotFoundView');
+            $notFoundView->render();
             exit;
         }
     }
