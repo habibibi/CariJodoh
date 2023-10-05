@@ -72,7 +72,7 @@
                     likesContainer.innerHTML = '';
 
                     if (response.data.length == 0) {
-                        likesContainer.innerHTML = "<p>No likes are available yet.</p>"
+                        likesContainer.innerHTML = "<p class='mx-auto'>No likes are available yet.</p>"
                     }
 
                     response.data.forEach((likes) => {

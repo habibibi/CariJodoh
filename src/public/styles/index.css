@@ -158,3 +158,16 @@ footer span {
   left: 0;
   z-index: 99999;
 }
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+button {
+  cursor: pointer;
+}

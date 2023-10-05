@@ -352,7 +352,7 @@
                     notificationContainer.innerHTML = '';
 
                     if (response.data.length == 0) {
-                        notificationContainer.innerHTML = "<p>No notifications are available yet.</p>"
+                        notificationContainer.innerHTML = "<p class='mx-auto'>No notifications are available yet.</p>"
                     }
 
                     response.data.forEach((notification) => {

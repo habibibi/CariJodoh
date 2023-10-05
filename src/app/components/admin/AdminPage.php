@@ -37,7 +37,6 @@
                     if (this.status === 201) {
                         const data = JSON.parse(this.responseText);
                         location.replace(data.redirect_url);
-                        showToast("Berhasil logout!");
                     } else {
                         showToast("Gagal logout!");
                     }
