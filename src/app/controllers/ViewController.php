@@ -44,4 +44,34 @@ class ViewController extends Controller {
             exit;
         }
     }
+
+    public function like($userId) {
+        try {
+            switch ($_SERVER['REQUEST METHOD']) {
+                case 'POST':
+                    if ($this->authMiddlewar->checkAdmin()) {
+                        throw new Exception('Method Not Allowed', 405);
+                    } else if ($this->authMiddleware->checkAutheticated() && $userId) {
+                        if ($this->genderMiddleware->isDifferentGender($userId)) {
+                            $notificationModel = $this->model("NotificationModel");
+                            $notificationModel->likeUser($_SESSION['user_id'], $userId);
+
+                            header('Content-Type: application/json');
+                            http_response_code(201);
+                            echo json_encode(["message" => "Berhasil menyukai user!"]);
+                        } else {
+                            throw new Exception('Method Not Allowed', 405);
+                        }
+                    } else {
+                        header('Location: ' . BASE_URL . '/user/login');
+                    }
+                    break;
+                default:
+                    throw new Exception('Method Not Allowed', 405);
+            }
+        } catch (Exception $e) {
+            http_response_code($e->getCode());
+            exit;
+        }
+    }
 }
