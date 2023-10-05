@@ -80,9 +80,7 @@ input {
 .browser-container {
   width: 100%;
   min-height: 800px;
-  position: relative;
   align-items: center;
-  z-index: -1;
 }
 
 .profiles-grid {
@@ -145,4 +143,10 @@ input {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.a-link {
+  z-index: 1;
+  text-decoration: none;
+  color: black;
 }

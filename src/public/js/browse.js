@@ -11,6 +11,7 @@ let sortSelect = document.getElementById("sort");
 let paginationOffset = 1;
 
 function profile_card(
+  user_id,
   photo_name,
   nama,
   domisili,
@@ -22,6 +23,7 @@ function profile_card(
   mbti
 ) {
   const result = `
+      <a href="${BASE_URL}/view/profile/${user_id}" class="a-link">
         <div class="profile-card">
             <div class="img-profile">
                 <img src="/public/images/profile/${photo_name}" alt="profile"/>
@@ -39,6 +41,7 @@ function profile_card(
                 </div>
             </div>
         </div>
+      </a>
     `;
   return result;
 }
@@ -103,6 +106,7 @@ function loadProfiles(pageNumber) {
 
       response.profiles.forEach((profile) => {
         profilesGrid.innerHTML += profile_card(
+          profile.user_id,
           profile.gambar_profile,
           profile.nama_lengkap,
           profile.domisili,
