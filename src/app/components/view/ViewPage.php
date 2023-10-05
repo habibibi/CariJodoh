@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>CariJodoh</title>
-        <link rel="shortcut icon" href="/public/images/icons/loveicon.png">
+        <link rel="shortcut icon" href="../images/icons/loveicon.png">
     </head>
 
     <style>
@@ -39,7 +39,7 @@
             background-color: #FF91A4;
             
             margin-top: 30px;
-            margin-left: 650px;
+            margin-left: 750px;
             
             border-radius: 25px;
             border-color: #323949;
@@ -55,7 +55,7 @@
             margin-left: 39px;
             margin-top: auto 0;
         }
-
+        
         .group1 {
             display: flex;
         }
@@ -64,7 +64,7 @@
             margin-top: 40px;
             margin-left: 20px;
         }
-
+        
         .report {
             margin-left: 20px;
             margin-top: 40px;
@@ -103,6 +103,9 @@
         .apostrophe {
             position: absolute;
             z-index: 2;
+
+            width: 40px;
+            height: 40px;
             
             margin-left: 375px;
             margin-top: -150px;
@@ -111,7 +114,7 @@
         .id {
             position: absolute;
             margin-top: 100px;
-            margin-left: 800px;
+            margin-left: 900px;
         }
 
         .nama {
@@ -168,10 +171,40 @@
         }
 
         .square {
-            margin-left: 10px;
+            margin-left: 20px;
+            margin-top: 20px;
             height: 20px;
             width: 20px;
-            background-color: aqua;
+            border-radius: 5px;
+            border-color: #323949;
+            border-style: solid;
+            background-color: #FFFFFF;
+        }
+
+        .penampung {
+            display: flex;
+            margin-top: -10px;
+        }
+
+        .hobby {
+            position: absolute;
+            margin-top: -300px;
+            margin-left: 363px;
+            z-index: 999;
+        }
+
+        .interest {
+            position: absolute;
+            margin-top: -190px;
+            margin-left: 363px;
+            z-index: 999;
+        }
+
+        .anti {
+            position: absolute;
+            margin-top: -80px;
+            margin-left: 363px;
+            z-index: 999;
         }
     </style>
 
@@ -180,7 +213,7 @@
             <div class="circle"></div>
             <div class="video"></div>
             <div class="photo_trial">
-                <img src="../images/assets/profile_trial.png" alt="profile picture">
+                <img src="../../../public/images/assets/profile_trial.png" alt="profile picture">
             </div>
             
             <div class="rectangle_ikuti">
@@ -236,6 +269,18 @@
             <h3 style="font-family:Arial;margin-left:75px;">Kecoak, anjing galak, kuliah informatika, tomat mentah</h3>
         </div>
 
+        <div class="hobby">
+            <img src="../images/icons/hobby.png" alt="hobby">
+        </div>
+
+        <div class="interest">
+            <img src="../images/icons/interest.png" alt="interest">
+        </div>
+
+        <div class="anti">
+            <img src="../images/icons/anti.png" alt="anti">
+        </div>
+
 
 
         <div class="group2">
@@ -244,7 +289,7 @@
             </div>
             <div class="rectangle" style="width:950px;height:450px;margin-top: 60px;margin-left: 365px;">
                 <h2 style="font-family:Garamond;font-size: 40px;margin-left: 20px;margin-top: 20px;">TENTANG OGGY</h2>
-                <h3 style="font-family:Arial;margin-left: 20px;margin-top: 20px;">Halo para kucing cantik! Meow meow meow meow.. meoow, meee, moww, meow meow. Maeee maw mow meow. Meow, meow meowww! Meow meow meow meow.. meooaw, meee, moww, meow meow. Meow maw mow meow. Meow, meow meowww! Maeee maw mow meow. Meow, meow MEOWWW! Saya adalah Oggy, kucing petualang yang tinggal di rumah yang sering dihantui oleh kecoak-kecoak nakal. Meskipun mereka sering membuat kekacauan, saya selalu berusaha mengusir mereka dengan kelincahan dan kelihaian saya.</h3>
+                <h3 style="font-family:Arial;margin-left: 20px;margin-top: 20px;">Halo para kucing cantik! Meow meow meow meow.. meoow, meee, moww, meow meow. Maeee maw mow meow. Meow, meow meowww! Meow meow meow meow.. meooaw, meee, moww, meow meow. Meow maw mow meow. Meow, meow meowww! Maeee maw mow meow. Meow, meow MEOWWW! Saya adalah Oggy, kucing petualang yang tinggal di rumah yang sering dihantui oleh kecoak-kecoak nakal. Meskipun mereka sering membuat kekacauan, saya selalu berusaha mengusir mereka dengan kelincahan dan kelihaian saya. </h3>
             </div>
         </div>
 
@@ -255,15 +300,40 @@
             </div>
             <div class="rectangle" style="width:950px;height:450px;margin-top: 60px;margin-left: 20px;">
                 <h2 style="font-family:Garamond;font-size: 40px;margin-left: 20px;margin-top: 20px;">LOVE LANGUAGE</h2>
-                <h3 style="font-family:Arial;margin-left: 20px;margin-top: 20px;font-size: 30px;">
-                    Words of Affirmation
-                        <div class="square">
-                            <img src="../images/icons/check.png">
-                        </div>
-                    <br><br>Gifts
-                    <br><br>Acts of Service
-                    <br><br>Quality Time
-                    <br><br>Physical Touch</h3>
+                <div class="penampung">
+                    <h3 style="font-family:Arial;margin-left: 20px;font-size: 30px;">Words of Affirmation</h3>
+                    <div class="square">
+                        <img src="../images/icons/check.png">
+                    </div>
+                </div>
+
+                <div class="penampung">
+                    <h3 style="font-family:Arial;margin-left: 20px;font-size: 30px;">Gifts</h3>
+                    <div class="square">
+                        <img src="../images/icons/check.png">
+                    </div>
+                </div>
+
+                <div class="penampung">
+                    <h3 style="font-family:Arial;margin-left: 20px;font-size: 30px;">Acts of Service</h3>
+                    <div class="square">
+                        <img src="../images/icons/check.png">
+                    </div>
+                </div>
+
+                <div class="penampung">
+                    <h3 style="font-family:Arial;margin-left: 20px;font-size: 30px;">Quality Time</h3>
+                    <div class="square">
+                        <img src="../images/icons/check.png">
+                    </div>
+                </div>
+
+                <div class="penampung">
+                    <h3 style="font-family:Arial;margin-left: 20px;font-size: 30px;">Physical Touch</h3>
+                    <div class="square">
+                        <img src="../images/icons/check.png">
+                    </div>
+                </div>
             </div>
         </div>
     </body>
