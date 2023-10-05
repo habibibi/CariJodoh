@@ -123,7 +123,7 @@ function loadProfiles(pageNumber) {
 
       updatePaginationButtons();
     } else {
-      console.error("XHR request failed");
+      showToast("Gagal load profiles!");
     }
   };
 

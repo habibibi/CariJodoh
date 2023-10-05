@@ -136,6 +136,7 @@
             </div>
         </div>
     </div>
+    <script src="<?= BASE_URL ?>/js/globals.js"></script>
     <script>
         function hasUppercase(str) {
             return /[A-Z]/.test(str);
@@ -155,22 +156,22 @@
             // Perform validation
             // Check username
             if (!username || username.length < 5){
-                alert("Username minimal 5 karakter.");
+                showToast("Username minimal 5 karakter.");
                 return;
             }
 
             // Check password
             if (!password || password.length < 5){
-                alert("Password minimal 5 karakter.");
+                showToast("Password minimal 5 karakter.");
                 return;
             } else if (!hasUppercase(password) || !hasLowercase(password)){
-                alert("Password harus terdapat huruf besar dan huruf kecil.");
+                showToast("Password harus terdapat huruf besar dan huruf kecil.");
                 return;
             }
 
             // Check confirm password
             if (password !== confirmPassword) {
-                alert("Password dan Confirm Password tidak sama.");
+                showToast("Password dan Confirm Password tidak sama.");
                 return;
             }
 
@@ -214,51 +215,51 @@
             
             // Validasi
             if(!fullName || fullName.length < 2) {
-                alert("Nama Lengkap minimal 3 karakter.");
+                showToast("Nama Lengkap minimal 3 karakter.");
                 return;
             }
 
             if(!name || name.length < 2) {
-                alert("Nama Panggilan minimal 3 karakter.");
+                showToast("Nama Panggilan minimal 3 karakter.");
                 return;
             }
 
             if(!age || age < 12 || age > 100){
-                alert("Umur tidak valid!")
+                showToast("Umur tidak valid!")
                 return;
             }
 
             if(!contact || contact.length < 5){
-                alert("Contact minimal 5 karakter. (Bisa berupa id line, no WA, dll)");
+                showToast("Contact minimal 5 karakter. (Bisa berupa id line, no WA, dll)");
             }
 
             if(!hobby || hobby.length < 5) {
-                alert("Hobby minimal 5 karakter.");
+                showToast("Hobby minimal 5 karakter.");
                 return;
             }
 
             if(!interest || interest.length < 5) {
-                alert("Hobby minimal 5 karakter.");
+                showToast("Hobby minimal 5 karakter.");
                 return;
             }
 
             if(!tinggiBadan || tinggiBadan < 100 || tinggiBadan > 300){
-                alert("Tinggi badan tidak valid!")
+                showToast("Tinggi badan tidak valid!")
                 return;
             }
 
             if(!agama){
-                alert("Pilih agama terlebih dahulu.")
+                showToast("Pilih agama terlebih dahulu.")
                 return;
             }
 
             if(!gender){
-                alert("Pilih jenis kelamin terlebih dahulu.")
+                showToast("Pilih jenis kelamin terlebih dahulu.")
                 return;
             }
 
             if(!domisili){
-                alert("Masukkan domisili terlebih dahulu.")
+                showToast("Masukkan domisili terlebih dahulu.")
                 return;
             }
 
@@ -294,27 +295,27 @@
 
             // Validasi
             if(!loveLanguage){
-                alert("Pilih love language terlebih dahulu.")
+                showToast("Pilih love language terlebih dahulu.")
                 return;
             }
 
             if(!mbti){
-                alert("Pilih MBTI terlebih dahulu.")
+                showToast("Pilih MBTI terlebih dahulu.")
                 return;
             }
 
             if(!zodiac){
-                alert("Pilih zodiac terlebih dahulu.")
+                showToast("Pilih zodiac terlebih dahulu.")
                 return;
             }
 
             if(!ketidaksukaan){
-                alert("Masukkan ketidaksukaan terlebih dahulu.")
+                showToast("Masukkan ketidaksukaan terlebih dahulu.")
                 return;
             }
 
             if(!imageFile){
-                alert("Masukkan gambar muka anda terlebih dahulu.")
+                showToast("Masukkan gambar muka anda terlebih dahulu.")
                 return;
             }
 
@@ -349,9 +350,9 @@
                         const data = JSON.parse(this.responseText);
                         location.replace(data.redirect_url);
                     } else if(this.status == 409) {
-                        alert("Username sudah ada!");
+                        showToast("Username sudah ada!");
                     } else {
-                        alert("An error occured, please try again!");
+                        showToast("Gagal register!");
                     }
                 }
             };

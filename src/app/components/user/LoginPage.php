@@ -38,6 +38,7 @@
             </div>
         </div>
     </div>
+    <script src="<?= BASE_URL ?>/js/globals.js"></script>
     <script>
         const formLogin = document.querySelector(".main-form-login");
 
@@ -61,9 +62,9 @@
                         const data = JSON.parse(this.responseText);
                         location.replace(data.redirect_url);
                     } else if(this.status === 401){
-                        alert("Username atau password salah!");
+                        showToast("Username atau password salah!");
                     } else {
-                        alert("An error occured, please try again!");
+                        showToast("Gagal login!");
                     }
                 }
             };

@@ -186,8 +186,10 @@
 
                     popupDelete.style.display = 'none';
                     overlay.style.display = 'none';
+
+                    showToast("Berhasil delete notification!");
                 } else {
-                    console.error('XHR request failed');
+                    showToast("Gagal delete notification!");
                 }
             };
 
@@ -272,7 +274,7 @@
 
                     updatePaginationButtons();
                 } else {
-                    console.error('XHR request failed');
+                    showToast("Gagal load notifications!");
                 }
             };
 
@@ -498,8 +500,10 @@
                         loadNotifications(response.pages);
                         popupAdd.style.display = 'none';
                         overlay.style.display = 'none';
+
+                        showToast("Berhasil tambah notification!");
                     } else {
-                        alert("An error occured, please try again!");
+                        showToast("Gagal tambah notification!");
                     }
                 }
             };
@@ -530,8 +534,9 @@
                         loadNotifications(1);
                         popupEdit.style.display = 'none';
                         overlay.style.display = 'none';
+                        showToast("Berhasil update notification!");
                     } else {
-                        alert("An error occured, please try again!");
+                        showToast("Gagal update notification!");
                     }
                 }
             };
