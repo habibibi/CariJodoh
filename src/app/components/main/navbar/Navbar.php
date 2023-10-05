@@ -8,7 +8,7 @@
             <li><a href="<?= BASE_URL ?>/browse">Browse</a></li>
             <li><a href="<?= BASE_URL ?>/notification">Notification</a></li>
             <li><a href="<?= BASE_URL ?>/likes">Likes</a></li>
-            <li><a href="<?= BASE_URL ?>/user/profile">Profile</a></li>
+            <li><a href="<?= BASE_URL ?>/user/myprofile">Profile</a></li>
         </ul>  
     </div>
 </nav>

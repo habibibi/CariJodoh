@@ -1,270 +1,151 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>CariJodoh</title>
-        <link rel="shortcut icon" href="/public/images/icons/loveicon.png">
-    </head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/profile.css">
+    <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@300&family=Poppins:wght@400;600;700&family=Sofadi+One&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/public/images/icons/loveicon.png">
+    <title>CariJodoh</title>
+</head>
+<body>
+    <?php
+        include(__DIR__ . '/../main/navbar/Navbar.php');
+    ?>
+    <div class="container">
+        <div>
+            <h1>Foto Profil</h1>
+            <img src="<?= BASE_URL ?>/images/profile/<?= $_SESSION['user_id'] ?>.jpg" alt="profile_picture" class="profile_picture">
+            <input type="file" id="imageInput" name="Foto Profil" accept="image/*">
+        </div>
+        <div class="view_detail">
+            <form class="profile_detail">
 
-    <style>
-        body {
-            background-color: #FFF8DC;
-        }
+                <label for="fullNameInput"> Nama Lengkap </label>
+                <p id="fullName"> </p>
+                <input type="text" id="fullNameInput" placeholder="Masukkan nama lengkap..">
 
-        .circle {
-            height: 200px;
-            width: 200px;
-            background-color: #FF91A4;
-            
-            border-radius: 50%;
-            border-color: #323949;
-            border-style: solid;
+                <label for="nameInput"> Nama Panggilan </label>
+                <p id="name"> </p>
+                <input type="text" id="nameInput" placeholder="Masukkan nama panggilan..">
 
-            margin-top: 20px;
-            margin-left: 35px;
+                <label for="genderInput"> Jenis Kelamin </label>
+                <p id="gender"> </p>
+                <select id="genderInput" name="gender">
+                    <option value="Laki-Laki">Laki-Laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                </select>
 
-        }
+                <label for="domisiliInput"> Domisili </label>
+                <p id="domisili"> </p>
+                <input type="text" id="domisiliInput" placeholder="Masukkan domisili..">
 
-        .rectangle {
-            background-color: #FF91A4;
-            
-            border-radius: 25px;
-            border-radius: 25px;
-            border-color: #323949;
-            border-style: solid;
-        }
+                <label for="ageInput"> Umur </label>
+                <p id="age"> </p>
+                <input type="number" id="ageInput">
 
-        .rectangle_ikuti {
-            height: 50px;
-            width: 150px;
-            background-color: #FF91A4;
-            
-            margin-top: 30px;
-            margin-left: 650px;
-            
-            border-radius: 25px;
-            border-color: #323949;
-            border-style: solid;
+                <label for="tinggiBadanInput"> Tinggi Badan </label>
+                <p id="tinggiBadan"> </p>
+                <input type="number" id="tinggiBadanInput">
 
-            align-items: center;
-        }
 
-        .ikuti {
-            font-size: 35px;
-            font-weight: bold;
-            font-family: Garamond, serif;
-            margin-left: 39px;
-            margin-top: auto 0;
-        }
+                <label for="agamaInput"> Agama </label>
+                <p id="agama"> </p>
+                <select id="agamaInput">
+                    <option value="">Agama</option>
+                    <option value="Islam">Islam</option>
+                    <option value="Protestan">Protestan</option>
+                    <option value="Katolik">Katolik</option>
+                    <option value="Buddha">Buddha</option>
+                    <option value="Hindu">Hindu</option>
+                    <option value="Konghucu">Konghucu</option>
+                </select>
 
-        .group1 {
-            display: flex;
-        }
+                <label for="hobbyInput"> Hobi </label>
+                <p id="hobby"> </p>
+                <input type="text" id="hobbyInput" placeholder="Masukkan hobi..">
 
-        .bookmark {
-            margin-top: 40px;
-            margin-left: 20px;
-        }
+                <label for="interestInput"> Interest </label>
+                <p id="interest"> </p>
+                <input type="text" id="interestInput" placeholder="Masukkan interest..">
 
-        .report {
-            margin-left: 20px;
-            margin-top: 40px;
-        }
+                <label for="ketidaksukaanInput"> Ketidaksukaan </label>
+                <p id="ketidaksukaan"> </p>
+                <input type="text" id="ketidaksukaanInput" placeholder="Masukkan ketidaksukaan..">
 
-        .video {
-            height: 500px;
-            width: 300px;
-            background-color: #FF91A4;
-            
-            margin-top: 200px;
-            margin-left: 30px;
-            
-            border-radius: 25px;
-            border-color: #323949;
-            border-style: solid;
 
-            align-items: center;
-            position: absolute;
-            z-index: -1;
-        }
 
-        .photo_trial {
-            height: 190px;
-            width: 190px;
-            
-            border-radius: 50%;
+                <label for=loveLanguageInput> Love Language </label>
+                <p id="loveLanguage"> </p>
+                <select id="loveLanguageInput">
+                    <option value="">Love Language</option>
+                    <option value="Words of Affirmation">Words of Affirmation</option>
+                    <option value="Acts of Service">Acts of Service</option>
+                    <option value="Receiving Gifts">Receiving Gifts</option>
+                    <option value="Quality Time">Quality Time</option>
+                    <option value="Physical Touch">Physical Touch</option>
+                </select>
 
-            margin-top: 100px;
-            margin-left: 100px;
+                <label for="mbtiInput"> MBTI </label>
+                <p id="mbti"> </p>
+                <select id="mbtiInput" name="mbti" class="select-option">
+                    <option value="ESTJ">ESTJ</option>
+                    <option value="ESTP">ESTP</option>
+                    <option value="ESFJ">ESFJ</option>
+                    <option value="ESFP">ESFP</option>
+                    <option value="ENTJ">ENTJ</option>
+                    <option value="ENTP">ENTP</option>
+                    <option value="ENFJ">ENFJ</option>
+                    <option value="ENFP">ENFP</option>
+                    <option value="ISTJ">ISTJ</option>
+                    <option value="ISTP">ISTP</option>
+                    <option value="ISFJ">ISFJ</option>
+                    <option value="ISFP">ISFP</option>
+                    <option value="INTJ">INTJ</option>
+                    <option value="INTP">INTP</option>
+                    <option value="INFJ">INFJ</option>
+                    <option value="INFP">INFP</option>
+                </select>
 
-            position: absolute;
-            z-index: 2;
-        }
+                <label for=zodiacInput> Zodiak </label>
+                <p id="zodiac"> </p>
+                <select id="zodiacInput" name="zodiac" class="select-option">
+                    <option value="Aries">Aries</option>
+                    <option value="Taurus">Taurus</option>
+                    <option value="Gemini">Gemini</option>
+                    <option value="Cancer">Cancer</option>
+                    <option value="Leo">Leo</option>
+                    <option value="Virgo">Virgo</option>
+                    <option value="Libra">Libra</option>
+                    <option value="Scorpio">Scorpio</option>
+                    <option value="Sagittarius">Sagittarius</option>
+                    <option value="Capricorn">Capricorn</option>
+                    <option value="Aquarius">Aquarius</option>
+                    <option value="Pisces">Pisces</option>
+                </select>
 
-        .apostrophe {
-            position: absolute;
-            z-index: 2;
-            
-            margin-left: 375px;
-            margin-top: -150px;
-        }
+                <label for="kontakInput"> Kontak </label>
+                <p id="contact"> </p>
+                <input type="text" id="contactInput" placeholder="Masukkan kontak..">
 
-        .id {
-            position: absolute;
-            margin-top: 100px;
-            margin-left: 800px;
-        }
+                <label>Video Perkenalan</label>
+                <video id="video" height="240" controls>
+                    <source src="<?= BASE_URL?>/videos/<?= $_SESSION['user_id']?>.mp4" type="video/mp4">
+                </video>
+                <input type="file" id="videoInput" name="Video Perkenalan" accept="video/*">
 
-        .nama {
-            position: absolute;
-            margin-top: -10px;
-            margin-left: 375px;
-        }
-
-        .panggilan {
-            position: absolute;
-            margin-top: 70px;
-            margin-left: 375px;
-        }
-
-        .tanya_suka {
-            position: absolute;
-            margin-top: 5px;
-            margin-left: 375px;
-        }
-
-        .quote {
-            text-align: center;
-        }
-
-        .group2 {
-            display: flex;
-        }
-
-        h3 {
-            text-align: justify;
-            margin-right: 20px;
-            margin-top: 15px;
-            font-size: 25px;
-        }
-
-        .profile {
-            height: 500px;
-            width: 300px;
-            background-color: #FF91A4;
-            
-            margin-top: -15px;
-            margin-left: 30px;
-            
-            border-radius: 25px;
-            border-color: #323949;
-            border-style: solid;
-
-            align-items: center;
-            position: absolute;
-        }
-
-        .group3 {
-            display: flex;
-        }
-
-        .square {
-            margin-left: 10px;
-            height: 20px;
-            width: 20px;
-            background-color: aqua;
-        }
-    </style>
-
-    <body>
-        <div class="group1">
-            <div class="circle"></div>
-            <div class="video"></div>
-            <div class="photo_trial">
-                <img src="../images/assets/profile_trial.png" alt="profile picture">
-            </div>
-            
-            <div class="rectangle_ikuti">
-                <span class="ikuti">Ikuti</span>
-            </div>
-
-            <div class="bookmark">
-                <img src="../images/icons/bookmark.png" alt="bookmark" style="width:128px;height:128px">
-            </div>
-
-            <div class="report">
-                <img src="../images/icons/report.png" alt="report" style="width:128px;height:128px">
-            </div>
-
-            <div class="id">
-                <h2 style="font-family:Courier">@OGGY_THE_CAT_CONTOHIDPANJANG</h2>
-            </div>
-
-            <div class="nama">
-                <h2 style="font-family:Candara;font-size: 50px;">OGGY THE CAT</h2>
-            </div>
-
-            <div class="panggilan">
-                <h2 style="font-family:Garamond;font-size: 40px;">Panggil saya: OGGY</h2>
+                <button type="button" id="editButton"> Edit </button>
+                <div class="form-buttons">
+                    <button type="button" id="cancelButton"> Cancel </button>
+                    <button type="button" id="saveButton"> Save </button>
+                </div>
             </div>
         </div>
-
-        
-        
-        <div class="rectangle" style="width:950px;height:150px;margin-top: -25px;margin-left: 365px;">
-            <div class="quote">
-                <h3 style="font-family:Arial;text-align:center;">Do you like makan indomie setengah mateng?<br>
-                    Yeah, meow too! Check my profile!</h3>
-            </div>
-        </div>
-        <div class="apostrophe">
-            <img src="../images/icons/apostrophe.png">
-        </div>
-
-        <div class="tanya_suka">
-            <h2 style="font-family:Garamond;font-size: 40px;">Apa yang OGGY suka?</h2> 
-        </div>
-
-        <div class="rectangle" style="width:950px;height:93px;margin-top: 100px;margin-left: 365px;">
-            <h3 style="font-family:Arial;margin-left:75px;">Nonton TV, bersihin rumah dari kecoak, masak pie susu, ngemil whiskas, berjemur di depan rumah, dll, dll, dll</h3>
-        </div>
-        
-        <div class="rectangle" style="width:950px;height:93px;margin-top: 10px;margin-left: 365px;">
-            <h3 style="font-family:Arial;margin-left:75px;">Horor, astronomi, golf, pokemon, sains komputer</h3>
-        </div>
-        
-        <div class="rectangle" style="width:950px;height:93px;margin-top: 10px;margin-left: 365px;">
-            <h3 style="font-family:Arial;margin-left:75px;">Kecoak, anjing galak, kuliah informatika, tomat mentah</h3>
-        </div>
-
-
-
-        <div class="group2">
-            <div class="profile">
-                <h2 style="font-family:Garamond;font-size: 40px;text-align: center;">Profil OGGY</h2>
-            </div>
-            <div class="rectangle" style="width:950px;height:450px;margin-top: 60px;margin-left: 365px;">
-                <h2 style="font-family:Garamond;font-size: 40px;margin-left: 20px;margin-top: 20px;">TENTANG OGGY</h2>
-                <h3 style="font-family:Arial;margin-left: 20px;margin-top: 20px;">Halo para kucing cantik! Meow meow meow meow.. meoow, meee, moww, meow meow. Maeee maw mow meow. Meow, meow meowww! Meow meow meow meow.. meooaw, meee, moww, meow meow. Meow maw mow meow. Meow, meow meowww! Maeee maw mow meow. Meow, meow MEOWWW! Saya adalah Oggy, kucing petualang yang tinggal di rumah yang sering dihantui oleh kecoak-kecoak nakal. Meskipun mereka sering membuat kekacauan, saya selalu berusaha mengusir mereka dengan kelincahan dan kelihaian saya.</h3>
-            </div>
-        </div>
-
-
-        <div class="group3">
-            <div class="rectangle" style="width:1350px;height:450px;margin-top: 60px;margin-left: 30px;">
-                <h2 style="font-family:Garamond;font-size: 60px;text-align: left;margin-left: 20px;margin-top: 20px;">MBTI</h2>
-            </div>
-            <div class="rectangle" style="width:950px;height:450px;margin-top: 60px;margin-left: 20px;">
-                <h2 style="font-family:Garamond;font-size: 40px;margin-left: 20px;margin-top: 20px;">LOVE LANGUAGE</h2>
-                <h3 style="font-family:Arial;margin-left: 20px;margin-top: 20px;font-size: 30px;">
-                    Words of Affirmation
-                        <div class="square">
-                            <img src="../images/icons/check.png">
-                        </div>
-                    <br><br>Gifts
-                    <br><br>Acts of Service
-                    <br><br>Quality Time
-                    <br><br>Physical Touch</h3>
-            </div>
-        </div>
-    </body>
+    </div>
+    <? include(__DIR__ . '/../main/footer/Footer.php'); ?>
+    <script src="<?= BASE_URL ?>/js/profile.js"></script>
+</body>
 </html>
