@@ -34,7 +34,7 @@
 }
 
 .like-button {
-  background-color: #ff91a4;
+  background-color: #ffd2da;
   font-family: "Poppins";
   border: 0;
   padding: 1rem 2rem;
@@ -64,7 +64,7 @@
 
 .desc-profile,
 .desc-container {
-  background-color: #ff91a4;
+  background-color: #ffd2da;
   padding: 1rem;
   width: 100%;
   border-radius: 20px;

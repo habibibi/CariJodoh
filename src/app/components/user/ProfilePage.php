@@ -16,14 +16,12 @@
         include(__DIR__ . '/../main/navbar/Navbar.php');
     ?>
     <div class="container">
-        <div>
-            <h1>Foto Profil</h1>
-            <img src="<?= BASE_URL ?>/images/profile/<?= $_SESSION['user_id'] ?>.jpg" alt="profile_picture" class="profile_picture">
-            <input type="file" id="imageInput" name="Foto Profil" accept="image/*">
-        </div>
         <div class="view_detail">
+            <div class="header">
+                <img src="<?= BASE_URL ?>/images/profile/<?= $_SESSION['user_id'] ?>.jpg" alt="profile_picture" class="profile_picture">
+                <input type="file" id="imageInput" name="Foto Profil" accept="image/*">
+            </div>
             <form class="profile_detail">
-
                 <label for="fullNameInput"> Nama Lengkap </label>
                 <p id="fullName"> </p>
                 <input type="text" id="fullNameInput" placeholder="Masukkan nama lengkap..">
@@ -131,17 +129,23 @@
                 <p id="contact"> </p>
                 <input type="text" id="contactInput" placeholder="Masukkan kontak..">
 
-                <label>Video Perkenalan</label>
-                <video id="video" height="240" controls>
-                    <source src="<?= BASE_URL?>/videos/<?= $_SESSION['user_id']?>.mp4" type="video/mp4">
-                </video>
-                <input type="file" id="videoInput" name="Video Perkenalan" accept="video/*">
+                <div class="flex-col gap-4">
+                    <label>Video Perkenalan</label>
+                    <video id="video" height="240" controls>
+                        <source src="<?= BASE_URL?>/videos/<?= $_SESSION['user_id']?>.mp4" type="video/mp4">
+                    </video>
+                    <input type="file" id="videoInput" name="Video Perkenalan" accept="video/*">
+                </div>
 
-                <button type="button" id="editButton"> Edit </button>
+                <button type="button" id="editButton" class="mt-4"> Edit </button>
+                
                 <div class="form-buttons">
                     <button type="button" id="cancelButton"> Cancel </button>
                     <button type="button" id="saveButton"> Save </button>
                 </div>
+            </div>
+            <div class="mx-auto button-container">
+                <button type="button" class="logout-user">Logout</button>
             </div>
         </div>
     </div>
