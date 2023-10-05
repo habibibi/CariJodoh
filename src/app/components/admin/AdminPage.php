@@ -18,7 +18,7 @@
     <main class="admin flex-col">
         <h1>Admin Dashboard</h1>
         <p>Welcome to admin's dashboard!</p>
-        <img src="<?= BASE_URL ?>/images/assets/admin.png" alt="admin" />
+        <img src="<?= BASE_URL ?>/images/assets/admin.webp" alt="admin" />
         <button class="logout-admin">Logout</button>
     </main>
     <?php
@@ -37,8 +37,9 @@
                     if (this.status === 201) {
                         const data = JSON.parse(this.responseText);
                         location.replace(data.redirect_url);
+                        showToast("Berhasil logout!");
                     } else {
-                        alert("An error occured, please try again!");
+                        showToast("Gagal logout!");
                     }
                 }
             };

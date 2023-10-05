@@ -20,7 +20,7 @@
             <div class="admin-sidebar">
                 <h1>Admin Dashboard</h1>
                 <h3>Likes</h3>
-                <img src="<?= BASE_URL ?>/images/assets/admin.png" alt="admin" />
+                <img src="<?= BASE_URL ?>/images/assets/admin.webp" alt="admin" />
             </div>
             <div class="admin-likes">
                 <div class="flex-row header">
@@ -186,8 +186,10 @@
 
                     popupDelete.style.display = 'none';
                     overlay.style.display = 'none';
+
+                    showToast("Berhasil delete like!");
                 } else {
-                    console.error('XHR request failed');
+                    showToast("Gagal delete like!");
                 }
             };
 
@@ -244,7 +246,7 @@
 
                     updatePaginationButtons();
                 } else {
-                    console.error('XHR request failed');
+                    showToast("Gagal load likes!");
                 }
             };
 
@@ -466,8 +468,9 @@
                         loadLikes(response.pages);
                         popupAdd.style.display = 'none';
                         overlay.style.display = 'none';
+                        showToast("Berhasil tambah like!");
                     } else {
-                        alert("An error occured, please try again!");
+                        showToast("Gagal tambah like!");
                     }
                 }
             };
@@ -492,8 +495,9 @@
                         loadLikes(1);
                         popupEdit.style.display = 'none';
                         overlay.style.display = 'none';
+                        showToast("Berhasil update like!");
                     } else {
-                        alert("An error occured, please try again!");
+                        showToast("Gagal update like!");
                     }
                 }
             };

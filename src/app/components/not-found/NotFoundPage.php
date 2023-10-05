@@ -16,7 +16,7 @@
     ?>
 
     <main class="not-found">
-        <img src="<?= BASE_URL ?>/images/assets/404.png" alt="404"/>
+        <img src="<?= BASE_URL ?>/images/assets/404.webp" alt="404"/>
         <h1>NOT FOUND</h1>
         <p>Sorry, we couldn't find the page that you were looking for!</p>
     </main>

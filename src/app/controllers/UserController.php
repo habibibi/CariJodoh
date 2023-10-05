@@ -216,7 +216,7 @@ class UserController extends Controller {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
                     if($this->middleware->checkAdmin()){
-                        $adminView = $this->view('user', 'AdminView');
+                        $adminView = $this->view('admin', 'AdminView');
                         $adminView->render();
                     } else if($this->middleware->checkAuthenticated()) {
                         header('Location: ' . BASE_URL . '/recommendation');
@@ -238,7 +238,7 @@ class UserController extends Controller {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
                     if($this->middleware->checkAdmin()){
-                        $adminNotificationsView = $this->view('user', 'AdminNotificationsView');
+                        $adminNotificationsView = $this->view('admin', 'AdminNotificationsView');
                         $adminNotificationsView->render();
                     } else if($this->middleware->checkAuthenticated()) {
                         header('Location: ' . BASE_URL . '/recommendation');
@@ -260,7 +260,7 @@ class UserController extends Controller {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
                     if($this->middleware->checkAdmin()){
-                        $adminLikesView = $this->view('user', 'AdminLikesView');
+                        $adminLikesView = $this->view('admin', 'AdminLikesView');
                         $adminLikesView->render();
                     } else if($this->middleware->checkAuthenticated()) {
                         header('Location: ' . BASE_URL . '/recommendation');
