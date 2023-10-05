@@ -139,14 +139,14 @@ class UserController extends Controller {
                             throw new Exception('Bad Request', 400);
                         }
                         $userModel = $this->model('UserModel');
-                        $profile = $userModel->getProfile($user_id);
+                        $profile = $userModel->getMyProfile($user_id);
                         header('Content-Type: application/json');
                         http_response_code(200);
                         echo json_encode($profile, JSON_NUMERIC_CHECK);
                     } else if ($this->middleware->checkAuthenticated() && ($user_id == null || $user_id == $_SESSION['user_id'])) {
                         if ($user_id == null) $user_id = $_SESSION['user_id'];
                         $userModel = $this->model('UserModel');
-                        $profile = $userModel->getProfile($user_id);
+                        $profile = $userModel->getMyProfile($user_id);
                         header('Content-Type: application/json');
                         http_response_code(200);
                         echo json_encode($profile, JSON_NUMERIC_CHECK);

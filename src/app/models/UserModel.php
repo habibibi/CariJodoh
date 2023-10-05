@@ -430,7 +430,7 @@ class UserModel
         $this->database->execute();
     }
 
-    public function getProfile($user_id)
+    public function getMyProfile($user_id)
     {
         $query = 'SELECT * FROM profile JOIN (SELECT user_id, contact_person FROM user_contact WHERE user_id = :user_id) ct USING (user_id)';
         $this->database->query($query);
