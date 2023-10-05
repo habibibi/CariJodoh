@@ -13,7 +13,7 @@ class LikesController extends Controller {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
                     if($this->middleware->checkAdmin()){
-                        header('Location: ' . BASE_URL . '/user/admin');
+                        header('Location: ' . BASE_URL . '/admin');
                     } else if (!$this->middleware->checkAuthenticated()) {
                         header('Location: ' . BASE_URL . '/user/login');
                     } else {
