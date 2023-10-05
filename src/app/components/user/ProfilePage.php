@@ -55,6 +55,7 @@
             margin-left: 39px;
             margin-top: auto 0;
         }
+
         .group1 {
             display: flex;
         }
@@ -63,6 +64,7 @@
             margin-top: 40px;
             margin-left: 20px;
         }
+
         .report {
             margin-left: 20px;
             margin-top: 40px;
