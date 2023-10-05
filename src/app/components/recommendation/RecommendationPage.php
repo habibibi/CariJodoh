@@ -37,14 +37,14 @@
     <script>
         function card_profile(userId, namaLengkap, domisili, hobi, interest, umur, tinggi, agama) {
             const result = `
-                <a href="<?= BASE_URL ?>/user/profile/${userId}">
+                <a href="<?= BASE_URL ?>/view/profile/${userId}">
                     <div class="card-profile">
                         <div class="img-profile">
                             <img src="<?= BASE_URL ?>/images/profile/${userId}.jpg" alt="profile"/>
                         </div>
                         <div class="desc-profile">
                             <p class="card-nama">${namaLengkap}</p>
-                            <p>Lokasi: ${namaLengkap}</p>
+                            <p>Lokasi: ${domisili}</p>
                             <p>Hobi: ${hobi}</p>
                             <p>Interest: ${interest}</p>
                             <div class="flex-row items-center margin-auto">

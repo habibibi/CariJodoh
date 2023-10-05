@@ -131,7 +131,7 @@ class UserModel
     public function getProfiles($page = 1, $exclude_userid=null, $name=null, $interest=null, $agama=null, $mbti=null, $sortAttr='nama_lengkap', $isDesc=false)
     {
         $query = "
-        SELECT gambar_profile, nama_lengkap, domisili, hobi, interest, umur, tinggi_badan, agama, mbti 
+        SELECT user_id, gambar_profile, nama_lengkap, domisili, hobi, interest, umur, tinggi_badan, agama, mbti 
         FROM profile
         ";
         $cond = array();
