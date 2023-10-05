@@ -153,20 +153,36 @@ class NotificationModel
         $query = 'SELECT nama_lengkap FROM profile WHERE user_id = :user_id_sender';
         $this->database->query($query);
         $this->database->bind('user_id_sender', $userIdSender);
-        $nama_lengkap = $this->database->fetch();
+        $result = $this->database->fetch();
 
         // Define INSERT query
-        $query = 'INSERT INTO notification (jenis_notifikasi, user_id_sender, user_id_receiver, isi_notifikasi, sudah_dibaca) VALUES (:jenisNotifikasi, userIdSender, userIdReceiver, isiNotifikasi, sudahDibaca)';
+        $query = 'INSERT INTO notification (jenis_notifikasi, user_id_sender, user_id_receiver, isi_notifikasi, sudah_dibaca) VALUES (:jenisNotifikasi, :userIdSender, :userIdReceiver, :isiNotifikasi, :sudahDibaca)';
 
         // Binding parameters
         $this->database->query($query);
         $this->database->bind('jenisNotifikasi', 'date');
         $this->database->bind('userIdSender', $userIdSender);
         $this->database->bind('userIdReceiver', $userIdReceiver);
-        $this->database->bind('isiNotifikasi', $nama_lengkap . 'menyukai kamu!');
+        $this->database->bind('isiNotifikasi', $result->nama_lengkap . 'menyukai kamu!');
         $this->database->bind('sudahDibaca', false);
 
         // Execute query
         $this->database->execute();
+    }
+
+    public function checkLikeNotification($userIdSender, $userIdReceiver) {
+        $query = "SELECT * from notification WHERE user_id_sender = :userIdSender AND user_id_receiver = :userIdReceiver AND jenis_notifikasi = 'date'";
+
+        $this->database->query($query);
+        $this->database->bind('userIdSender', $userIdSender);
+        $this->database->bind('userIdReceiver', $userIdReceiver);
+
+        $result = $this->database->fetch();
+
+        if($result){
+            return "true";
+        }
+
+        return "false";
     }
 }

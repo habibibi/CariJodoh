@@ -25,7 +25,7 @@
                         <h1><?= $this->data['profile']->nama_lengkap ?></h1>
                         <h2>Panggil saya: <?= $this->data['profile']->nama_panggilan ?></h2>
                     </div>
-                    <button class="like-button">Like</button>
+                    <button class="like-button" <?= $this->data['liked'] == "true" ? 'disabled' : '' ?>>Like</button>
                 </div>
                 <div class="profil-utama">
                     <div class="video">
@@ -72,5 +72,26 @@
         <?php
             include(__DIR__ . '/../main/Footer/Footer.php');
         ?>
+
+        <script>
+            const likeButton = document.querySelector(".like-button");
+
+            likeButton.addEventListener('click', async function() {
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", `/public/view/like/${<?= $this->data['profile']->user_id ?>}`);
+
+                xhr.send();
+                xhr.onreadystatechange = function () {
+                    if (this.readyState === XMLHttpRequest.DONE) {
+                        if (this.status === 201) {
+                            alert("Berhasil!");
+                            likeButton.disabled = true;
+                        } else {
+                            alert("An error occured, please try again!");
+                        }
+                    }
+                };
+            })
+        </script>
     </body>
 </html>

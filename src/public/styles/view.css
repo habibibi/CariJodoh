@@ -1,9 +1,9 @@
 .view-profile {
-  padding: 2rem;
-  gap: 3rem;
+  padding: 3rem 0;
+  gap: 2rem;
   display: flex;
   flex-direction: column;
-  max-width: 1200px;
+  max-width: 900px;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
@@ -42,16 +42,20 @@
   font-size: 20px;
   font-weight: bold;
   border: 2px black solid;
+  margin-left: auto;
+  cursor: pointer;
 }
 
 .profil-utama {
   display: flex;
-  gap: 2rem;
   justify-content: center;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
 
 .video {
-  width: 50%;
+  width: 60%;
 }
 
 .video video {
@@ -70,10 +74,14 @@
 .desc-addition {
   display: flex;
   flex-direction: column;
-  padding: 0 12.5rem;
 }
 
 .flex-column {
   display: flex;
   flex-direction: column;
+}
+
+.profil {
+  margin-left: auto;
+  width: auto;
 }
