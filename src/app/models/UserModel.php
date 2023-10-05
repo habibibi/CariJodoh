@@ -115,6 +115,19 @@ class UserModel
         return $userId;
     }
 
+    public function getProfile($userId) {
+        $query = "
+            SELECT * FROM profile
+            WHERE user_id = :user_id
+        ";
+
+        $this->database->query($query);
+        $this->database->bind('user_id', $userId);
+        $profile = $this->database->fetch();
+
+        return $profile;
+    }
+
     public function getProfiles($page = 1, $exclude_userid=null, $name=null, $interest=null, $agama=null, $mbti=null, $sortAttr='nama_lengkap', $isDesc=false)
     {
         $query = "
