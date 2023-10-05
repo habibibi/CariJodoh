@@ -27,6 +27,7 @@
                 </select>
             </div>
         </div>
+        <div class="no-data flex-row"></div>
         <div class="recommend-container"></div>
     </main>
     <?php
@@ -36,22 +37,24 @@
     <script>
         function card_profile(userId, namaLengkap, domisili, hobi, interest, umur, tinggi, agama) {
             const result = `
-                <div class="card-profile">
-                    <div class="img-profile">
-                        <img src="<?= BASE_URL ?>/images/profile/${userId}.jpg" alt="profile"/>
-                    </div>
-                    <div class="desc-profile">
-                        <p class="card-nama">${namaLengkap}</p>
-                        <p>Lokasi: ${namaLengkap}</p>
-                        <p>Hobi: ${hobi}</p>
-                        <p>Interest: ${interest}</p>
-                        <div class="flex-row items-center margin-auto">
-                            <span class="detail-info">Umur: ${umur} Tahun</span>
-                            <span class="detail-info">Tinggi: ${tinggi} cm</span>
-                            <span class="detail-info">Agama: ${agama}</span>
+                <a href="<?= BASE_URL ?>/user/profile/${userId}">
+                    <div class="card-profile">
+                        <div class="img-profile">
+                            <img src="<?= BASE_URL ?>/images/profile/${userId}.jpg" alt="profile"/>
+                        </div>
+                        <div class="desc-profile">
+                            <p class="card-nama">${namaLengkap}</p>
+                            <p>Lokasi: ${namaLengkap}</p>
+                            <p>Hobi: ${hobi}</p>
+                            <p>Interest: ${interest}</p>
+                            <div class="flex-row items-center margin-auto">
+                                <span class="detail-info">Umur: ${umur} Tahun</span>
+                                <span class="detail-info">Tinggi: ${tinggi} cm</span>
+                                <span class="detail-info">Agama: ${agama}</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             `
 
             return result;
@@ -67,10 +70,12 @@
                 if (xhr.status === 200) {
                     const response = JSON.parse(xhr.responseText);
                     const recommendationContainer = document.querySelector('.recommend-container');
+                    const noData = document.querySelector(".no-data");
                     recommendationContainer.innerHTML = '';
+                    noData.innerHTML = '';
 
                     if (response.data.length == 0) {
-                        recommendationContainer.innerHTML = "<p class='mx-auto'>No recommendations are available yet.</p>"
+                        noData.innerHTML = "<p class='mx-auto pt-4'>No recommendations are available yet.</p>"
                     }
 
                     response.data.forEach((recom) => {
