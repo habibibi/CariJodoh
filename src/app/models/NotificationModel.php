@@ -149,6 +149,19 @@ class NotificationModel
     }
 
     public function likeUser($userIdSender, $userIdReceiver) {
+        // Check if user already like sender
+        $query = 'SELECT * FROM notification WHERE user_id_receiver = :user_id_receiver AND user_id_sender = :user_id_sender AND sudah_dibaca = false';
+        $this->database->query($query);
+        $this->database->bind('user_id_sender', $userIdReceiver);
+        $this->database->bind('user_id_receiver', $userIdSender);
+        $result = $this->database->fetch();
+
+        if($result) {
+            // Like notification
+            $this->likeNotification($result->notification_id, $userIdSender, $userIdReceiver);
+            return;
+        }
+
         // Get sender name
         $query = 'SELECT nama_lengkap FROM profile WHERE user_id = :user_id_sender';
         $this->database->query($query);
@@ -163,7 +176,7 @@ class NotificationModel
         $this->database->bind('jenisNotifikasi', 'date');
         $this->database->bind('userIdSender', $userIdSender);
         $this->database->bind('userIdReceiver', $userIdReceiver);
-        $this->database->bind('isiNotifikasi', $result->nama_lengkap . 'menyukai kamu!');
+        $this->database->bind('isiNotifikasi', $result->nama_lengkap . ' menyukai kamu!');
         $this->database->bind('sudahDibaca', false);
 
         // Execute query
@@ -181,6 +194,18 @@ class NotificationModel
 
         if($result){
             return "true";
+        }
+
+        $query = "SELECT * from date WHERE user_id_1 = :userIdSender AND user_id_2 = :userIdReceiver";
+
+        $this->database->query($query);
+        $this->database->bind('userIdSender', $userIdSender);
+        $this->database->bind('userIdReceiver', $userIdReceiver);
+
+        $result = $this->database->fetch();
+
+        if($result){
+            return "pending";
         }
 
         return "false";

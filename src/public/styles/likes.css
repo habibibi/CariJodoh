@@ -55,3 +55,12 @@
   border: 0;
   padding: 1rem;
 }
+
+.likes-img img {
+  margin: 0 auto;
+  object-fit: cover;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  border: #323949 3px solid;
+}

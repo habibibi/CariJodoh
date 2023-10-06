@@ -36,7 +36,7 @@
         function likes_card(user_id, nama_lengkap, user_contact) {
             const result = `
                 <div class="likes-card">
-                    <div>
+                    <div class="likes-img">
                         <img src="<?= BASE_URL ?>/images/profile/${user_id}.jpg" alt="profile"/>
                     </div>
                     <div class="flex-col">
@@ -44,7 +44,7 @@
                         <span>Kontak: ${user_contact}</span>
                     </div>
                     <div class="button-container">
-                        <a href="<?= BASE_URL ?>/user/profile/${user_id}">
+                        <a href="<?= BASE_URL ?>/view/profile/${user_id}">
                             <button class="view-button"><strong>View Profile</strong></button>
                         </a>
                     </div>
