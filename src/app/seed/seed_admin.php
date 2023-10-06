@@ -44,7 +44,7 @@ try {
     ];
 
     // Check if the admin account already exists
-    $db->query("SELECT user_id FROM user WHERE username = :username LIMIT 1");
+    $db->query("SELECT user_id FROM user WHERE (username = :username) LIMIT 1");
     $db->bind(':username', 'admin');
     $result = $db->fetch();
 

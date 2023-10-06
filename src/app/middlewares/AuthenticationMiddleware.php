@@ -15,7 +15,7 @@ class AuthenticationMiddleware
             return false;
         }
 
-        $query = 'SELECT user_id FROM user WHERE user_id = :user_id LIMIT 1';
+        $query = 'SELECT user_id FROM user WHERE (user_id = :user_id) LIMIT 1';
 
         $this->database->query($query);
         $this->database->bind('user_id', $_SESSION['user_id']);
@@ -35,7 +35,7 @@ class AuthenticationMiddleware
             return false;
         }
 
-        $query = 'SELECT role FROM user WHERE user_id = :user_id LIMIT 1';
+        $query = 'SELECT role FROM user WHERE (user_id = :user_id) LIMIT 1';
 
         $this->database->query($query);
         $this->database->bind('user_id', $_SESSION['user_id']);
@@ -55,7 +55,7 @@ class AuthenticationMiddleware
             throw new Exception('Unauthorized', 401);
         }
 
-        $query = 'SELECT user_id FROM user WHERE user_id = :user_id LIMIT 1';
+        $query = 'SELECT user_id FROM user WHERE (user_id = :user_id) LIMIT 1';
 
         $this->database->query($query);
         $this->database->bind('user_id', $_SESSION['user_id']);
@@ -75,7 +75,7 @@ class AuthenticationMiddleware
             throw new Exception('Unauthorized', 401);
         }
 
-        $query = 'SELECT role FROM user WHERE user_id = :user_id LIMIT 1';
+        $query = 'SELECT role FROM user WHERE (user_id = :user_id) LIMIT 1';
 
         $this->database->query($query);
         $this->database->bind('user_id', $_SESSION['user_id']);

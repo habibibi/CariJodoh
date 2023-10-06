@@ -79,7 +79,7 @@ function register($database, $username, $password, $fullName, $name, $age, $cont
         ];
 
         // Check if user already exists
-        $query = 'SELECT user_id FROM user WHERE username = :username LIMIT 1';
+        $query = 'SELECT user_id FROM user WHERE (username = :username) LIMIT 1';
         $database->query($query);
         $database->bind('username', $username);
         $user = $database->fetch();
@@ -96,7 +96,7 @@ function register($database, $username, $password, $fullName, $name, $age, $cont
         $database->execute();
 
         // Get the user_id of the newly inserted user
-        $query = 'SELECT user_id FROM user WHERE username = :username LIMIT 1';
+        $query = 'SELECT user_id FROM user WHERE (username = :username) LIMIT 1';
         $database->query($query);
         $database->bind('username', $username);
         $user = $database->fetch();
