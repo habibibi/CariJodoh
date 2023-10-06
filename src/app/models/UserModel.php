@@ -11,7 +11,7 @@ class UserModel
 
     public function login($username, $password)
     {
-        $query = 'SELECT user_id, password FROM user WHERE username = :username LIMIT 1';
+        $query = 'SELECT user_id, password FROM user WHERE (username = :username) LIMIT 1';
 
         $this->database->query($query);
         $this->database->bind('username', $username);
@@ -25,8 +25,22 @@ class UserModel
         }
     }
 
+    public function isRegistered($username){
+        // Check if user already exists
+        $query = 'SELECT user_id FROM user WHERE (username = :username) LIMIT 1';
+        $this->database->query($query);
+        $this->database->bind('username', $username);
+        $user = $this->database->fetch();
+        if($user){
+            throw new Exception('Username already exists', 409);
+        }
+    }
+
     public function register_admin($username, $password)
     {   
+        // Check if user already exists
+        $this->isRegistered($username);
+
         $query = 'INSERT INTO user (username, password, role) VALUES (:username, :password, :role)';
         $options = [
             'cost' => 10,
@@ -46,13 +60,7 @@ class UserModel
         ];
 
         // Check if user already exists
-        $query = 'SELECT user_id FROM user WHERE username = :username LIMIT 1';
-        $this->database->query($query);
-        $this->database->bind('username', $username);
-        $user = $this->database->fetch();
-        if($user){
-            throw new Exception('Username already exists', 409);
-        }
+        $this->isRegistered($username);
 
         // Insert user data into the 'user' table
         $query = 'INSERT INTO user (username, password, role) VALUES (:username, :password, :role)';
@@ -63,7 +71,7 @@ class UserModel
         $this->database->execute();
 
         // Get the user_id of the newly inserted user
-        $query = 'SELECT user_id FROM user WHERE username = :username LIMIT 1';
+        $query = 'SELECT user_id FROM user WHERE (username = :username) LIMIT 1';
         $this->database->query($query);
         $this->database->bind('username', $username);
         $user = $this->database->fetch();
@@ -118,7 +126,7 @@ class UserModel
     public function getProfile($userId) {
         $query = "
             SELECT * FROM profile
-            WHERE user_id = :user_id
+            WHERE (user_id = :user_id)
         ";
 
         $this->database->query($query);
@@ -152,7 +160,7 @@ class UserModel
         }
 
         if ($exclude_userid) {
-            $queryGender = "SELECT gender from profile WHERE user_id = :userid";
+            $queryGender = "SELECT gender from profile WHERE (user_id = :userid)";
             $this->database->query($queryGender);
             $this->database->bind('userid', $exclude_userid);
             $gender = $this->database->fetch()->gender;
@@ -220,7 +228,7 @@ class UserModel
         }
 
         if ($exclude_userid) {
-            $queryGender = "SELECT gender from profile WHERE user_id = :userid";
+            $queryGender = "SELECT gender from profile WHERE (user_id = :userid)";
             $this->database->query($queryGender);
             $this->database->bind('userid', $exclude_userid);
             $gender = $this->database->fetch()->gender;
@@ -257,7 +265,7 @@ class UserModel
     public function getGender($userId) {
         $query = '
             SELECT gender from profile
-            WHERE user_id = :user_id
+            WHERE (user_id = :user_id)
         ';
 
         $this->database->query($query);
@@ -271,7 +279,7 @@ class UserModel
     public function getMBTI($userId) {
         $query = '
             SELECT mbti from profile
-            WHERE user_id = :user_id
+            WHERE (user_id = :user_id)
         ';
 
         $this->database->query($query);
@@ -285,7 +293,7 @@ class UserModel
     public function getAgama($userId) {
         $query = '
             SELECT agama from profile
-            WHERE user_id = :user_id
+            WHERE (user_id = :user_id)
         ';
 
         $this->database->query($query);
@@ -299,7 +307,7 @@ class UserModel
     public function getZodiak($userId) {
         $query = '
             SELECT zodiak from profile
-            WHERE user_id = :user_id
+            WHERE (user_id = :user_id)
         ';
 
         $this->database->query($query);
@@ -317,7 +325,7 @@ class UserModel
         if($condition == "mbti"){
             $query = "
                 SELECT * from profile
-                WHERE mbti = :mbti AND gender <> :gender AND user_id <> :user_id
+                WHERE (mbti = :mbti) AND (gender <> :gender) AND (user_id <> :user_id)
                 LIMIT 6
             ";
 
@@ -329,7 +337,7 @@ class UserModel
         } else if($condition == "agama"){
             $query = "
                 SELECT * from profile
-                WHERE agama = :agama AND gender <> :gender AND user_id <> :user_id
+                WHERE (agama = :agama) AND (gender <> :gender) AND (user_id <> :user_id)
                 LIMIT 6
             ";
 
@@ -341,7 +349,7 @@ class UserModel
         } else if($condition == "zodiak"){
             $query = "
                 SELECT * from profile
-                WHERE zodiak = :zodiak AND gender <> :gender AND user_id <> :user_id
+                WHERE (zodiak = :zodiak) AND (gender <> :gender) AND (user_id <> :user_id)
                 LIMIT 6
             ";
 
@@ -392,7 +400,7 @@ class UserModel
             zodiak = :zodiak, 
             ketidaksukaan = :ketidaksukaan, 
             gender = :gender
-            WHERE user_id = :user_id';
+            WHERE (user_id = :user_id)';
         $this->database->query($query);
         $this->database->bind('user_id', $user_id);
         $this->database->bind('nama_panggilan', $name);
@@ -423,7 +431,7 @@ class UserModel
         $this->database->execute();
 
         // Insert contact data into the 'user_contact' table
-        $query = 'UPDATE user_contact SET contact_person = :contact_person WHERE user_id = :user_id';
+        $query = 'UPDATE user_contact SET contact_person = :contact_person WHERE (user_id = :user_id)';
         $this->database->query($query);
         $this->database->bind('user_id', $user_id);
         $this->database->bind('contact_person', $contact);
@@ -432,7 +440,7 @@ class UserModel
 
     public function getMyProfile($user_id)
     {
-        $query = 'SELECT * FROM profile JOIN (SELECT user_id, contact_person FROM user_contact WHERE user_id = :user_id) ct USING (user_id)';
+        $query = 'SELECT * FROM profile JOIN (SELECT user_id, contact_person FROM user_contact WHERE (user_id = :user_id)) ct USING (user_id)';
         $this->database->query($query);
         $this->database->bind('user_id', $user_id);
         $profile = $this->database->fetch();

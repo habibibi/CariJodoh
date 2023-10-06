@@ -47,8 +47,8 @@
         <div class="popup-add-likes">
             <h1>Add Likes</h1>
             <div class="flex-col gap-2">
-                <input type="number" placeholder="User ID Sender" name="user_id_1" id="user_id_1">
-                <input type="number" placeholder="User ID Receiver" name="user_id_2" id="user_id_2">
+                <input type="number" placeholder="User ID Sender" name="user_id_1" id="user_id_1" required>
+                <input type="number" placeholder="User ID Receiver" name="user_id_2" id="user_id_2" required>
             </div>
             <div class="button-container-popup">
                 <button class="cancel-button"><strong>Cancel</strong></button>
@@ -58,8 +58,8 @@
         <div class="popup-edit-likes">
             <h1>Edit Likes</h1>
             <div class="flex-col gap-2">
-                <input type="number" placeholder="User ID Sender" name="user_id_1_2" id="user_id_1_2">
-                <input type="number" placeholder="User ID Receiver" name="user_id_2_2" id="user_id_2_2">
+                <input type="number" placeholder="User ID Sender" name="user_id_1_2" id="user_id_1_2" required>
+                <input type="number" placeholder="User ID Receiver" name="user_id_2_2" id="user_id_2_2" required>
             </div>
             <div class="button-container-popup">
                 <button class="cancel-button-2"><strong>Cancel</strong></button>
@@ -94,7 +94,7 @@
         function likes_card(userId1, userId2, dateId){
             const result = `
                 <div class="likes-card">
-                    <div>
+                    <div class="likes-img">
                         <img src="<?= BASE_URL ?>/images/profile/${userId1}.jpg" alt="profile"/>
                     </div>
                     <div>
@@ -452,28 +452,32 @@
             const userId1 = document.getElementById("user_id_1").value;
             const userId2 = document.getElementById("user_id_2").value;
             
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", "/public/likes/fetch");
+            if(userId1 && userId2){
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "/public/likes/fetch");
 
-            const formData = new FormData();
-            formData.append("user_id_1", userId1);
-            formData.append("user_id_2", userId2);
+                const formData = new FormData();
+                formData.append("user_id_1", userId1);
+                formData.append("user_id_2", userId2);
 
-            xhr.send(formData);
-            xhr.onreadystatechange = function () {
-                if (this.readyState === XMLHttpRequest.DONE) {
-                    if (this.status === 201) {
-                        const response = JSON.parse(this.responseText);
-                        currentPage = response.pages;
-                        loadLikes(response.pages);
-                        popupAdd.style.display = 'none';
-                        overlay.style.display = 'none';
-                        showToast("Berhasil tambah like!");
-                    } else {
-                        showToast("Gagal tambah like!");
+                xhr.send(formData);
+                xhr.onreadystatechange = function () {
+                    if (this.readyState === XMLHttpRequest.DONE) {
+                        if (this.status === 201) {
+                            const response = JSON.parse(this.responseText);
+                            currentPage = response.pages;
+                            loadLikes(response.pages);
+                            popupAdd.style.display = 'none';
+                            overlay.style.display = 'none';
+                            showToast("Berhasil tambah like!");
+                        } else {
+                            showToast("Gagal tambah like!");
+                        }
                     }
-                }
-            };
+                };
+            } else {
+                showToast("Lengkapi Form!");
+            }
         })
 
         editButton.addEventListener('click', async () => {
@@ -481,26 +485,30 @@
             const userId1 = document.getElementById("user_id_1_2").value;
             const userId2 = document.getElementById("user_id_2_2").value;
             
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", `/public/likes/update/${idDate}`);
+            if(userId1 && userId2){
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", `/public/likes/update/${idDate}`);
 
-            const formData = new FormData();
-            formData.append("user_id_1", userId1);
-            formData.append("user_id_2", userId2);
+                const formData = new FormData();
+                formData.append("user_id_1", userId1);
+                formData.append("user_id_2", userId2);
 
-            xhr.send(formData);
-            xhr.onreadystatechange = function () {
-                if (this.readyState === XMLHttpRequest.DONE) {
-                    if (this.status === 201) {
-                        loadLikes(1);
-                        popupEdit.style.display = 'none';
-                        overlay.style.display = 'none';
-                        showToast("Berhasil update like!");
-                    } else {
-                        showToast("Gagal update like!");
+                xhr.send(formData);
+                xhr.onreadystatechange = function () {
+                    if (this.readyState === XMLHttpRequest.DONE) {
+                        if (this.status === 201) {
+                            loadLikes(1);
+                            popupEdit.style.display = 'none';
+                            overlay.style.display = 'none';
+                            showToast("Berhasil update like!");
+                        } else {
+                            showToast("Gagal update like!");
+                        }
                     }
-                }
-            };
+                };
+            } else {
+                showToast("Lengkapi Form!");
+            }
         })
     </script>
 </body>

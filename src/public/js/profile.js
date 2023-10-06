@@ -93,48 +93,74 @@ document.getElementById("saveButton").addEventListener("click", function () {
   const imageFile = document.getElementById("imageInput").files[0];
   const videoFile = document.getElementById("videoInput").files[0];
   const gender = document.getElementById("genderInput").value;
+
   // Validasi
+  if (!loveLanguage) {
+    showToast("Masukkan love language terlebih dahulu.");
+    return;
+  }
+
+  if (!mbti) {
+    showToast("Masukkan MBTI terlebih dahulu.");
+    return;
+  }
+
+  if (!zodiac) {
+    showToast("Masukkan Zodiak terlebih dahulu.");
+    return;
+  }
+
+  if (!gender) {
+    showToast("Masukkan Gender terlebih dahulu.");
+    return;
+  }
+
   if (!fullName || fullName.length < 2) {
-    alert("Nama Lengkap minimal 3 karakter.");
+    showToast("Nama Lengkap minimal 3 karakter.");
     return;
   }
 
   if (!name || name.length < 2) {
-    alert("Nama Panggilan minimal 3 karakter.");
+    showToast("Nama Panggilan minimal 3 karakter.");
     return;
   }
 
   if (!age || age < 12 || age > 100) {
-    alert("Umur tidak valid!");
+    showToast("Umur tidak valid!");
     return;
   }
 
   if (!contact || contact.length < 5) {
-    alert("Contact minimal 5 karakter. (Bisa berupa id line, no WA, dll)");
+    showToast("Contact minimal 5 karakter. (Bisa berupa id line, no WA, dll)");
   }
 
   if (!hobby || hobby.length < 5) {
-    alert("Hobby minimal 5 karakter.");
+    showToast("Hobby minimal 5 karakter.");
     return;
   }
 
   if (!interest || interest.length < 5) {
-    alert("Hobby minimal 5 karakter.");
+    showToast("Hobby minimal 5 karakter.");
     return;
   }
 
   if (!tinggiBadan || tinggiBadan < 100 || tinggiBadan > 300) {
-    alert("Tinggi badan tidak valid!");
+    showToast("Tinggi badan tidak valid!");
     return;
   }
 
   if (!domisili) {
-    alert("Masukkan domisili terlebih dahulu.");
+    showToast("Masukkan domisili terlebih dahulu.");
     return;
   }
 
   if (!ketidaksukaan) {
-    alert("Masukkan ketidaksukaan terlebih dahulu.");
+    showToast("Masukkan ketidaksukaan terlebih dahulu.");
+    return;
+  }
+
+  if (!agama) {
+    showToast("Masukkan agama terlebih dahulu.");
     return;
   }
 
@@ -164,7 +190,7 @@ document.getElementById("saveButton").addEventListener("click", function () {
   xhr.onreadystatechange = function () {
     if (this.readyState === XMLHttpRequest.DONE) {
       if (this.status !== 201) {
-        alert("An error occured, please try again!");
+        showToast("An error occured, please try again!");
         return;
       }
       location.reload();

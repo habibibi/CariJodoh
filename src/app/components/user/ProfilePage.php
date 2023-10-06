@@ -53,7 +53,6 @@
                 <label for="agamaInput"> Agama </label>
                 <p id="agama"> </p>
                 <select id="agamaInput">
-                    <option value="">Agama</option>
                     <option value="Islam">Islam</option>
                     <option value="Protestan">Protestan</option>
                     <option value="Katolik">Katolik</option>
@@ -79,7 +78,6 @@
                 <label for=loveLanguageInput> Love Language </label>
                 <p id="loveLanguage"> </p>
                 <select id="loveLanguageInput">
-                    <option value="">Love Language</option>
                     <option value="Words of Affirmation">Words of Affirmation</option>
                     <option value="Acts of Service">Acts of Service</option>
                     <option value="Receiving Gifts">Receiving Gifts</option>

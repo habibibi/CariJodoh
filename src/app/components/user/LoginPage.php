@@ -48,26 +48,30 @@
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
 
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", "/public/user/login");
+            if(username && password){
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "/public/user/login");
 
-            const formData = new FormData();
-            formData.append("username", username);
-            formData.append("password", password);
+                const formData = new FormData();
+                formData.append("username", username);
+                formData.append("password", password);
 
-            xhr.send(formData);
-            xhr.onreadystatechange = function () {
-                if (this.readyState === XMLHttpRequest.DONE) {
-                    if (this.status === 201) {
-                        const data = JSON.parse(this.responseText);
-                        location.replace(data.redirect_url);
-                    } else if(this.status === 401){
-                        showToast("Username atau password salah!");
-                    } else {
-                        showToast("Gagal login!");
+                xhr.send(formData);
+                xhr.onreadystatechange = function () {
+                    if (this.readyState === XMLHttpRequest.DONE) {
+                        if (this.status === 201) {
+                            const data = JSON.parse(this.responseText);
+                            location.replace(data.redirect_url);
+                        } else if(this.status === 401){
+                            showToast("Username atau password salah!");
+                        } else {
+                            showToast("Gagal login!");
+                        }
                     }
-                }
-            };
+                };
+            } else {
+                showToast("Lengkapi Form!");
+            }
         })
     </script>
 </body>

@@ -199,7 +199,7 @@
         function notification_card(image, isiNotifikasi, userIdReceiver, userIdSender, notificationId, sudahDibaca, jenisNotifikasi){
             const result = `
             <div class="notification-card">
-                <div>
+                <div class="notification-card-img">
                     <img src="<?= BASE_URL ?>/images/profile/${image}.jpg" alt="profile" class="profile-img"/>
                 </div>
                 <div class="flex-col">
@@ -482,31 +482,35 @@
             const userId1 = document.getElementById("user_id_sender").value;
             const userId2 = document.getElementById("user_id_receiver").value;
             
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", "/public/notification/fetch");
+            if(isiNotifikasi && jenisNotifikasi && userId1 && userId2) {
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "/public/notification/fetch");
 
-            const formData = new FormData();
-            formData.append("jenis_notifikasi", jenisNotifikasi);
-            formData.append("isi_notifikasi", isiNotifikasi);
-            formData.append("user_id_sender", userId1);
-            formData.append("user_id_receiver", userId2);
+                const formData = new FormData();
+                formData.append("jenis_notifikasi", jenisNotifikasi);
+                formData.append("isi_notifikasi", isiNotifikasi);
+                formData.append("user_id_sender", userId1);
+                formData.append("user_id_receiver", userId2);
 
-            xhr.send(formData);
-            xhr.onreadystatechange = function () {
-                if (this.readyState === XMLHttpRequest.DONE) {
-                    if (this.status === 201) {
-                        const response = JSON.parse(this.responseText);
-                        currentPage = response.pages;
-                        loadNotifications(response.pages);
-                        popupAdd.style.display = 'none';
-                        overlay.style.display = 'none';
+                xhr.send(formData);
+                xhr.onreadystatechange = function () {
+                    if (this.readyState === XMLHttpRequest.DONE) {
+                        if (this.status === 201) {
+                            const response = JSON.parse(this.responseText);
+                            currentPage = response.pages;
+                            loadNotifications(response.pages);
+                            popupAdd.style.display = 'none';
+                            overlay.style.display = 'none';
 
-                        showToast("Berhasil tambah notification!");
-                    } else {
-                        showToast("Gagal tambah notification!");
+                            showToast("Berhasil tambah notification!");
+                        } else {
+                            showToast("Gagal tambah notification!");
+                        }
                     }
-                }
-            };
+                };
+            } else {
+                showToast("Lengkapi Form!");
+            }
         })
 
         editButton.addEventListener('click', async () => {
@@ -517,29 +521,33 @@
             const userId2 = document.getElementById("user_id_receiver_2").value;
             const sudahDibaca = document.getElementById("sudah_dibaca").value;
             
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", `/public/notification/update/${idNotifikasi}`);
+            if(isiNotifikasi && jenisNotifikasi && userId1 && userId2){
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", `/public/notification/update/${idNotifikasi}`);
 
-            const formData = new FormData();
-            formData.append("jenis_notifikasi", jenisNotifikasi);
-            formData.append("isi_notifikasi", isiNotifikasi);
-            formData.append("user_id_sender", userId1);
-            formData.append("user_id_receiver", userId2);
-            formData.append("sudah_dibaca", sudahDibaca == "on" ? 1 : 0);
+                const formData = new FormData();
+                formData.append("jenis_notifikasi", jenisNotifikasi);
+                formData.append("isi_notifikasi", isiNotifikasi);
+                formData.append("user_id_sender", userId1);
+                formData.append("user_id_receiver", userId2);
+                formData.append("sudah_dibaca", sudahDibaca == "on" ? 1 : 0);
 
-            xhr.send(formData);
-            xhr.onreadystatechange = function () {
-                if (this.readyState === XMLHttpRequest.DONE) {
-                    if (this.status === 201) {
-                        loadNotifications(1);
-                        popupEdit.style.display = 'none';
-                        overlay.style.display = 'none';
-                        showToast("Berhasil update notification!");
-                    } else {
-                        showToast("Gagal update notification!");
+                xhr.send(formData);
+                xhr.onreadystatechange = function () {
+                    if (this.readyState === XMLHttpRequest.DONE) {
+                        if (this.status === 201) {
+                            loadNotifications(1);
+                            popupEdit.style.display = 'none';
+                            overlay.style.display = 'none';
+                            showToast("Berhasil update notification!");
+                        } else {
+                            showToast("Gagal update notification!");
+                        }
                     }
-                }
-            };
+                };
+            } else {
+                showToast("Lengkapi Form!");
+            }
         })
     </script>
 </body>

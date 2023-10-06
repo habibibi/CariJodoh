@@ -15,7 +15,7 @@ class GenderMiddleware
             throw new Exception('Unauthorized', 401);
         }
 
-        $query1 = 'SELECT gender FROM profile WHERE user_id = :user_id LIMIT 1';
+        $query1 = 'SELECT gender FROM profile WHERE (user_id = :user_id) LIMIT 1';
 
         $this->database->query($query1);
         $this->database->bind('user_id', $_SESSION['user_id']);
@@ -26,7 +26,7 @@ class GenderMiddleware
             throw new Exception('Unauthorized', 401);
         }
 
-        $query2 = 'SELECT gender FROM profile WHERE user_id = :user_id LIMIT 1';
+        $query2 = 'SELECT gender FROM profile WHERE (user_id = :user_id) LIMIT 1';
 
         $this->database->query($query2);
         $this->database->bind('user_id', $userId);
