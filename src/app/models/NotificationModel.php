@@ -184,7 +184,7 @@ class NotificationModel
     }
 
     public function checkLikeNotification($userIdSender, $userIdReceiver) {
-        $query = "SELECT * from notification WHERE user_id_sender = :userIdSender AND user_id_receiver = :userIdReceiver AND jenis_notifikasi = 'date'";
+        $query = "SELECT * from notification WHERE user_id_sender = :userIdSender AND user_id_receiver = :userIdReceiver AND jenis_notifikasi = 'date' AND sudah_dibaca = false";
 
         $this->database->query($query);
         $this->database->bind('userIdSender', $userIdSender);

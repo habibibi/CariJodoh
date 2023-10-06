@@ -65,9 +65,11 @@
         function notification_card(notification_id, user_id, isi_notifikasi) {
             const result = `
                 <div class="notification-card">
-                    <div class="notification-img">
-                        <img src="<?= BASE_URL ?>/images/profile/${user_id}.jpg" alt="profile"/>
-                    </div>
+                    <a href="<?= BASE_URL?>/view/profile/${user_id}">
+                        <div class="notification-img">
+                            <img src="<?= BASE_URL ?>/images/profile/${user_id}.jpg" alt="profile"/>
+                        </div>
+                    </a>
                     <div class="flex-row">
                         <span>${isi_notifikasi}</span>
                     </div>
