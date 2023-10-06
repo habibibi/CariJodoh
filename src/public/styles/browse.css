@@ -81,6 +81,8 @@ input {
   width: 100%;
   min-height: 800px;
   align-items: center;
+  position: relative;
+  margin-bottom: 10px;
 }
 
 .profiles-grid {
@@ -92,7 +94,6 @@ input {
   padding: 10px;
   grid-template-rows: repeat(2, 1fr);
   grid-template-columns: repeat(3, 1fr);
-  margin-bottom: 10px;
 }
 
 .profile-card {
