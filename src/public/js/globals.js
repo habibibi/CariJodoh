@@ -14,7 +14,7 @@ function showToast(message) {
   toastContainer.appendChild(toast);
   document.body.appendChild(toastContainer);
 
-  animateProgressBar(progressBar, 1900);
+  animateProgressBar(progressBar, 3000);
 
   setTimeout(function () {
     toast.remove();

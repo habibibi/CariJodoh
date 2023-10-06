@@ -25,7 +25,7 @@
                         <h1><?= $this->data['profile']->nama_lengkap ?></h1>
                         <h2>Panggil saya: <?= $this->data['profile']->nama_panggilan ?></h2>
                     </div>
-                    <button class="like-button" <?= $this->data['liked'] == "true" ? 'disabled' : '' ?>>Like</button>
+                    <button class="like-button" <?= $this->data['liked'] == "true" || $this->data['liked'] == "pending" ? 'disabled' : '' ?>>Like</button>
                 </div>
                 <div class="profil-utama">
                     <div class="video">
