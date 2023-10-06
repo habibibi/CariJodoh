@@ -26,7 +26,14 @@ class LikesModel
 
     public function getLikesByUserId($userId, $page = 1){
         // Define query
-        $query = 'SELECT * FROM date WHERE (user_id_1 = :userId) LIMIT :limit OFFSET :offset';
+        $query = '
+            SELECT date.user_id_2, profile.nama_lengkap, user_contact.contact_person  
+            FROM date
+            JOIN profile on date.user_id_2 = profile.user_id
+            JOIN user_contact on user_contact.user_id = date.user_id_2
+            WHERE (date.user_id_1 = :userId) 
+            LIMIT :limit OFFSET :offset
+        ';
         $this->database->query($query);
         $this->database->bind('limit', 6);
         $this->database->bind('offset', ($page - 1) * 6);
@@ -41,8 +48,13 @@ class LikesModel
     }
 
     public function addLike($userId1, $userId2){
+        // Check conflict
+        if($this->checkConflict($userId1, $userId2)) {
+            throw new Exception('Conflict', 409);
+        }
+
         // Define the INSERT query
-        $query = 'INSERT INTO date (user_id_1, user_id_2) VALUES (:userId1, :userId2)';
+        $query = 'INSERT INTO date (user_id_1, user_id_2) VALUES (:userId1, :userId2); INSERT INTO date (user_id_1, user_id_2) VALUES (:userId2, :userId1)';
         
         // Bind parameters and execute the query
         $this->database->query($query);
@@ -82,7 +94,7 @@ class LikesModel
 
     public function deleteLike($dateId){
         // Define query
-        $query = 'DELETE FROM date WHERE date_id = :dateId';
+        $query = 'DELETE FROM date WHERE (date_id = :dateId)';
 
         // Execute delete
         $this->database->query($query);
@@ -91,11 +103,16 @@ class LikesModel
     }
 
     public function updateLike($dateId, $userId1, $userId2){
+        // Check conflict
+        if($this->checkConflict($userId1, $userId2)) {
+            throw new Exception('Conflict', 409);
+        }
+        
         // Define the UPDATE query
         $query = 'UPDATE date 
                 SET user_id_1 = :userId1, 
                     user_id_2 = :userId2 
-                WHERE date_id = :dateId';
+                WHERE (date_id = :dateId)';
         
         // Bind parameters and execute the query
         $this->database->query($query);
@@ -105,5 +122,22 @@ class LikesModel
 
         // Execute the query
         $this->database->execute();
+    }
+
+    public function checkConflict($userId1, $userId2){
+        // Define query
+        $query = 'SELECT * FROM date WHERE (user_id_1 = :userId1) AND (user_id_2 = :userId2)';
+        $this->database->query($query);
+        $this->database->bind('userId1', $userId1);
+        $this->database->bind('userId2', $userId2);
+
+        // Get result
+        $result = $this->database->fetch();
+
+        if($result){
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -18,7 +18,7 @@ class UserController extends Controller {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
                     if($this->middleware->checkAdmin()){
-                        header('Location: ' . BASE_URL . '/user/admin');
+                        header('Location: ' . BASE_URL . '/admin');
                     } else if ($this->middleware->checkAuthenticated()) {
                         header('Location: ' . BASE_URL . '/recommendation');
                     } else {
@@ -36,7 +36,7 @@ class UserController extends Controller {
 
                     if($this->middleware->checkAdmin()){
                         $_SESSION['role'] = 'admin';
-                        echo json_encode(["redirect_url" => BASE_URL . "/user/admin"]);
+                        echo json_encode(["redirect_url" => BASE_URL . "/admin"]);
                     } else {
                         $_SESSION['role'] = 'user';
                         echo json_encode(["redirect_url" => BASE_URL . "/recommendation"]);
@@ -56,7 +56,7 @@ class UserController extends Controller {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
                     if($this->middleware->checkAdmin()){
-                        header('Location: ' . BASE_URL . '/user/admin');
+                        header('Location: ' . BASE_URL . '/admin');
                     } else if ($this->middleware->checkAuthenticated()) {
                         header('Location: ' . BASE_URL . '/recommendation');
                     } else {
@@ -119,7 +119,7 @@ class UserController extends Controller {
     
                     header('Content-Type: application/json');
                     http_response_code(201);
-                    echo json_encode(["redirect_url" => BASE_URL . "/user/admin"]);
+                    echo json_encode(["redirect_url" => BASE_URL . "/admin"]);
                     break;
                 default:
                     throw new Exception('Method Not Allowed', 405);
@@ -130,23 +130,82 @@ class UserController extends Controller {
         }
     }
 
-    public function profile(){
+    public function profile($user_id=null){
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
                     if($this->middleware->checkAdmin()){
-                        header('Location: ' . BASE_URL . '/user/admin');
-                    } else if($this->middleware->checkAuthenticated()) {
-                        $profileView = $this->view('user', 'ProfileView');
-                        $profileView->render();
+                        if ($user_id == null) {
+                            throw new Exception('Bad Request', 400);
+                        }
+                        $userModel = $this->model('UserModel');
+                        $profile = $userModel->getMyProfile($user_id);
+                        header('Content-Type: application/json');
+                        http_response_code(200);
+                        echo json_encode($profile, JSON_NUMERIC_CHECK);
+                    } else if ($this->middleware->checkAuthenticated() && ($user_id == null || $user_id == $_SESSION['user_id'])) {
+                        if ($user_id == null) $user_id = $_SESSION['user_id'];
+                        $userModel = $this->model('UserModel');
+                        $profile = $userModel->getMyProfile($user_id);
+                        header('Content-Type: application/json');
+                        http_response_code(200);
+                        echo json_encode($profile, JSON_NUMERIC_CHECK);
                     } else {
                         header('Location: ' . BASE_URL . '/user/login');
+                    }
+                    break;
+                case 'POST':
+                    $valid = false;
+                    if ($this->middleware->checkAdmin()){
+                        if ($user_id == null) {
+                            throw new Exception('Bad Request', 400);
+                        }
+                        $valid = true;
+                    }
+                    else if ($this->middleware->checkAuthenticated() && ($user_id == $_SESSION['user_id'] || $user_id == null)) {
+                        $valid = true;
+                        $user_id = $_SESSION['user_id'];
+                    }
+                    if ($valid){
+                        $userModel = $this->model('UserModel');
+                        $formData = $_POST;
+                        $fullName = $formData['fullName'];
+                        $name = $formData['name'];
+                        $age = $formData['age'];
+                        $contact = $formData['contact_person'];
+                        $hobby = $formData['hobby'];
+                        $interest = $formData['interest'];
+                        $tinggiBadan = $formData['tinggiBadan'];
+                        $agama = $formData['agama'];
+                        $domisili = $formData['domisili'];
+                        $loveLanguage = $formData['loveLanguage'];
+                        $mbti = $formData['mbti'];
+                        $zodiac = $formData['zodiac'];
+                        $ketidaksukaan = $formData['ketidaksukaan'];
+                        if (isset($_FILES['imageFile'])) {
+                            $imageFile = $_FILES['imageFile'];
+                        } else {
+                            $imageFile = null;
+                        }
+                        if(isset($_FILES['videoFile'])){
+                            $videoFile = $_FILES['videoFile'];
+                        } else {
+                            $videoFile = null;
+                        }
+                        $gender = $formData['gender'];
+                        $userModel->updateProfile($user_id, $fullName, $name, $age, $contact, $hobby, $interest, $tinggiBadan, $agama, $domisili, $loveLanguage, $mbti, $zodiac, $ketidaksukaan, $imageFile, $videoFile, $gender);
+                        header('Content-Type: application/json');
+                        http_response_code(201);
+                        echo json_encode(["message" => "Profile updated"]);
+                    } else {
+                        throw new Exception('Unauthorized', 401);
                     }
                     break;
                 default:
                     throw new Exception('Method Not Allowed', 405);
             }
         } catch (Exception $e) {
+            echo $e->getMessage();
             http_response_code($e->getCode());
             exit;
         }
@@ -157,7 +216,7 @@ class UserController extends Controller {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
                     if($this->middleware->checkAdmin()){
-                        $adminView = $this->view('user', 'AdminView');
+                        $adminView = $this->view('admin', 'AdminView');
                         $adminView->render();
                     } else if($this->middleware->checkAuthenticated()) {
                         header('Location: ' . BASE_URL . '/recommendation');
@@ -179,7 +238,7 @@ class UserController extends Controller {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
                     if($this->middleware->checkAdmin()){
-                        $adminNotificationsView = $this->view('user', 'AdminNotificationsView');
+                        $adminNotificationsView = $this->view('admin', 'AdminNotificationsView');
                         $adminNotificationsView->render();
                     } else if($this->middleware->checkAuthenticated()) {
                         header('Location: ' . BASE_URL . '/recommendation');
@@ -201,7 +260,7 @@ class UserController extends Controller {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
                     if($this->middleware->checkAdmin()){
-                        $adminLikesView = $this->view('user', 'AdminLikesView');
+                        $adminLikesView = $this->view('admin', 'AdminLikesView');
                         $adminLikesView->render();
                     } else if($this->middleware->checkAuthenticated()) {
                         header('Location: ' . BASE_URL . '/recommendation');
@@ -251,12 +310,12 @@ class UserController extends Controller {
                         $mbti = $_GET['mbti'] ?? null;
 
                         $sort = $_GET['sort'] ?? 'nama_lengkap';
-                        $allowed_column = ['nama_lengkap', 'umur'];
+                        $allowed_column = ['nama_lengkap', 'tinggi_badan', 'umur'];
                         if (!in_array($sort, $allowed_column)) {
                             throw new Exception('Bad Request', 400);
                         }
 
-                        $isdesc = $_GET['isdesc'] ?? false;
+                        $isdesc = $_GET['isdesc'] ?? null;
                         $result = $userModel->getProfiles($page, $exclude_userid, $name, $interest, $agama, $mbti, $sort, $isdesc);
                         $pageCount = $userModel->getProfilesPageCount($exclude_userid, $name, $interest, $agama, $mbti);
                         header('Content-Type: application/json');
@@ -294,6 +353,25 @@ class UserController extends Controller {
                     break;
                 default:
                     throw new Exception('Method Not Allowed', 405);
+            }
+        } catch (Exception $e){
+            http_response_code($e->getCode());
+            exit;
+        }
+    }
+    public function myprofile(){
+        try {
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'GET':
+                    if($this->middleware->checkAdmin()){
+                        header('Location: ' . BASE_URL . '/admin');
+                    } else if($this->middleware->checkAuthenticated()) {
+                        $profileView = $this->view('user', 'ProfileView');
+                        $profileView->render();
+                    } else {
+                        header('Location: ' . BASE_URL . '/user/login');
+                    }
+                    break;
             }
         } catch (Exception $e){
             http_response_code($e->getCode());

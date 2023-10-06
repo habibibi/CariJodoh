@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@300&family=Poppins:wght@400;600;700&family=Sofadi+One&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/public/images/icons/loveicon.png">
     <title>CariJodoh</title>
 </head>
 <body>
@@ -37,6 +38,7 @@
             </div>
         </div>
     </div>
+    <script src="<?= BASE_URL ?>/js/globals.js"></script>
     <script>
         const formLogin = document.querySelector(".main-form-login");
 
@@ -46,26 +48,30 @@
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
 
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", "/public/user/login");
+            if(username && password){
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "/public/user/login");
 
-            const formData = new FormData();
-            formData.append("username", username);
-            formData.append("password", password);
+                const formData = new FormData();
+                formData.append("username", username);
+                formData.append("password", password);
 
-            xhr.send(formData);
-            xhr.onreadystatechange = function () {
-                if (this.readyState === XMLHttpRequest.DONE) {
-                    if (this.status === 201) {
-                        const data = JSON.parse(this.responseText);
-                        location.replace(data.redirect_url);
-                    } else if(this.status === 401){
-                        alert("Username atau password salah!");
-                    } else {
-                        alert("An error occured, please try again!");
+                xhr.send(formData);
+                xhr.onreadystatechange = function () {
+                    if (this.readyState === XMLHttpRequest.DONE) {
+                        if (this.status === 201) {
+                            const data = JSON.parse(this.responseText);
+                            location.replace(data.redirect_url);
+                        } else if(this.status === 401){
+                            showToast("Username atau password salah!");
+                        } else {
+                            showToast("Gagal login!");
+                        }
                     }
-                }
-            };
+                };
+            } else {
+                showToast("Lengkapi Form!");
+            }
         })
     </script>
 </body>

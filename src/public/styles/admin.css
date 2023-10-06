@@ -19,7 +19,7 @@ body {
 
 .logout-admin {
   margin: 0 auto;
-  background-color: #ff91a4;
+  background-color: #ffd2da;
   font-family: "Poppins";
   border: 0;
   padding: 1rem;
@@ -138,7 +138,7 @@ body {
 }
 
 .view-button {
-  background-color: #ff91a4;
+  background-color: #ffd2da;
   font-family: "Poppins";
   border: 0;
   padding: 1rem;
@@ -264,4 +264,22 @@ select {
 
 .mt-2 {
   margin-top: 1rem;
+}
+
+.likes-img img {
+  margin: 0 auto;
+  object-fit: cover;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  border: #323949 3px solid;
+}
+
+.notification-card-img img {
+  margin: 0 auto;
+  object-fit: cover;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  border: #323949 3px solid;
 }

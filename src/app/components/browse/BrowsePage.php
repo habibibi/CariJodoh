@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@300&family=Poppins:wght@400;600;700&family=Sofadi+One&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/public/images/icons/loveicon.png">
     <title>Browse</title>
 </head>
 <body>
@@ -65,10 +66,12 @@
                     <div class='option'>
                         <h2>Pengurutan</h2>
                         <select name="sort" id="sort" class="select-option">
-                            <option selected value="name_asc">Nama ↓</option>
-                            <option value="name_desc">Nama ↑</option>
-                            <option value="height_asc">Tinggi ↓</option>
-                            <option value="height_desc">Tinggi ↑</option>
+                            <option selected value="name_asc">Nama ↑</option>
+                            <option value="name_desc">Nama ↓</option>
+                            <option value="height_asc">Tinggi ↑</option>
+                            <option value="height_desc">Tinggi ↓</option>
+                            <option value="umur_asc">Umur ↑</option>
+                            <option value="umur_desc">Umur ↓</option>
                         </select>
                     </div>
                 </div>
@@ -91,6 +94,9 @@
     </div>
     <?php
         include(__DIR__ . '/../main/Footer/Footer.php');
+    ?>
+    <?php
+        echo '<script>const BASE_URL = "' . BASE_URL . '";</script>';
     ?>
     <script src="<?= BASE_URL ?>/js/browse.js"></script>
 </body>

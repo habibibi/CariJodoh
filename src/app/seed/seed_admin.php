@@ -26,11 +26,11 @@ if (file_exists($envFilePath)) {
 }
 
 // Define DB Constants
-define('DB_HOST', 'localhost');
+define('DB_HOST', 'tugas-besar-1-mysql-1');
 define('DB_NAME', $_ENV['MYSQL_DATABASE']);
 define('DB_USER', $_ENV['MYSQL_USER']);
 define('DB_PASSWORD', $_ENV['MYSQL_PASSWORD']);
-define('DB_PORT', $_ENV['MYSQL_PORT']);
+define('DB_PORT', 3306);
 define('ADMIN_PASSWORD', $_ENV['ADMIN_PASSWORD']);
 
 // Seed admin account
@@ -44,7 +44,7 @@ try {
     ];
 
     // Check if the admin account already exists
-    $db->query("SELECT user_id FROM user WHERE username = :username LIMIT 1");
+    $db->query("SELECT user_id FROM user WHERE (username = :username) LIMIT 1");
     $db->bind(':username', 'admin');
     $result = $db->fetch();
 
@@ -56,6 +56,7 @@ try {
         $db->bind(':role', 'admin');
         $db->execute();
     }
-} catch (PDOException) {
+} catch (PDOException $e) {
     // Database failed
+    echo $e->getMessage();
 }

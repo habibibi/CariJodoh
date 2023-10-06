@@ -8,13 +8,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@300&family=Poppins:wght@400;600;700&family=Sofadi+One&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/public/images/icons/loveicon.png">
     <title>Recommendation</title>
 </head>
 <body>
     <?php
         include(__DIR__ . '/../main/navbar/Navbar.php');
     ?>
-    <div class="recommend">
+    <main class="recommend">
         <h1>Discover Your Matches</h1>
         <div class="flex-row">
             <div class="ml-auto flex-row gap-4">
@@ -26,8 +27,9 @@
                 </select>
             </div>
         </div>
+        <div class="no-data flex-row"></div>
         <div class="recommend-container"></div>
-    </div>
+    </main>
     <?php
         include(__DIR__ . '/../main/Footer/Footer.php');
     ?>
@@ -35,22 +37,24 @@
     <script>
         function card_profile(userId, namaLengkap, domisili, hobi, interest, umur, tinggi, agama) {
             const result = `
-                <div class="card-profile">
-                    <div class="img-profile">
-                        <img src="<?= BASE_URL ?>/images/profile/${userId}.jpg" alt="profile"/>
-                    </div>
-                    <div class="desc-profile">
-                        <p class="card-nama">${namaLengkap}</p>
-                        <p>Lokasi: ${namaLengkap}</p>
-                        <p>Hobi: ${hobi}</p>
-                        <p>Interest: ${interest}</p>
-                        <div class="flex-row items-center margin-auto">
-                            <span class="detail-info">Umur: ${umur} Tahun</span>
-                            <span class="detail-info">Tinggi: ${tinggi} cm</span>
-                            <span class="detail-info">Agama: ${agama}</span>
+                <a href="<?= BASE_URL ?>/view/profile/${userId}">
+                    <div class="card-profile">
+                        <div class="img-profile">
+                            <img src="<?= BASE_URL ?>/images/profile/${userId}.jpg" alt="profile"/>
+                        </div>
+                        <div class="desc-profile">
+                            <p class="card-nama">${namaLengkap}</p>
+                            <p>Lokasi: ${domisili}</p>
+                            <p>Hobi: ${hobi}</p>
+                            <p>Interest: ${interest}</p>
+                            <div class="flex-row items-center margin-auto">
+                                <span class="detail-info">Umur: ${umur} Tahun</span>
+                                <span class="detail-info">Tinggi: ${tinggi} cm</span>
+                                <span class="detail-info">Agama: ${agama}</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             `
 
             return result;
@@ -66,17 +70,19 @@
                 if (xhr.status === 200) {
                     const response = JSON.parse(xhr.responseText);
                     const recommendationContainer = document.querySelector('.recommend-container');
+                    const noData = document.querySelector(".no-data");
                     recommendationContainer.innerHTML = '';
+                    noData.innerHTML = '';
 
                     if (response.data.length == 0) {
-                        recommendationContainer.innerHTML = "<p class='mx-auto'>No recommendations are available yet.</p>"
+                        noData.innerHTML = "<p class='mx-auto pt-4'>No recommendations are available yet.</p>"
                     }
 
                     response.data.forEach((recom) => {
                         recommendationContainer.innerHTML += card_profile(recom.user_id, recom.nama_lengkap, recom.domisili, recom.hobi, recom.interest, recom.umur, recom.tinggi_badan, recom.agama);
                     });
                 } else {
-                    console.error('XHR request failed');
+                    showToast("Gagal load recommendation!");
                 }
             };
 
