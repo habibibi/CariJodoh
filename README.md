@@ -112,9 +112,9 @@ http://localhost:8080/public/user/login
     <p>Berikut adalah beberapa tangkapan layar hasil terbaik dari pengujian setiap halaman dengan menggunakan Google Lighthouse. Detail nilai untuk setiap halaman dapat dilihat pada tabel di bawah. <b>Catatan: Kami memiliki bukti tangkapan layar lengkap untuk setiap halaman, hanya saja tidak disertakan di sini demi efisiensi.<b></p>
 </div>
 
-![SS](docs/lighthouse/register.JPG)
+![SS](docs/lighthouse/register.jpg)
 ![SS](docs/lighthouse/recommendation.jpg)
-![SS](docs/lighthouse/profile.jpg)
+![SS](docs/lighthouse/profile.JPG)
 ![SS](docs/lighthouse/admin-likes.jpg)
 
 | Halaman | _Performance_ | _Accessibility_ | _Best Practices_
