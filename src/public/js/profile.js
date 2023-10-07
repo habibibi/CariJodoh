@@ -132,6 +132,7 @@ document.getElementById("saveButton").addEventListener("click", function () {
 
   if (!contact || contact.length < 5) {
     showToast("Contact minimal 5 karakter. (Bisa berupa id line, no WA, dll)");
+    return;
   }
 
   if (!hobby || hobby.length < 5) {
@@ -164,6 +165,21 @@ document.getElementById("saveButton").addEventListener("click", function () {
     return;
   }
 
+  if (imageFile && imageFile.size > 10000000) {
+    showToast("Ukuran file foto maksimal 10 MB.");
+    return;
+  }
+
+  if (videoFile && videoFile.size > 10000000) {
+    showToast("Ukuran file video maksimal 10 MB.");
+    return;
+  }
+
+  var confirmation = confirm("Apakah kamu yakin ingin menyimpan perubahan?");
+  if (!confirmation) {
+    return;
+  }
+  
   // AJAX
   const formData = new FormData();
   formData.append("fullName", fullName);
