@@ -1,6 +1,6 @@
 # Aplikasi Berbasis Web: CariJodoh
 
-![Logo CariJodoh](src/public/images/assets/logo.webp){width=100%}
+![Logo CariJodoh](src/public/images/assets/logo.webp){width=50%}
 
 ## Deskripsi Singkat
 > <h3>Halo para pejuang cinta!</h3> 
@@ -113,9 +113,9 @@ http://localhost:8080/public/user/login
 </div>
 
 ![SS](docs/lighthouse/register.JPG)
-![SS](docs/lighthouse/recommendation.JPG)
-![SS](docs/lighthouse/profile.JPG)
-![SS](docs/lighthouse/admin-likes.JPG)
+![SS](docs/lighthouse/recommendation.jpg)
+![SS](docs/lighthouse/profile.jpg)
+![SS](docs/lighthouse/admin-likes.jpg)
 
 | Halaman | _Performance_ | _Accessibility_ | _Best Practices_
 | :---: | :---: | :---: | :---:
