@@ -58,7 +58,7 @@
                                 </select>
                             </div>
                             <input id="domisili" type="text" placeholder="Domisili"/>
-                            <div class="flex-row">
+                            <div class="flex-row button-container">
                                 <button type="button" id="prev1">Previous</button>
                                 <button type="button" id="next1" class="ml-auto">Next</button>
                             </div>
@@ -120,7 +120,7 @@
                                 <label class="w-half">Video Profile (opsional):</label>
                                 <input class="w-half" type="file" id="videoUpload" name="videoFile" accept="video/*">
                             </div>
-                            <div class="flex-row">
+                            <div class="flex-row button-container">
                                 <button type="button" id="prev2">Previous</button>
                                 <button type="submit" id="realDaftar">DAFTAR!</button>
                             </div>

@@ -38,6 +38,13 @@ body {
   width: 25rem;
 }
 
+@media (max-width: 500px) {
+  .admin > img {
+    margin: 0 auto;
+    width: 10rem;
+  }
+}
+
 .admin-notif-outer,
 .admin-likes-outer {
   width: 100%;
@@ -52,6 +59,13 @@ body {
 
 .admin-sidebar {
   width: 40%;
+  display: block;
+}
+
+@media (max-width: 1200px) {
+  .admin-sidebar {
+    display: none;
+  }
 }
 
 .admin-notification,
@@ -79,7 +93,10 @@ body {
   background-color: #ffd2da;
   border-radius: 20px;
   padding: 1rem;
-  width: auto;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
 
 .flex-col {
@@ -282,4 +299,31 @@ select {
   height: 65px;
   border-radius: 50%;
   border: #323949 3px solid;
+}
+
+@media (max-width: 1024px) {
+  .admin-notification,
+  .admin-likes {
+    width: 75%;
+  }
+}
+
+@media (max-width: 720px) {
+  .notification-container,
+  .likes-container {
+    width: 95%;
+  }
+  .notification-card,
+  .likes-card {
+    flex-direction: column;
+  }
+  .button-container {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 320px) {
+  .button-container {
+    flex-direction: column;
+  }
 }
