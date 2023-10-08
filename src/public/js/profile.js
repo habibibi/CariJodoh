@@ -5,7 +5,6 @@ function loadDetail() {
   xhr.onload = function () {
     if (xhr.status === 200) {
       const data = JSON.parse(xhr.responseText);
-      console.log(data);
       document.getElementById("fullName").innerHTML = data.nama_lengkap;
       document.getElementById("fullNameInput").value = data.nama_lengkap;
       document.getElementById("name").innerHTML = data.nama_panggilan;
@@ -179,7 +178,7 @@ document.getElementById("saveButton").addEventListener("click", function () {
   if (!confirmation) {
     return;
   }
-  
+
   // AJAX
   const formData = new FormData();
   formData.append("fullName", fullName);

@@ -23,7 +23,7 @@
                 <img src="<?= BASE_URL ?>/images/assets/admin.webp" alt="admin" />
             </div>
             <div class="admin-notification">
-                <div class="flex-row header">
+                <div class="flex-row header add-header">
                     <h1>Notification</h1>
                     <button class="add-button"><strong>Add</strong></button>
                 </div>
