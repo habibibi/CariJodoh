@@ -31,8 +31,8 @@
                     <div class="video">
                         <h2>Video Perkenalan</h2>
                         <?php
-                            $videoFilePath = BASE_URL . '/videos/' . $_SESSION['user_id'] . '.mp4';
-                            $checkVideoPath = __DIR__ . '/../../../public/videos/' . $_SESSION['user_id'] . '.mp4';
+                            $videoFilePath = BASE_URL . '/videos/' . $this->data['profile']->user_id . '.mp4';
+                            $checkVideoPath = __DIR__ . '/../../../public/videos/' . $this->data['profile']->user_id . '.mp4';
                             if (file_exists($checkVideoPath)) {
                                 echo '
                                 <video id="video" height="240" controls>
