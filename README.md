@@ -27,31 +27,32 @@ git clone -b main https://gitlab.informatika.org/if3110-2023-k02-01-35/tugas-bes
 ## Menjalankan Server
 
 1. Buka Docker Desktop.
-2. Jalankan _script_ berikut setelah masuk ke folder hasil _clone_ pada terminal
+2. Buatlah file .env menggunakan format dari .env.example
+3. Jalankan _script_ berikut setelah masuk ke folder hasil _clone_ pada terminal
 
 ```
 docker build -t tubes-1:latest .
 ```
 
-3. Jalankan _script_ berikut pada terminal
+4. Jalankan _script_ berikut pada terminal
 
 ```
 docker compose up -d
 ```
 
-4. Jalankan _script_ berikut pada terminal untuk membuat _user seed_
+5. Jalankan _script_ berikut pada terminal untuk membuat _user seed_
 
 ```
 docker exec -it tugas-besar-1-web-1 php "./app/seed/seed_users.php"
 ```
 
-5. Jalankan _script_ berikut pada terminal untuk membuat _admin seed_
+6. Jalankan _script_ berikut pada terminal untuk membuat _admin seed_
 
 ```
 docker exec -it tugas-besar-1-web-1 php "./app/seed/seed_admin.php"
 ```
 
-6. Jalankan dua _command_ berikut untuk memberikan akses _image_ dan _video_.
+7. Jalankan dua _command_ berikut untuk memberikan akses _image_ dan _video_.
 
 ```
 docker exec -it tugas-besar-1-web-1 chmod -R 777 /var/www/html/public/videos
@@ -61,7 +62,7 @@ docker exec -it tugas-besar-1-web-1 chmod -R 777 /var/www/html/public/videos
 docker exec -it tugas-besar-1-web-1 chmod -R 777 /var/www/html/public/images/profile
 ```
 
-7. Buka _browser_ favorit dan masukkan URL berikut untuk memulai aplikasi
+8. Buka _browser_ favorit dan masukkan URL berikut untuk memulai aplikasi
 
 ```
 http://localhost:8080/public/user/login
