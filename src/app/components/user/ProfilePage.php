@@ -155,6 +155,15 @@
                 <button type="button" class="logout-user">Logout</button>
             </div>
         </div>
+        <div class="popup-confirm">
+            <h1>Konfirmasi</h1>
+            <p>Apakah Anda yakin untuk menyimpan perubahan?</p>
+            <div class="button-container-popup">
+                <button type="button" class="no-button"><strong>No</strong></button>
+                <button type="button" class="yes-button"><strong>Yes</strong></button>
+            </div>
+        </div>
+        <div class="overlay"></div>
     </div>
     <? include(__DIR__ . '/../main/footer/Footer.php'); ?>
     <script src="<?= BASE_URL ?>/js/profile.js"></script>

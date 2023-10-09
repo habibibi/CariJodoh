@@ -165,6 +165,14 @@
             <button class="yes-button" type="button"><strong>Delete</strong></button>
         </div>
     </div>
+    <div class="popup-confirm">
+        <h1>Konfirmasi</h1>
+        <span>Apakah Anda yakin untuk menyimpan perubahan?</span>
+        <div class="button-container-popup">
+            <button type="button" class="no-confirm-button"><strong>No</strong></button>
+            <button type="button" class="yes-confirm-button"><strong>Yes</strong></button>
+        </div>
+    </div>
     <div class="overlay"></div>
     <script>
         const user_id = <?= $this->data["user_id"] ?>;

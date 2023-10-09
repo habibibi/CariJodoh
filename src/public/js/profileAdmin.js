@@ -1,3 +1,5 @@
+const popUpConfirm = document.querySelector(".popup-confirm");
+
 function loadDetail() {
   const xhr = new XMLHttpRequest();
   xhr.open("GET", `/public/user/profile/${user_id}`, true);
@@ -74,6 +76,8 @@ document.getElementById("editButton").addEventListener("click", function () {
 document.getElementById("cancelButton").addEventListener("click", function () {
   switchMode();
 });
+
+var formData = new FormData();
 
 document.getElementById("saveButton").addEventListener("click", function () {
   const fullName = document.getElementById("fullNameInput").value;
@@ -174,13 +178,7 @@ document.getElementById("saveButton").addEventListener("click", function () {
     return;
   }
 
-  var confirmation = confirm("Apakah kamu yakin ingin menyimpan perubahan?");
-  if (!confirmation) {
-    return;
-  }
-
   // AJAX
-  const formData = new FormData();
   formData.append("fullName", fullName);
   formData.append("name", name);
   formData.append("age", age);
@@ -198,19 +196,38 @@ document.getElementById("saveButton").addEventListener("click", function () {
   formData.append("videoFile", videoFile);
   formData.append("gender", gender);
 
+  popUpConfirm.style.display = "block";
+  overlay.style.display = "block";
+});
+
+var submitForm = () => {
+  // AJAX
   const xhr = new XMLHttpRequest();
   xhr.open("POST", `/public/user/profile/${user_id}`, true);
 
-  xhr.send(formData);
-  xhr.onreadystatechange = function () {
-    if (this.readyState === XMLHttpRequest.DONE) {
-      if (this.status !== 201) {
-        showToast("An error occured, please try again!");
-        return;
-      }
+  xhr.onload = function () {
+    if (xhr.status !== 201) {
+      showToast("Update User Gagal!");
+      return;
+    } else {
       location.reload();
     }
   };
+
+  xhr.send(formData);
+};
+
+const noButton = document.querySelector(".no-confirm-button");
+noButton.addEventListener("click", function () {
+  popUpConfirm.style.display = "none";
+  overlay.style.display = "none";
+});
+
+const yesButton = document.querySelector(".yes-confirm-button");
+yesButton.addEventListener("click", function () {
+  popUpConfirm.style.display = "none";
+  overlay.style.display = "none";
+  submitForm();
 });
 
 const deleteButton = document.querySelector(".delete-user");
