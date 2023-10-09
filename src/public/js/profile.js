@@ -1,3 +1,6 @@
+const popUpConfirm = document.querySelector(".popup-confirm");
+const overlay = document.querySelector(".overlay");
+
 function loadDetail() {
   const xhr = new XMLHttpRequest();
   xhr.open("GET", "/public/user/profile", true);
@@ -49,7 +52,7 @@ function switchMode() {
   document.getElementById("editButton").style.display = editMode
     ? "none"
     : "block";
-  const p = document.querySelectorAll("p");
+  const p = document.querySelectorAll(".view_detail p");
   for (let i = 0; i < p.length; i++) {
     p[i].style.display = editMode ? "none" : "block";
   }
@@ -74,6 +77,8 @@ document.getElementById("editButton").addEventListener("click", function () {
 document.getElementById("cancelButton").addEventListener("click", function () {
   switchMode();
 });
+
+var formData = new FormData();
 
 document.getElementById("saveButton").addEventListener("click", function () {
   const fullName = document.getElementById("fullNameInput").value;
@@ -174,13 +179,7 @@ document.getElementById("saveButton").addEventListener("click", function () {
     return;
   }
 
-  var confirmation = confirm("Apakah kamu yakin ingin menyimpan perubahan?");
-  if (!confirmation) {
-    return;
-  }
-
-  // AJAX
-  const formData = new FormData();
+  formData = new FormData();
   formData.append("fullName", fullName);
   formData.append("name", name);
   formData.append("age", age);
@@ -198,20 +197,37 @@ document.getElementById("saveButton").addEventListener("click", function () {
   formData.append("videoFile", videoFile);
   formData.append("gender", gender);
 
+  popUpConfirm.style.display = "block";
+  overlay.style.display = "block";
+});
+
+var submitForm = () => {
+  // AJAX
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", "/public/user/profile", true);
+  xhr.open("POST", "/public/user/profile", false);
 
   xhr.send(formData);
-  xhr.onreadystatechange = function () {
-    if (this.readyState === XMLHttpRequest.DONE) {
-      if (this.status !== 201) {
-        showToast("An error occured, please try again!");
-        return;
-      }
-      location.reload();
-    }
-  };
+  if (xhr.status !== 201) {
+    showToast("An error occured, please try again!");
+    return;
+  }
+  location.reload();
+}
+
+ 
+const noButton = document.querySelector(".no-button");
+noButton.addEventListener("click", function () {
+  popUpConfirm.style.display = "none";
+  overlay.style.display = "none";
 });
+
+const yesButton = document.querySelector(".yes-button");
+yesButton.addEventListener("click", function () {
+  popUpConfirm.style.display = "none";
+  overlay.style.display = "none";
+  submitForm();
+});
+
 
 const logout = document.querySelector(".logout-user");
 logout.addEventListener("click", async function (e) {
