@@ -1,6 +1,21 @@
-version: '3.3'
+version: "3.3"
 services:
   web:
     image: tubes-1:latest
     ports:
-      - 8008:80
+      - 8080:80
+    hostname: web-tubes-1
+    env_file: .env
+    volumes:
+      - ./src:/var/www/html
+  mysql:
+    image: mysql:latest
+    ports:
+      - 3307:3306
+    hostname: db-tubes-1
+    env_file: .env
+    volumes:
+      - ./mysql:/var/lib/mysql
+networks:
+  web-mysql:
+    driver: bridge

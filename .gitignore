@@ -1,0 +1,9 @@
+# Hide env file
+.env
+
+# Hide database directory
+mysql/
+
+# Ignore videos and profile pictures
+src/public/images/profile/*.jpg
+src/public/videos/*.mp4
