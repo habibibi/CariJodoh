@@ -129,9 +129,18 @@
 
                 <div class="flex-col gap-4">
                     <label>Video Perkenalan</label>
-                    <video id="video" height="240" controls>
-                        <source src="<?= BASE_URL?>/videos/<?= $_SESSION['user_id']?>.mp4" type="video/mp4">
-                    </video>
+                    <?php
+                        $videoFilePath = BASE_URL . '/videos/' . $_SESSION['user_id'] . '.mp4';
+                        $checkVideoPath = __DIR__ . '/../../../public/videos/' . $_SESSION['user_id'] . '.mp4';
+                        if (file_exists($checkVideoPath)) {
+                            echo '
+                            <video id="video" height="240" controls>
+                                <source src="' . $videoFilePath . '" type="video/mp4">
+                            </video>';
+                        } else {
+                            echo 'No video available';
+                        }
+                    ?>
                     <input type="file" id="videoInput" name="Video Perkenalan" accept="video/*">
                 </div>
 

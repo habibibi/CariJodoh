@@ -47,6 +47,62 @@ h1 {
   text-decoration: underline;
 }
 
+@media (max-width: 1024px) {
+  .navbar-container ul {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background-color: #ffd2da;
+    width: 100%;
+  }
+
+  .navbar-container ul.show {
+    display: flex;
+  }
+
+  .navbar-container ul li {
+    display: block;
+    padding: 1rem;
+    text-align: center;
+  }
+}
+
+.hamburger-menu {
+  display: none;
+  cursor: pointer;
+}
+
+.dropbtn {
+  width: 2rem;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font: inherit;
+  margin-left: auto;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  width: auto;
+  right: 0;
+  top: 100%;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+@media (max-width: 1024px) {
+  .hamburger-menu {
+    display: flex;
+    width: 100%;
+  }
+}
+
 footer {
   background-color: #ffd2da;
   color: black;
@@ -170,4 +226,22 @@ footer span {
 
 button {
   cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .pagination {
+    flex-direction: column;
+  }
+
+  .pagination-tab {
+    flex-direction: column;
+  }
+
+  #button-pagination {
+    flex-direction: column !important;
+  }
+
+  .add-header {
+    flex-direction: column !important;
+  }
 }

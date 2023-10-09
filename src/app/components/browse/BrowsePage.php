@@ -32,7 +32,7 @@
                         <h2>Filter</h2>
                             <h3>Agama</h3>
                             <select id="agama" name="agama" class="select-option">
-                                    <option value="">-</option>
+                                    <option value="">Semua</option>
                                     <option value="Islam">Islam</option>
                                     <option value="Protestan">Protestan</option>
                                     <option value="Katolik">Katolik</option>
@@ -43,7 +43,7 @@
 
                             <h3>MBTI</h3>
                             <select id="mbti" name="mbti" class="select-option">
-                                    <option value="">-</option>
+                                    <option value="">Semua</option>
                                     <option value="ESTJ">ESTJ</option>
                                     <option value="ESTP">ESTP</option>
                                     <option value="ESFJ">ESFJ</option>

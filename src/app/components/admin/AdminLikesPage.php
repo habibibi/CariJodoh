@@ -23,7 +23,7 @@
                 <img src="<?= BASE_URL ?>/images/assets/admin.webp" alt="admin" />
             </div>
             <div class="admin-likes">
-                <div class="flex-row header">
+                <div class="flex-row header add-header">
                     <h1>Likes</h1>
                     <button class="add-button"><strong>Add</strong></button>
                 </div>

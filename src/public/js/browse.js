@@ -98,10 +98,16 @@ function loadProfiles(pageNumber) {
       const response = JSON.parse(xhr.responseText);
       let profilesGrid = document.querySelector(".profiles-grid");
       profilesGrid.innerHTML = "";
+      let browserContainer = document.querySelector(".browser-container");
       if (response.pageCount == 0) {
-        profilesGrid.innerHTML =
-          '<h1 class="no-data">Maaf ya, gaada yg cocok :(</h1>';
-        return;
+        if (!browserContainer.querySelector(".no-data")) {
+          browserContainer.innerHTML += '<h1 class="no-data">Maaf ya, gaada yg cocok :(</h1>';
+        }
+
+      } else {
+        if (browserContainer.querySelector(".no-data")) {
+          browserContainer.querySelector(".no-data").remove();
+        }
       }
 
       response.profiles.forEach((profile) => {
@@ -131,13 +137,14 @@ function loadProfiles(pageNumber) {
 }
 
 function updatePaginationButtons() {
-  if (currentPage == 1) {
+  if (currentPage == 1 || totalPages == 0) {
     prevButton.disabled = true;
   } else {
     prevButton.disabled = false;
   }
+  console.log(currentPage, totalPages); 
 
-  if (currentPage == totalPages) {
+  if (currentPage == totalPages || totalPages == 0) {
     nextButton.disabled = true;
   } else {
     nextButton.disabled = false;

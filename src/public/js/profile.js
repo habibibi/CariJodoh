@@ -8,7 +8,6 @@ function loadDetail() {
   xhr.onload = function () {
     if (xhr.status === 200) {
       const data = JSON.parse(xhr.responseText);
-      console.log(data);
       document.getElementById("fullName").innerHTML = data.nama_lengkap;
       document.getElementById("fullNameInput").value = data.nama_lengkap;
       document.getElementById("name").innerHTML = data.nama_panggilan;

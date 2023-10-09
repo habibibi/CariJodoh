@@ -83,3 +83,41 @@
   margin-top: 1rem;
   font-size: larger;
 }
+
+@media (max-width: 1000px) {
+  .container {
+    width: auto;
+    height: auto;
+  }
+  .login-outer {
+    flex-direction: column-reverse;
+    gap: 1.5rem;
+  }
+  .login-form-section,
+  .login-title-section {
+    margin: 0 auto;
+    width: 80%;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    min-height: 100vh;
+  }
+  .login-form-section,
+  .login-title-section {
+    margin: 0 auto;
+    width: 95%;
+  }
+  .login-form {
+    width: 100%;
+  }
+  .login-title,
+  .login-form-container h1 {
+    font-size: 24px;
+  }
+
+  .login-form-container h2 {
+    font-size: 18px;
+  }
+}

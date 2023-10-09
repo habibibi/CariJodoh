@@ -11,7 +11,7 @@
 }
 
 .likes-container {
-  width: 50%;
+  width: 60%;
   margin: 0 auto;
   padding: 1rem 0;
   gap: 1rem;
@@ -27,7 +27,28 @@
   background-color: #ffd2da;
   border-radius: 20px;
   padding: 1rem;
-  width: auto;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+  .likes-container {
+    width: 75%;
+  }
+}
+
+@media (max-width: 720px) {
+  .likes-container {
+    width: 95%;
+  }
+  .likes-card {
+    flex-direction: column;
+  }
+  .button-container {
+    margin: 0 auto;
+  }
 }
 
 .flex-col {

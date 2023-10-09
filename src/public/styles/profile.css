@@ -17,6 +17,7 @@ p {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  min-width: 400px;
 }
 
 .profile_detail {
@@ -43,13 +44,14 @@ p {
   justify-content: center;
 }
 
-.img-profile img {
-  margin: 0 auto;
-  object-fit: cover;
-  width: 250px;
-  height: 250px;
-  border-radius: 50%;
-  border: #323949 3px solid;
+@media (max-width: 1024px) {
+  .view_detail {
+    min-width: 0;
+    width: 80%;
+  }
+  .header {
+    flex-direction: column;
+  }
 }
 
 label {
@@ -82,6 +84,13 @@ button {
   height: 200px;
   border-radius: 50%;
   border: #323949 3px solid;
+}
+
+@media (max-width: 420px) {
+  .header img {
+    width: 100px;
+    height: 100px;
+  }
 }
 
 .logout-user {
