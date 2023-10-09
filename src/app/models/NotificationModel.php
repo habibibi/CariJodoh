@@ -142,7 +142,7 @@ class NotificationModel
 
     public function likeNotification($notificationId, $user_id_1, $user_id_2){
         // Check conflict
-        if($this->checkConflict2($user_id_1, $user_id_2) || $$user_id_1 == $user_id_2) {
+        if($this->checkConflict2($user_id_1, $user_id_2) || $user_id_1 == $user_id_2) {
             throw new Exception('Conflict', 409);
         }
 
