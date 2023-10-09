@@ -42,7 +42,7 @@ class NotificationModel
 
     public function addNotification($jenisNotifikasi, $userIdSender, $userIdReceiver, $isiNotifikasi){
         // Check conflict
-        if($this->checkConflict($jenisNotifikasi, $userIdSender, $userIdReceiver, $isiNotifikasi)) {
+        if($this->checkConflict($jenisNotifikasi, $userIdSender, $userIdReceiver, $isiNotifikasi) || $userIdSender == $userIdReceiver) {
             throw new Exception('Conflict', 409);
         }
 
@@ -100,6 +100,10 @@ class NotificationModel
 
     public function updateNotification($notificationId, $jenisNotifikasi, $userIdSender, $userIdReceiver, $isiNotifikasi, $sudahDibaca){
         // Notifikasi dalam kasus aplikasi ini bisa terdapat duplikat akibat flow sistem likenya
+        if($userIdSender == $userIdReceiver) {
+            throw new Exception('Conflict', 409);
+        }
+
         // Define the UPDATE query
         $query = 'UPDATE notification 
                 SET jenis_notifikasi = :jenisNotifikasi,
@@ -138,7 +142,7 @@ class NotificationModel
 
     public function likeNotification($notificationId, $user_id_1, $user_id_2){
         // Check conflict
-        if($this->checkConflict2($user_id_1, $user_id_2)) {
+        if($this->checkConflict2($user_id_1, $user_id_2) || $$user_id_1 == $user_id_2) {
             throw new Exception('Conflict', 409);
         }
 
@@ -161,7 +165,7 @@ class NotificationModel
 
     public function likeUser($userIdSender, $userIdReceiver) {
         // Check conflict
-        if($this->checkConflict2($userIdSender, $userIdReceiver)) {
+        if($this->checkConflict2($userIdSender, $userIdReceiver) || $userIdSender == $userIdReceiver) {
             throw new Exception('Conflict', 409);
         }
 
