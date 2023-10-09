@@ -117,23 +117,23 @@ http://localhost:8080/public/user/login
 
 |        Fitur         |        _Side_        |       NIM Pembuat        |
 | :------------------: | :------------------: | :----------------------: |
-|       _Login_        | _Server_<br>_Client_ | `13521XXX`<br>`13521XXX` |
-|      _Register_      | _Server_<br>_Client_ | `13521XXX`<br>`13521XXX` |
-|       _Browse_       | _Server_<br>_Client_ | `13521XXX`<br>`13521XXX` |
-|   _Recommendation_   | _Server_<br>_Client_ | `13521XXX`<br>`13521XXX` |
-|      _Profile_       | _Server_<br>_Client_ | `13521XXX`<br>`13521XXX` |
-|    _Edit Profile_    | _Server_<br>_Client_ | `13521XXX`<br>`13521XXX` |
-|     _Like User_      | _Server_<br>_Client_ | `13521XXX`<br>`13521XXX` |
-|    _Notification_    | _Server_<br>_Client_ | `13521XXX`<br>`13521XXX` |
-|       _Likes_        | _Server_<br>_Client_ | `13521XXX`<br>`13521XXX` |
-|  _Admin-Dashboard_   | _Server_<br>_Client_ | `13521XXX`<br>`13521XXX` |
-|     _Admin-User_     | _Server_<br>_Client_ | `13521XXX`<br>`13521XXX` |
-| _Admin-Notification_ | _Server_<br>_Client_ | `13521XXX`<br>`13521XXX` |
-|    _Admin-Likes_     | _Server_<br>_Client_ | `13521XXX`<br>`13521XXX` |
-|       _Header_       | _Server_<br>_Client_ | `13521XXX`<br>`13521XXX` |
-|       _Footer_       | _Server_<br>_Client_ | `13521XXX`<br>`13521XXX` |
-|     _Pagination_     | _Server_<br>_Client_ | `13521XXX`<br>`13521XXX` |
-|     _Not Found_      | _Server_<br>_Client_ | `13521XXX`<br>`13521XXX` |
+|       _Login_        | _Client_<br>_Server_ | `13521140`<br>`13521124` |
+|      _Register_      | _Client_<br>_Server_ | `13521140`<br>`13521124` |
+|       _Browse_       | _Client_<br>_Server_ | `13521169`<br>`13521169` |
+|   _Recommendation_   | _Client_<br>_Server_ | `13521124`<br>`13521124` |
+|      _Profile_       | _Client_<br>_Server_ | `13521140`<br>`13521169` |
+|    _Edit Profile_    | _Client_<br>_Server_ | `13521169`<br>`13521169` |
+|     _Like User_      | _Client_<br>_Server_ | `13521140`<br>`13521140` |
+|    _Notification_    | _Client_<br>_Server_ | `13521124`<br>`13521124` |
+|       _Likes_        | _Client_<br>_Server_ | `13521124`<br>`13521140` |
+|  _Admin-Dashboard_   | _Client_<br>_Server_ | `13521124`<br>`13521124` |
+|     _Admin-User_     | _Client_<br>_Server_ | `13521124`<br>`13521124` |
+| _Admin-Notification_ | _Client_<br>_Server_ | `13521124`<br>`13521124` |
+|    _Admin-Likes_     | _Client_<br>_Server_ | `13521124`<br>`13521124` |
+|       _Header_       |       _Client_       |        `13521124`        |
+|       _Footer_       |       _Client_       |        `13521124`        |
+|     _Pagination_     | _Client_<br>_Server_ | `13521124`<br>`13521169` |
+|     _Not Found_      | _Client_<br>_Server_ | `13521124`<br>`13521124` |
 
 ## BONUS: Hasil Tes Google Lightouse
 
