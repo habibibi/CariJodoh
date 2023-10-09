@@ -186,6 +186,7 @@ body {
   gap: 0.5rem;
 }
 
+.popup-delete-user,
 .popup-delete-notif,
 .popup-add-notif,
 .popup-edit-notif,
@@ -235,11 +236,15 @@ body {
   color: #333;
 }
 
-.yes-button,
-.add-button-2,
-.edit-button {
+.yes-button {
   background-color: #ff0000;
   color: #fff;
+}
+
+.add-button-2,
+.edit-button {
+  background-color: #b3ffcc;
+  color: black;
 }
 
 .gap-2 {

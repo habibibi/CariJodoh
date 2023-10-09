@@ -83,7 +83,7 @@ class NotificationController extends Controller {
                             $result = $notifModel->getNotifications(1);
 
                             header('Content-Type: application/json');
-                            http_response_code(200);
+                            http_response_code(202);
                             echo json_encode($result);
                         }
                     } else {

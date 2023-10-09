@@ -104,3 +104,8 @@ button {
 .container {
   gap: 0 !important;
 }
+
+.delete-user {
+  background-color: crimson;
+  color: white;
+}

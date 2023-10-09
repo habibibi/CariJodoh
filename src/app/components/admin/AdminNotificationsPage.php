@@ -130,7 +130,7 @@
             xhr.open('DELETE', `<?= BASE_URL ?>/notification/fetch/${notificationId}`, true);
 
             xhr.onload = function () {
-                if (xhr.status === 200) {
+                if (xhr.status === 202) {
                     const response = JSON.parse(xhr.responseText);
                     currentPage = 1;
                     const notificationContainer = document.querySelector('.notification-container');
@@ -519,8 +519,8 @@
             const isiNotifikasi = document.getElementById("isi_notifikasi_2").value;
             const userId1 = document.getElementById("user_id_sender_2").value;
             const userId2 = document.getElementById("user_id_receiver_2").value;
-            const sudahDibaca = document.getElementById("sudah_dibaca").value;
-            
+            const sudahDibaca = document.getElementById("sudah_dibaca").checked;
+
             if(isiNotifikasi && jenisNotifikasi && userId1 && userId2){
                 const xhr = new XMLHttpRequest();
                 xhr.open("POST", `/public/notification/update/${idNotifikasi}`);
@@ -530,7 +530,7 @@
                 formData.append("isi_notifikasi", isiNotifikasi);
                 formData.append("user_id_sender", userId1);
                 formData.append("user_id_receiver", userId2);
-                formData.append("sudah_dibaca", sudahDibaca == "on" ? 1 : 0);
+                formData.append("sudah_dibaca", sudahDibaca ? 1 : 0);
 
                 xhr.send(formData);
                 xhr.onreadystatechange = function () {

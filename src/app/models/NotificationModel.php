@@ -99,11 +99,7 @@ class NotificationModel
     }
 
     public function updateNotification($notificationId, $jenisNotifikasi, $userIdSender, $userIdReceiver, $isiNotifikasi, $sudahDibaca){
-        // Check conflict
-        if($this->checkConflict($jenisNotifikasi, $userIdSender, $userIdReceiver, $isiNotifikasi)) {
-            throw new Exception('Conflict', 409);
-        }
-        
+        // Notifikasi dalam kasus aplikasi ini bisa terdapat duplikat akibat flow sistem likenya
         // Define the UPDATE query
         $query = 'UPDATE notification 
                 SET jenis_notifikasi = :jenisNotifikasi,

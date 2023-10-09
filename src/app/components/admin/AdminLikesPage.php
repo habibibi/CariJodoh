@@ -138,7 +138,7 @@
             xhr.open('DELETE', `<?= BASE_URL ?>/likes/fetch/${dateId}`, true);
 
             xhr.onload = function () {
-                if (xhr.status === 200) {
+                if (xhr.status === 202) {
                     const response = JSON.parse(xhr.responseText);
                     currentPage = 1;
                     const likesContainer = document.querySelector('.likes-container');
