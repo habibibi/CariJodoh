@@ -109,25 +109,33 @@ http://localhost:8080/public/user/login
 
 ## BONUS: Hasil Tes Google Lightouse
 <div align="justify">
-    <p>Berikut adalah beberapa tangkapan layar hasil terbaik dari pengujian setiap halaman dengan menggunakan Google Lighthouse. Detail nilai untuk setiap halaman dapat dilihat pada tabel di bawah. <b>Catatan: Kami memiliki bukti tangkapan layar lengkap untuk setiap halaman, hanya saja tidak disertakan di sini demi efisiensi.<b></p>
+    <p>Berikut adalah beberapa tangkapan layar hasil terbaik dari pengujian setiap halaman dengan menggunakan Google Lighthouse. Detail nilai untuk setiap halaman dapat dilihat pada tabel di bawah.</p>
 </div>
 
-![SS](docs/lighthouse/register.jpg)
-![SS](docs/lighthouse/recommendation.jpg)
-![SS](docs/lighthouse/profile.JPG)
-![SS](docs/lighthouse/admin-likes.jpg)
+![SS](docs/lighthouse/login.png)
+![SS](docs/lighthouse/register.png)
+![SS](docs/lighthouse/recommendation.png)
+![SS](docs/lighthouse/browse.png)
+![SS](docs/lighthouse/user-notification.png)
+![SS](docs/lighthouse/user-likes.png)
+![SS](docs/lighthouse/my-profile.png)
+![SS](docs/lighthouse/view-profile.png)
+![SS](docs/lighthouse/admin-dashboard.png)
+![SS](docs/lighthouse/admin-users.png)
+![SS](docs/lighthouse/admin-notification.png)
+![SS](docs/lighthouse/admin-likes.png)
 
 | Halaman | _Performance_ | _Accessibility_ | _Best Practices_
 | :---: | :---: | :---: | :---:
-| _Login_ | 96 | 95 | 100
-| _Register_ | 99 | 95 | 100
-| _Recommendation_ | 91 | 95 | 100
-| _Browse_ | 85 | 96 | 100
-| _Notification_ | 88 | 100 | 100
-| _Likes_ | 89 | 100 | 100
-| _My Profile_ | 89 | 100 | 100
-| _Other's Profile_ | 90 | 95 | 100
-| _Admin-Dashboard_ | 81 | 95 | 100
-| _Admin-User_ | 87 | 96 | 100
-| _Admin-Notification_ | 92 | 97 | 100
-| _Admin-Likes_ | 95 | 97 | 100
+| _Login_ | 100 | 95 | 100
+| _Register_ | 100 | 95 | 100
+| _Recommendation_ | 100 | 95 | 100
+| _Browse_ | 98 | 96 | 100
+| _User Notification_ | 95 | 100 | 100
+| _User Likes_ | 95 | 100 | 100
+| _My Profile_ | 99 | 100 | 100
+| _Other's Profile_ | 100 | 95 | 100
+| _Admin-Dashboard_ | 100 | 95 | 100
+| _Admin-Users_ | 98 | 96 | 100
+| _Admin-Notification_ | 84 | 97 | 100
+| _Admin-Likes_ | 82 | 97 | 100
