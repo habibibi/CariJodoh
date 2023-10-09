@@ -105,6 +105,10 @@ button {
   gap: 0 !important;
 }
 
+.delete-user {
+  background-color: crimson;
+  color: white;
+}
 
 .popup-confirm {
   background-color: #fff;

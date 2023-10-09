@@ -446,4 +446,11 @@ class UserModel
         $profile = $this->database->fetch();
         return $profile;
     }
+
+    public function deleteUser($user_id){
+        $query = 'DELETE FROM user WHERE (user_id = :user_id)';
+        $this->database->query($query);
+        $this->database->bind('user_id', $user_id);
+        $this->database->execute();
+    }
 }

@@ -92,12 +92,19 @@ class UserController extends Controller {
 
                     // Call the register method with the extracted data
                     $userId = $userModel->register($username, $password, $fullName, $name, $age, $contact, $hobby, $interest, $tinggiBadan, $agama, $domisili, $loveLanguage, $mbti, $zodiac, $ketidaksukaan, $imageFile, $videoFile, $gender);
-                    $_SESSION['user_id'] = $userId;
-                    $_SESSION['role'] = 'user';
+                    
+                    if($this->middleware->checkAdmin()){
+                        header('Content-Type: application/json');
+                        http_response_code(201);
+                        echo json_encode(["message" => "Berhasil tambah user!"]);
+                    } else {
+                        $_SESSION['user_id'] = $userId;
+                        $_SESSION['role'] = 'user';
 
-                    header('Content-Type: application/json');
-                    http_response_code(201);
-                    echo json_encode(["redirect_url" => BASE_URL . "/recommendation"]);
+                        header('Content-Type: application/json');
+                        http_response_code(201);
+                        echo json_encode(["redirect_url" => BASE_URL . "/recommendation"]);
+                    }
                     break;
                 default:
                     throw new Exception('Method Not Allowed', 405);
@@ -359,6 +366,7 @@ class UserController extends Controller {
             exit;
         }
     }
+
     public function myprofile(){
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
@@ -370,6 +378,25 @@ class UserController extends Controller {
                         $profileView->render();
                     } else {
                         header('Location: ' . BASE_URL . '/user/login');
+                    }
+                    break;
+            }
+        } catch (Exception $e){
+            http_response_code($e->getCode());
+            exit;
+        }
+    }
+
+    public function delete($userId=null){
+        try {
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'DELETE':
+                    if($userId && $this->middleware->isAdmin()){
+                        $userModel = $this->model("UserModel");
+                        $userModel->deleteUser($userId);
+                        header('Content-Type: application/json');
+                        http_response_code(202);
+                        echo json_encode(["redirect_url" => BASE_URL . "/admin/user"]);
                     }
                     break;
             }

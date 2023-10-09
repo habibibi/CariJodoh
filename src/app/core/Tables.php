@@ -28,14 +28,14 @@ class Tables
         agama               VARCHAR(64),
         ketidaksukaan       VARCHAR(256),
         domisili            VARCHAR(256),
-        FOREIGN KEY (user_id) REFERENCES user(user_id)
+        FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE
     );";
 
     public const USER_CONTACT_TABLE =
     "CREATE TABLE IF NOT EXISTS user_contact (
         user_id             INT             PRIMARY KEY,
         contact_person      VARCHAR(255),
-        FOREIGN KEY (user_id) REFERENCES user(user_id)
+        FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE
     );";
 
     public const DATE_TABLE =
@@ -43,8 +43,8 @@ class Tables
         date_id             INT             AUTO_INCREMENT      PRIMARY KEY,
         user_id_1           INT             NOT NULL,
         user_id_2           INT             NOT NULL,
-        FOREIGN KEY (user_id_1) REFERENCES user(user_id),
-        FOREIGN KEY (user_id_2) REFERENCES user(user_id)
+        FOREIGN KEY (user_id_1) REFERENCES user(user_id) ON DELETE CASCADE,
+        FOREIGN KEY (user_id_2) REFERENCES user(user_id) ON DELETE CASCADE
     );";
 
     public const NOTIFICATION_TABLE =
@@ -55,7 +55,7 @@ class Tables
         user_id_receiver    INT             NOT NULL,
         isi_notifikasi      VARCHAR(255)    NOT NULL,
         sudah_dibaca        BOOLEAN         NOT NULL,
-        FOREIGN KEY (user_id_sender) REFERENCES user(user_id),
-        FOREIGN KEY (user_id_receiver) REFERENCES user(user_id)
+        FOREIGN KEY (user_id_sender) REFERENCES user(user_id) ON DELETE CASCADE,
+        FOREIGN KEY (user_id_receiver) REFERENCES user(user_id) ON DELETE CASCADE
     );";
 }

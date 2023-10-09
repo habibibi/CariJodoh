@@ -1,9 +1,8 @@
 const popUpConfirm = document.querySelector(".popup-confirm");
-const overlay = document.querySelector(".overlay");
 
 function loadDetail() {
   const xhr = new XMLHttpRequest();
-  xhr.open("GET", "/public/user/profile", true);
+  xhr.open("GET", `/public/user/profile/${user_id}`, true);
 
   xhr.onload = function () {
     if (xhr.status === 200) {
@@ -52,7 +51,7 @@ function switchMode() {
   document.getElementById("editButton").style.display = editMode
     ? "none"
     : "block";
-  const p = document.querySelectorAll(".view_detail p");
+  const p = document.querySelectorAll("p");
   for (let i = 0; i < p.length; i++) {
     p[i].style.display = editMode ? "none" : "block";
   }
@@ -179,7 +178,7 @@ document.getElementById("saveButton").addEventListener("click", function () {
     return;
   }
 
-  formData = new FormData();
+  // AJAX
   formData.append("fullName", fullName);
   formData.append("name", name);
   formData.append("age", age);
@@ -204,11 +203,11 @@ document.getElementById("saveButton").addEventListener("click", function () {
 var submitForm = () => {
   // AJAX
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", "/public/user/profile", false);
+  xhr.open("POST", `/public/user/profile/${user_id}`, true);
 
   xhr.onload = function () {
     if (xhr.status !== 201) {
-      showToast("Update Profile Gagal!");
+      showToast("Update User Gagal!");
       return;
     } else {
       location.reload();
@@ -218,33 +217,51 @@ var submitForm = () => {
   xhr.send(formData);
 };
 
-const noButton = document.querySelector(".no-button");
+const noButton = document.querySelector(".no-confirm-button");
 noButton.addEventListener("click", function () {
   popUpConfirm.style.display = "none";
   overlay.style.display = "none";
 });
 
-const yesButton = document.querySelector(".yes-button");
+const yesButton = document.querySelector(".yes-confirm-button");
 yesButton.addEventListener("click", function () {
   popUpConfirm.style.display = "none";
   overlay.style.display = "none";
   submitForm();
 });
 
-const logout = document.querySelector(".logout-user");
-logout.addEventListener("click", async function (e) {
+const deleteButton = document.querySelector(".delete-user");
+const popupDelete = document.querySelector(".popup-delete-user");
+const overlay = document.querySelector(".overlay");
+const confirmDelete = document.querySelector(".yes-button");
+const cancelButton = document.querySelector(".no-button");
+
+deleteButton.addEventListener("click", () => {
+  popupDelete.style.display = "block";
+  overlay.style.display = "block";
+});
+
+cancelButton.addEventListener("click", () => {
+  popupDelete.style.display = "none";
+  overlay.style.display = "none";
+});
+
+confirmDelete.addEventListener("click", async function (e) {
   e.preventDefault();
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", "/public/user/logout");
+  xhr.open("DELETE", `/public/user/delete/${user_id}`);
   xhr.send();
 
   xhr.onreadystatechange = function () {
     if (this.readyState === XMLHttpRequest.DONE) {
-      if (this.status === 201) {
+      if (this.status === 202) {
         const data = JSON.parse(this.responseText);
-        location.replace(data.redirect_url);
+        showToast("Delete User Berhasil!");
+        setTimeout(function () {
+          location.replace(data.redirect_url);
+        }, 1000);
       } else {
-        showToast("Gagal logout!");
+        showToast("Gagal Delete User!");
       }
     }
   };
