@@ -43,23 +43,23 @@ docker compose up -d
 5. Jalankan _script_ berikut pada terminal untuk membuat _user seed_
 
 ```
-docker exec -it tugas-besar-1-web-1 php "./app/seed/seed_users.php"
+docker exec -it tugas-besar-1-v2-web-1 php "./app/seed/seed_users.php"
 ```
 
 6. Jalankan _script_ berikut pada terminal untuk membuat _admin seed_
 
 ```
-docker exec -it tugas-besar-1-web-1 php "./app/seed/seed_admin.php"
+docker exec -it tugas-besar-1-v2-web-1 php "./app/seed/seed_admin.php"
 ```
 
 7. Jalankan dua _command_ berikut untuk memberikan akses _image_ dan _video_.
 
 ```
-docker exec -it tugas-besar-1-web-1 chmod -R 777 /var/www/html/public/videos
+docker exec -it tugas-besar-1-v2-web-1 chmod -R 777 /var/www/html/public/videos
 ```
 
 ```
-docker exec -it tugas-besar-1-web-1 chmod -R 777 /var/www/html/public/images/profile
+docker exec -it tugas-besar-1-v2-web-1 chmod -R 777 /var/www/html/public/images/profile
 ```
 
 8. Buka _browser_ favorit dan masukkan URL berikut untuk memulai aplikasi
