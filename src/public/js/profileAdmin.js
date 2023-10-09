@@ -144,7 +144,7 @@ document.getElementById("saveButton").addEventListener("click", function () {
   }
 
   if (!interest || interest.length < 5) {
-    showToast("Hobby minimal 5 karakter.");
+    showToast("Interest minimal 5 karakter.");
     return;
   }
 

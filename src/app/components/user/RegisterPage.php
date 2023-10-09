@@ -231,6 +231,7 @@
 
             if(!contact || contact.length < 5){
                 showToast("Contact minimal 5 karakter. (Bisa berupa id line, no WA, dll)");
+                return;
             }
 
             if(!hobby || hobby.length < 5) {
@@ -239,7 +240,7 @@
             }
 
             if(!interest || interest.length < 5) {
-                showToast("Hobby minimal 5 karakter.");
+                showToast("Interest minimal 5 karakter.");
                 return;
             }
 
