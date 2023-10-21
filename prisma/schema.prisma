@@ -1,0 +1,26 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Report {
+  report_id Int @id @default(autoincrement()) @map("report_id")
+  user_id_reporter Int @map("user_id_reporter")
+  user_id_reported Int @map("user_id_reported")
+  report_detail String @db.VarChar(255)
+}
+
+model DateHistory {
+  history_id Int @id @default(autoincrement()) @map("history_id")
+  user_id_1 Int @map("user_id_1")
+  user_id_2 Int @map("user_id_2")
+  timestamp DateTime @default(now()) @map("timestamp")
+  location String @db.VarChar(255)
+}

@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  mysql:
+    image: mysql:latest
+    hostname: db-rest
+    ports:
+      - 3308:3306
+    env_file: .env
+    volumes:
+      - ./mysql:/var/lib/mysql
+    restart: unless-stopped
+
+  rest-service:
+    hostname: web-rest
+    env_file: .env
+    volumes:
+      - ./:/app
+      - /app/node_modules
+      - /app/prisma
+    depends_on:
+      - mysql
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    restart: on-failure
