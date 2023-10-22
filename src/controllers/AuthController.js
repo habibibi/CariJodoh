@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-const secretKey = "coba-secret-key";
+const secretKey = process.env.SECRET_KEY;
 
 export class AuthController {
   constructor(authService) {
