@@ -2,7 +2,6 @@
 
 # Define variables
 host="$1"
-shift
 cmd="$@"
 
 # Wait for MySQL to be available
