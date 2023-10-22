@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import AuthRouter from "./routes/AuthRouter.js";
 
 const app = express();
 
@@ -9,12 +10,16 @@ app.use(
   })
 );
 
+app.use(express.json());
+
 const port = 3000;
+
+app.get("/", (req, res) => {
+  res.send("Kelompok 35 Tubes WBD 2 :)");
+});
+
+app.use("/", AuthRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
-});
-
-app.get("/", (req, res) => {
-  res.send("Hello, Express!");
 });

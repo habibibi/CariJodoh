@@ -10,11 +10,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Security {
+  security_id Int @id @default(autoincrement()) @map("security_id")
+  username String @map("username") @unique
+  password String @map("password")
+
+  @@map("security")
+}
+
 model Report {
   report_id Int @id @default(autoincrement()) @map("report_id")
   user_id_reporter Int @map("user_id_reporter")
   user_id_reported Int @map("user_id_reported")
   report_detail String @db.VarChar(255)
+
+  @@map("report")
 }
 
 model DateHistory {
@@ -23,4 +33,6 @@ model DateHistory {
   user_id_2 Int @map("user_id_2")
   timestamp DateTime @default(now()) @map("timestamp")
   location String @db.VarChar(255)
+
+  @@map("date_history")
 }
