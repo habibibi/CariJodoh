@@ -12,7 +12,11 @@ export class AuthController {
       const data = req.body;
       const user = await this.authService.login(data);
       const token = jwt.sign(
-        { user_id: user.id, username: user.username },
+        {
+          user_id: user.id,
+          username: user.username,
+          exp: Math.floor(Date.now() / 1000) + 86400,
+        },
         secretKey
       );
       res.status(201).json({ token, message: "Berhasil melakukan login." });
