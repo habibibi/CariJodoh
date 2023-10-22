@@ -1,8 +1,67 @@
 import { Link } from "react-router-dom";
 import AuthLayout from "../layouts/AuthLayout";
-import AuthImage from "../../public/assets/auth-img.webp";
+import AuthImage from "../assets/auth-img.webp";
+import Axios from "../config/Axios";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { checkAuthenticationStatus } from "../config/VerifyAuth";
 
 const Register = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const isAuthenticated = checkAuthenticationStatus();
+    if (isAuthenticated) {
+      toast.error("Logout terlebih dahulu!");
+      navigate("/");
+    }
+  }, [navigate]);
+
+  const registerUser = async (e) => {
+    e.preventDefault();
+
+    // Validate
+    if (!username || !password || !confirmPassword) {
+      toast.error("Lengkapi form terlebih dahulu!");
+      return;
+    }
+
+    if (username < 5) {
+      toast.error("Username minimal 5 karakter");
+    }
+
+    if (password < 5) {
+      toast.error("Password minimal 5 karakter");
+    }
+
+    if (password != confirmPassword) {
+      toast.error("Password dan confirm password tidak sama!");
+      return;
+    }
+
+    const body = {
+      username: username,
+      password: password,
+    };
+
+    try {
+      const response = await Axios.post(
+        `${import.meta.env.VITE_API_URL}/register`,
+        body
+      );
+      toast.success(response.data.message);
+      navigate("/login");
+    } catch (error) {
+      toast.error(
+        error.response.data.message || "Registrasi gagal, silahkan coba lagi"
+      );
+    }
+  };
+
   return (
     <AuthLayout>
       <div className="flex flex-col items-center md:items-left md:flex-row h-full min-h-[inherit]">
@@ -25,6 +84,8 @@ const Register = () => {
                 type="text"
                 placeholder="Enter your username..."
                 className="p-3 rounded-xl"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
 
@@ -34,6 +95,8 @@ const Register = () => {
                 type="password"
                 placeholder="Enter your password..."
                 className="p-3 rounded-xl"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 
@@ -43,20 +106,17 @@ const Register = () => {
                 type="password"
                 placeholder="Enter your confirm password..."
                 className="p-3 rounded-xl"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </div>
           </div>
           <div className="flex flex-col gap-4 w-3/4">
-            <button className="bg-[#FFD2DA] p-3 font-semibold rounded-xl">
+            <button
+              className="bg-[#FFD2DA] p-3 font-semibold rounded-xl"
+              onClick={(e) => registerUser(e)}
+            >
               Register
-            </button>
-            <div className="flex flex-row gap-2 items-center">
-              <hr className="h-[2px] bg-black w-full"></hr>
-              <h2>OR</h2>
-              <hr className="h-[2px] bg-black w-full"></hr>
-            </div>
-            <button className="mx-auto bg-[#FFD2DA] p-4 rounded-xl font-semibold">
-              Google
             </button>
           </div>
           <p>
