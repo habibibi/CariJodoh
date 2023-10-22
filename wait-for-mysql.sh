@@ -2,7 +2,7 @@
 
 # Define variables
 host="$1"
-cmd="$@"
+cmd="$2"
 
 # Wait for MySQL to be available
 while ! nc -z "$host" 3306; do
