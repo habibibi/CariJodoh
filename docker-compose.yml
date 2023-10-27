@@ -11,6 +11,7 @@ services:
     restart: unless-stopped
 
   rest-service:
+    image: tubes-2-rest:latest
     hostname: web-rest
     env_file: .env
     volumes:
