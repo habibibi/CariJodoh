@@ -11,6 +11,15 @@ class AuthenticationMiddleware
 
     public function checkAuthenticated()
     {
+        // Check using API KEY
+        if(isset($_GET['api_key'])) {
+            if($_GET['api_key'] == API_KEY){
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         if (!isset($_SESSION['user_id'])) {
             return false;
         }
@@ -31,6 +40,15 @@ class AuthenticationMiddleware
 
     public function checkAdmin()
     {
+        // Check using API KEY
+        if(isset($_GET['api_key'])) {
+            if($_GET['api_key'] == API_KEY){
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         if (!isset($_SESSION['user_id'])) {
             return false;
         }
@@ -51,6 +69,15 @@ class AuthenticationMiddleware
 
     public function isAuthenticated()
     {
+        // Check using API KEY
+        if(isset($_GET['api_key'])) {
+            if($_GET['api_key'] == API_KEY){
+                return true;
+            } else {
+                throw new Exception('Unauthorized', 401);
+            }
+        }
+
         if (!isset($_SESSION['user_id'])) {
             throw new Exception('Unauthorized', 401);
         }
@@ -71,6 +98,15 @@ class AuthenticationMiddleware
 
     public function isAdmin()
     {
+        // Check using API KEY
+        if(isset($_GET['api_key'])) {
+            if($_GET['api_key'] == API_KEY){
+                return true;
+            } else {
+                throw new Exception('Unauthorized', 401);
+            }
+        }
+
         if (!isset($_SESSION['user_id'])) {
             throw new Exception('Unauthorized', 401);
         }

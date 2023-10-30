@@ -341,6 +341,29 @@ class UserController extends Controller {
         }
     }
 
+    public function users(){
+        try{
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'GET':
+                    if ($this->middleware->checkAdmin()){
+                        $userModel = $this->model('UserModel');
+                        $result = $userModel->getAllUsers();
+                        header('Content-Type: application/json');
+                        http_response_code(200);
+                        echo json_encode(["users" => $result], JSON_NUMERIC_CHECK);
+                    } else {
+                        throw new Exception('Unauthorized', 401);
+                    }
+                    break;
+                default:
+                    throw new Exception('Method Not Allowed', 405);
+            }
+        } catch (Exception $e){
+            http_response_code($e->getCode());
+            exit;
+        }
+    }
+
     public function fetch_recommendation(){
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
