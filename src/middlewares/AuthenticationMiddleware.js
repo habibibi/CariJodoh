@@ -1,21 +1,27 @@
-export class AuthenticationMiddleware {
-  authenticate = async (req, res, next) => {
+import jwt from "jsonwebtoken";
+
+export default class AuthenticationMiddleware {
+  async authenticate(req, res, next) {
     try {
-      const token = req.header("Authorization")?.replace("Bearer ", "");
-      if (!token) {
-        res.status(401).json({
-          message: "Unauthorized",
-        });
-        return;
+      if (req.query?.api_key && req.query?.api_key == process.env.API_KEY_PHP) {
+        next();
+      } else {
+        const token = req.header("Authorization")?.replace("Bearer ", "");
+        if (!token) {
+          res.status(401).json({
+            message: "Unauthorized",
+          });
+          return;
+        }
+
+        req.token = jwt.verify(token, process.env.SECRET_KEY);
+
+        next();
       }
-
-      req.token = jwt.verify(token, jwtConfig.secret);
-
-      next();
     } catch (error) {
-      res.status(500).json({
+      return res.status(500).json({
         message: "Internal Server Error",
       });
     }
-  };
+  }
 }
