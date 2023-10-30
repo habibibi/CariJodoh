@@ -1,0 +1,37 @@
+version: "3.9"
+services:
+  php-web:
+    extends:
+      file: ../tugas-besar-2-php/docker-compose.yml
+      service: web
+    networks:
+      - cari-jodoh
+  php-db:
+    extends:
+      file: ../tugas-besar-2-php/docker-compose.yml
+      service: mysql
+    networks:
+      - cari-jodoh
+  mysql-rest:
+    extends:
+      file: ../tugas-besar-2-rest/docker-compose.yml
+      service: mysql-rest
+    networks:
+      - cari-jodoh
+  rest-web:
+    depends_on:
+      - mysql-rest
+    extends:
+      file: ../tugas-besar-2-rest/docker-compose.yml
+      service: rest-web
+    networks:
+      - cari-jodoh
+  spa:
+    extends:
+      file: ../tugas-besar-2-spa/docker-compose.yml
+      service: spa
+    networks:
+      - cari-jodoh
+
+networks:
+  cari-jodoh:
