@@ -7,7 +7,9 @@ const MainLayout = ({ children }) => {
     <div className="flex flex-col">
       <Navbar />
       <div className="bg-[#FFF8DC]">
-        <div className="max-w-screen-2xl mx-auto py-8 px-4">{children}</div>
+        <div className="max-w-screen-2xl mx-auto py-8 px-4 min-h-[85vh]">
+          {children}
+        </div>
       </div>
       <Footer />
     </div>
