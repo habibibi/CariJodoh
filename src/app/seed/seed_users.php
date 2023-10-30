@@ -26,7 +26,7 @@ if (file_exists($envFilePath)) {
 }
 
 // Define DB Constants
-define('DB_HOST', 'tugas-besar-1-v3-mysql-1');
+define('DB_HOST', 'config-php-db-1');
 define('DB_NAME', $_ENV['MYSQL_DATABASE']);
 define('DB_USER', $_ENV['MYSQL_USER']);
 define('DB_PASSWORD', $_ENV['MYSQL_PASSWORD']);
@@ -46,7 +46,7 @@ $dislikes = ['Spiders', 'Snakes', 'Loud noise', 'Crowded places', 'Mushrooms', '
 $imageDirectory = __DIR__ . '/../../public/seed_profile_video/user_profile.webp';
 $videoDirectory = __DIR__ . '/../../public/seed_profile_video/user_video.mp4';
 
-for ($i = 1; $i <= 24; $i++) {
+for ($i = 1; $i <= 100; $i++) {
     $user = [
         'username' => "user{$i}_username",
         'password' => "user{$i}_password",
@@ -65,7 +65,7 @@ for ($i = 1; $i <= 24; $i++) {
         'ketidaksukaan' => $dislikes[array_rand($dislikes)],
         'imageFile' => file_get_contents($imageDirectory),
         'videoFile' => file_get_contents($videoDirectory),
-        'gender' => $i <= 12 ? 'Laki-Laki' : 'Perempuan'
+        'gender' => $i <= 50 ? 'Laki-Laki' : 'Perempuan'
     ];
 
     $users[] = $user;

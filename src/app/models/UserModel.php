@@ -136,6 +136,14 @@ class UserModel
         return $profile;
     }
 
+    public function getAllUsers()
+    {
+        $query = "SELECT * FROM profile";
+        $this->database->query($query);
+        $profiles = $this->database->fetchall();
+        return $profiles;
+    }
+
     public function getProfiles($page = 1, $exclude_userid=null, $name=null, $interest=null, $agama=null, $mbti=null, $sortAttr='nama_lengkap', $isDesc=false)
     {
         $query = "
