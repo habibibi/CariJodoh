@@ -1,25 +1,23 @@
 version: "3.8"
 services:
-  mysql:
+  mysql-rest:
     image: mysql:latest
     hostname: db-rest
     ports:
-      - 3308:3306
+      - "3308:3306"
     env_file: .env
     volumes:
       - ./mysql:/var/lib/mysql
     restart: unless-stopped
 
-  rest-service:
+  rest-web:
     image: tubes-2-rest:latest
-    hostname: web-rest
+    hostname: rest-web
     env_file: .env
     volumes:
       - ./:/app
       - /app/node_modules
       - /app/prisma
-    depends_on:
-      - mysql
     stdin_open: true
     build:
       context: .
