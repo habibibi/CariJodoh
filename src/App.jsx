@@ -11,6 +11,7 @@ import ProtectedRoute from "./config/ProtectedRoute";
 import Detect from "./pages/Detect";
 import ProfileView from "./pages/ProfileView";
 import Report from "./pages/Report";
+import Tes from "./pages/Tes";
 
 const App = () => {
   return (
@@ -50,6 +51,14 @@ const App = () => {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route 
+          path="/tes" 
+          element={
+          <ProtectedRoute>
+              <Tes />
+          </ProtectedRoute>
+          } 
+        />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
