@@ -1,0 +1,80 @@
+.main-container 
+{
+    width: 800px;
+    margin: 0 auto;
+    min-height: 90vh;
+    padding: 1rem;
+}
+
+@media screen and (max-width: 800px)
+{
+    .main-container
+    {
+        box-sizing: border-box;
+        width: 100%;
+    }
+    
+}
+
+h1
+{
+    text-align: center;
+    margin-bottom: 1rem;
+    padding: 0;
+
+}
+
+.search
+{
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    box-sizing: border-box
+}
+
+
+.card-list
+{
+    display: flex;
+    margin-bottom: 20px;
+    min-height: 100%;
+    flex-direction: column;
+}
+
+.card
+{
+    max-height: 200px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 2px solid #cfc2ab;
+    gap: 10px;
+    padding: 10px;
+}
+
+.card-image
+{
+    flex : 0 0 40%;
+    max-width: 400px;
+}
+
+.article-image
+{
+    height: auto;
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: auto;
+}
+
+.card-content
+{
+    flex: 1 1;
+}
+
+.card-content p
+{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
