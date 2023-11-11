@@ -25,7 +25,7 @@ const Navbar = () => {
             <Link to="/report">Report</Link>
           </li>
           <li className="inline-block p-[1rem]">
-            <Link to="/history">History</Link>
+            <Link to="/article">Article</Link>
           </li>
         </ul>
         <div className="flex w-full lg:hidden cursor-pointer">
@@ -49,7 +49,7 @@ const Navbar = () => {
                 <Link to="/report">Report</Link>
               </li>
               <li className="p-[1rem] text-center font-semibold">
-                <Link to="/history">History</Link>
+                <Link to="/article">Article</Link>
               </li>
             </ul>
           ) : (

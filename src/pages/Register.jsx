@@ -32,10 +32,12 @@ const Register = () => {
 
     if (username < 5) {
       toast.error("Username minimal 5 karakter");
+      return;
     }
 
     if (password < 5) {
       toast.error("Password minimal 5 karakter");
+      return;
     }
 
     if (password != confirmPassword) {
