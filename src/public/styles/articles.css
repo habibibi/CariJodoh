@@ -43,38 +43,55 @@ h1
 
 .card
 {
-    max-height: 200px;
     min-height: 200px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     border-bottom: 2px solid #cfc2ab;
-    gap: 10px;
     padding: 10px;
-}
-
-.card-image
-{
-    flex : 0 0 40%;
-    max-width: 400px;
-}
-
-.article-image
-{
-    height: auto;
-    width: 100%;
-    object-fit: cover;
-    aspect-ratio: auto;
 }
 
 .card-content
 {
-    flex: 1 1;
+    margin-top: 1rem;
 }
 
-.card-content p
+.card-image
+{
+    float: left;
+    height: calc(1.5rem * 10 - 1rem);
+    margin-right: 1rem;
+}
+
+.article-image
+{
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    aspect-ratio: auto;
+}
+
+
+.card p
 {
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    line-height: 1.5rem;
+    text-align: justify;
+}
+
+.card h2
+{
+    margin: 0;
+    padding: 0;
+}
+
+.author
+{
+    font-size: 0.8rem;
+    font-weight: lighter;
+}
+
+.pagination
+{
+    margin-bottom: 1rem;
 }
