@@ -54,9 +54,7 @@ const App = () => {
         <Route 
           path="/tes" 
           element={
-          <ProtectedRoute>
               <Tes />
-          </ProtectedRoute>
           } 
         />
         <Route path="*" element={<Navigate to="/" />} />
