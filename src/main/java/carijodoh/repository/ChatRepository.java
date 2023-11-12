@@ -43,8 +43,21 @@ public class ChatRepository {
             CriteriaBuilder builder = session.getCriteriaBuilder();
             CriteriaQuery<Chat> criteria = builder.createQuery(Chat.class);
             Root<Chat> root = criteria.from(Chat.class);
-            Predicate predicate = builder.and(builder.equal(root.get("userIdSender"), userIdSender), builder.equal(root.get("userIdReceiver"), userIdReceiver));
-            criteria.select(root).where(predicate);
+
+            // Create a condition for both sender = receiver and receiver = sender
+            Predicate predicateSenderReceiver = builder.and(
+                    builder.equal(root.get("userIdSender"), userIdSender),
+                    builder.equal(root.get("userIdReceiver"), userIdReceiver)
+            );
+            Predicate predicateReceiverSender = builder.and(
+                    builder.equal(root.get("userIdSender"), userIdReceiver),
+                    builder.equal(root.get("userIdReceiver"), userIdSender)
+            );
+            Predicate finalPredicate = builder.or(predicateSenderReceiver, predicateReceiverSender);
+
+            // Order by timestamp in descending order
+            criteria.orderBy(builder.asc(root.get("timestamp")));
+            criteria.select(root).where(finalPredicate);
             TypedQuery<Chat> query = session.createQuery(criteria);
 
             List<Chat> chats = query.getResultList();

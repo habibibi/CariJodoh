@@ -2,7 +2,7 @@ package carijodoh;
 
 import javax.xml.ws.Endpoint;
 
-import carijodoh.middleware.LoggerServlet;
+import carijodoh.middleware.LoggerHandler;
 import carijodoh.service.ArticleService;
 import carijodoh.service.ChatService;
 import carijodoh.util.HibernateUtil;
@@ -21,12 +21,6 @@ public class Main {
         String addressChat = "http://localhost:8001/chat";
         Endpoint endpointArticle = Endpoint.create(new ArticleService());
         Endpoint endpointChat = Endpoint.create(new ChatService());
-
-        // Add a handler to the endpoint's handler chain
-        List<Handler> handlerChain = new ArrayList<>();
-        handlerChain.add(new LoggerServlet());
-        endpointArticle.getBinding().setHandlerChain(handlerChain);
-        endpointChat.getBinding().setHandlerChain(handlerChain);
 
         // Publish the endpoint
         endpointArticle.publish(addressArticle);

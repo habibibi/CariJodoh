@@ -4,12 +4,12 @@ import carijodoh.model.DataPagination;
 import carijodoh.repository.ArticleRepository;
 import io.github.cdimascio.dotenv.Dotenv;
 
+import javax.jws.HandlerChain;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
-import javax.jws.soap.SOAPBinding;
 
 @WebService
-@SOAPBinding(style = SOAPBinding.Style.DOCUMENT)
+@HandlerChain(file = "handler-chains.xml")
 public class ArticleService {
     private static final ArticleRepository articleRepository = new ArticleRepository();
 
