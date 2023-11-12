@@ -44,6 +44,9 @@
                         <span>Kontak: ${user_contact}</span>
                     </div>
                     <div class="button-container">
+                        <a href="<?= BASE_URL ?>/chat/user/${user_id}">
+                            <button class="chat-button"><strong>Chat</strong></button>
+                        </a>
                         <a href="<?= BASE_URL ?>/view/profile/${user_id}">
                             <button class="view-button"><strong>View Profile</strong></button>
                         </a>
