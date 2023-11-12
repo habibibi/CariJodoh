@@ -1,0 +1,97 @@
+.main-container 
+{
+    width: 800px;
+    margin: 0 auto;
+    min-height: 90vh;
+    padding: 1rem;
+}
+
+@media screen and (max-width: 800px)
+{
+    .main-container
+    {
+        box-sizing: border-box;
+        width: 100%;
+    }
+    
+}
+
+h1
+{
+    text-align: center;
+    margin-bottom: 1rem;
+    padding: 0;
+
+}
+
+.search
+{
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    box-sizing: border-box
+}
+
+
+.card-list
+{
+    display: flex;
+    margin-bottom: 20px;
+    min-height: 100%;
+    flex-direction: column;
+}
+
+.card
+{
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 2px solid #cfc2ab;
+    padding: 10px;
+}
+
+.card-content
+{
+    margin-top: 1rem;
+}
+
+.card-image
+{
+    float: left;
+    height: calc(1.5rem * 10 - 1rem);
+    margin-right: 1rem;
+}
+
+.article-image
+{
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    aspect-ratio: auto;
+}
+
+
+.card p
+{
+    margin: 0;
+    padding: 0;
+    line-height: 1.5rem;
+    text-align: justify;
+}
+
+.card h2
+{
+    margin: 0;
+    padding: 0;
+}
+
+.author
+{
+    font-size: 0.8rem;
+    font-weight: lighter;
+}
+
+.pagination
+{
+    margin-bottom: 1rem;
+}

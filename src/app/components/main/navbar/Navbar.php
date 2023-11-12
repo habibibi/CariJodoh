@@ -5,6 +5,7 @@
         </span>
         <ul>
             <li><a href="<?= BASE_URL ?>/recommendation">Recommendation</a></li>
+            <li><a href="<?= BASE_URL ?>/articles">Articles</a></li>
             <li><a href="<?= BASE_URL ?>/browse">Browse</a></li>
             <li><a href="<?= BASE_URL ?>/notification">Notification</a></li>
             <li><a href="<?= BASE_URL ?>/likes">Likes</a></li>
@@ -16,6 +17,7 @@
             </div>
             <ul class="dropdown-content">
                 <li><a href="<?= BASE_URL ?>/recommendation">Recommendation</a></li>
+                <li><a href="<?= BASE_URL ?>/articles">Articles</a></li>
                 <li><a href="<?= BASE_URL ?>/browse">Browse</a></li>
                 <li><a href="<?= BASE_URL ?>/notification">Notification</a></li>
                 <li><a href="<?= BASE_URL ?>/likes">Likes</a></li>
