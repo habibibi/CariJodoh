@@ -83,7 +83,7 @@ function loadArticles() {
         totalPages = data.pageCount["#text"];
         cardList.innerHTML = ``;
         if (totalPages == 0) {
-          cardList.innerHTML += `<h1 class="no-data">Maaf ya, gaada yg cocok :(</h1>`;
+          cardList.innerHTML += `<h1 class="no-data">Maaf ya, belum ada artikel :(</h1>`;
         } else {
           if (data && data.data && data.data instanceof Array) {
             data.data.forEach((article) => {
@@ -137,7 +137,7 @@ function loadArticles() {
 
         updatePaginationButtons();
       } else {
-        console.error("Error:", xhr.status, xhr.statusText);
+        showToast("Gagal load artikel!");
       }
     }
   };

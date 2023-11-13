@@ -68,21 +68,28 @@
   font-weight: bold;
 }
 
-.message {
-  border-radius: 1rem;
+.div-message {
   max-width: 70%;
-  background-color: #ffd2da;
-  padding: 1rem;
 }
 
-.message p {
+.message {
+  border-radius: 1rem;
+  max-width: 100%;
+  background-color: #ffd2da;
+  padding: 1rem;
+  display: inline-block;
+  word-wrap: break-word;
   margin: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
 
 .chat-input {
   display: flex;
   align-items: center;
   margin-top: 1rem;
+  position: relative;
 }
 
 .chat-input textarea {
@@ -93,9 +100,12 @@
   padding: 1rem;
   resize: none;
   font-size: 1rem;
-  height: 3rem;
+  height: auto;
   min-height: 3rem;
   max-height: 30rem;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
 
 .chat-input button {
@@ -105,6 +115,23 @@
   margin-left: 0.5rem;
   height: 50px;
   width: 80px;
+}
+
+@media screen and (max-width: 460px) {
+  .chat-input {
+    flex-direction: column;
+    padding: 10px 10px;
+    gap: 1rem;
+  }
+  .chat-input textarea {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+  .refresh,
+  .delete-chat {
+    bottom: 250px;
+  }
 }
 
 .chat-input button:hover {
