@@ -23,7 +23,7 @@ public class Article implements Serializable {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 900)
     private String content;
 
     @Column(nullable = false)
