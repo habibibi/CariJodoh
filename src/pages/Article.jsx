@@ -1,12 +1,28 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { toast } from "react-toastify";
-// import Axios from "../config/Axios";
+import Axios from "../config/Axios";
 
 const Article = () => {
   const [author, setAuthor] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
+  const imageInputRef = useRef(null);
+
+  const resetImageInput = () => {
+    if (imageInputRef.current) {
+      imageInputRef.current.value = '';
+    }
+  };
+
+  const handleImage = async (file) => {
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      var res = event.target.result.split(',')[1];
+      setImage(res);
+    };
+    reader.readAsDataURL(file);
+  }
 
   const addArticle = async (e) => {
     e.preventDefault();
@@ -21,25 +37,27 @@ const Article = () => {
     } else if (content < 50) {
       toast.error("Isi artikel minimal 50 karakter!");
       return;
+    } else if (!image) {
+      toast.error("Masukkan gambar artikel terlebih dahulu!");
+      return;
     }
 
-    // const body = {
-    //   author: author,
-    //   title: title,
-    //   content: content,
-    //   image: image,
-    // };
+    const body = {
+      author: author,
+      title: title,
+      content: content,
+      image: image,
+    };
 
-    // try {
-    //   const response = await Axios
-    //     .post
-    //     // ???????? belum
-    //     ();
-    // } catch (error) {
-    //   toast.error(
-    //     error.response.data.message || "Tambah artikel gagal, silakan coba lagi"
-    //   );
-    // }
+    try {
+      const response = await Axios
+        .post(import.meta.env.VITE_API_URL+"/article", body);
+      toast.success(response.data.message);
+    } catch (error) {
+      toast.error(
+        error.response.data.message || "Tambah artikel gagal, silakan coba lagi"
+      );
+    }
   };
 
   return (
@@ -90,11 +108,11 @@ const Article = () => {
           </label>
           <input
             type="file"
+            ref={imageInputRef}
             id="gambar"
             accept="image/*"
             className="w-full px-3 py-2 border bg-gray-100 rounded"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
+            onChange={(e) => handleImage(e.target.files[0])}
           />
         </div>
         <div className="flex justify-center">
@@ -113,6 +131,7 @@ const Article = () => {
               setContent("");
               setImage("");
               setTitle("");
+              resetImageInput();
             }}
           >
             Clear
