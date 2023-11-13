@@ -142,7 +142,6 @@ function updatePaginationButtons() {
   } else {
     prevButton.disabled = false;
   }
-  console.log(currentPage, totalPages);
 
   if (currentPage == totalPages || totalPages == 0) {
     nextButton.disabled = true;

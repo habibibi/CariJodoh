@@ -82,11 +82,35 @@ function loadArticles() {
         const data = xmlNodesToObject(xmlDoc.getElementsByTagName("return")[0]);
         totalPages = data.pageCount["#text"];
         cardList.innerHTML = ``;
-
         if (totalPages == 0) {
           cardList.innerHTML += `<h1 class="no-data">Maaf ya, gaada yg cocok :(</h1>`;
         } else {
-          data.data.forEach((article) => {
+          if (data && data.data && data.data instanceof Array) {
+            data.data.forEach((article) => {
+              // Decode base64 string to binary
+              var binaryString = atob(article.image["#text"]);
+
+              // Create a Uint8Array from the binary data
+              var uint8Array = new Uint8Array(binaryString.length);
+              for (var i = 0; i < binaryString.length; i++) {
+                uint8Array[i] = binaryString.charCodeAt(i);
+              }
+
+              // Create a Blob from the Uint8Array
+              var blob = new Blob([uint8Array], { type: "image/png" });
+
+              // Create a data URL from the Blob
+              const dataURL = URL.createObjectURL(blob);
+
+              cardList.innerHTML += articleCard(
+                article.title["#text"],
+                article.author["#text"],
+                dataURL,
+                article.content["#text"]
+              );
+            });
+          } else if (data && data.data) {
+            const article = data.data;
             // Decode base64 string to binary
             var binaryString = atob(article.image["#text"]);
 
@@ -108,7 +132,7 @@ function loadArticles() {
               dataURL,
               article.content["#text"]
             );
-          });
+          }
         }
 
         updatePaginationButtons();
