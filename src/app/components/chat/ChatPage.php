@@ -18,42 +18,38 @@
     ?>
     <div class='main-container'>
         <div class='chat-container'>
-            <div class='user-chat-component'>
-                <div class='sender-name'>John Doe</div>
-                <div class='message'>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quam nibh, feugiat vel auctor id, vulputate at magna. Nulla magna nunc, aliquam at molestie varius, viverra vitae lorem. Aenean lobortis orci laoreet, vestibulum leo maximus, accumsan nibh. Aliquam in mi dignissim, facilisis urna sit amet, porttitor velit. Ut elit urna, pellentesque eget gravida eu, faucibus eu lacus. Mauris consectetur lectus eu luctus tempus. In placerat nisl enim, at sollicitudin ipsum sodales sit amet. Donec ut ligula nibh. Aenean eget ante lacus. Etiam vitae ipsum hendrerit, interdum purus in, rutrum ligula. Fusce in enim et urna pellentesque vestibulum. Donec ullamcorper ut purus ac condimentum. Nulla facilisi. Morbi tincidunt nunc in dui fringilla, ac consequat justo vestibulum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras nec velit congue arcu condimentum congue sit amet vitae ipsum.</p>
-                </div>
-            </div>
-            <div class='other-chat-component'>
-                <label class='sender-name'>John Doe</label>
-                <div class='message'>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quam nibh, feugiat vel auctor id, vulputate at magna. Nulla magna nunc, aliquam at molestie varius, <br> <br> viverra vitae lorem. Aenean lobortis orci laoreet, vestibulum leo maximus, accumsan nibh. Aliquam in mi dignissim, facilisis urna sit amet, porttitor velit. Ut elit urna, pellentesque eget gravida eu, faucibus eu lacus. Mauris consectetur lectus eu luctus tempus. In placerat nisl enim, at sollicitudin ipsum sodales sit amet. Donec ut ligula nibh. Aenean eget ante lacus. Etiam vitae ipsum hendrerit, interdum purus in, rutrum ligula. Fusce in enim et urna pellentesque vestibulum. Donec ullamcorper ut purus ac condimentum. Nulla facilisi. Morbi tincidunt nunc in dui fringilla, ac consequat justo vestibulum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras nec velit congue arcu condimentum congue sit amet vitae ipsum.</p>
-                </div>
-                <div class='message'>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quam nibh, feugiat vel auctor id, vulputate at magna. Nulla magna nunc, aliquam at molestie varius, <br> <br> viverra vitae lorem. Aenean lobortis orci laoreet, vestibulum leo maximus, accumsan nibh. Aliquam in mi dignissim, facilisis urna sit amet, porttitor velit. Ut elit urna, pellentesque eget gravida eu, faucibus eu lacus. Mauris consectetur lectus eu luctus tempus. In placerat nisl enim, at sollicitudin ipsum sodales sit amet. Donec ut ligula nibh. Aenean eget ante lacus. Etiam vitae ipsum hendrerit, interdum purus in, rutrum ligula. Fusce in enim et urna pellentesque vestibulum. Donec ullamcorper ut purus ac condimentum. Nulla facilisi. Morbi tincidunt nunc in dui fringilla, ac consequat justo vestibulum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras nec velit congue arcu condimentum congue sit amet vitae ipsum.</p>
-                </div>
-            </div>
         </div>
         <div class='chat-input'>
-            <textarea w></textarea> 
+            <textarea id="message-box"></textarea> 
             <button id="send-message">Send</button>
         </div>
     </div>
     <button class="refresh">
         <img src="<?= BASE_URL ?>/images/icons/refresh.png" alt="refresh">
     </button>
+    <button class="delete-chat">
+        <img src="<?= BASE_URL ?>/images/icons/delete.png" alt="delete">
+    </button>
     <?php
         include(__DIR__ . '/../main/Footer/Footer.php');
     ?>
+    <div class="popup-delete">
+        <h1>Do you wish to delete?</h1>
+        <div class="button-container-popup">
+            <button class="no-button"><strong>No</strong></button>
+            <button class="yes-button"><strong>Delete</strong></button>
+        </div>
+    </div>
+    <div class="overlay"></div>
     <?php
-        echo '<script>';
-
-        echo '</script>';
+        echo '<script>const API_KEY_SOAP = "' . API_KEY_SOAP . '";</script>';
+        echo '<script>const user_id = ' . $this->user_id . ';</script>';
+        echo '<script>const other_id = ' . $this->other_id . ';</script>';
+        echo '<script>const our_name = "' . $this->our_name . '";</script>';
+        echo '<script>const other_name = "' . $this->other_name . '";</script>';
     ?>
     <script>
-        const BASE_URL = "<?= BASE_URL ?>" ;
-        const user_id = <?= $this->user_id ?>;
-        const other_id = <?= $this->other_id ?>;
+        const BASE_URL = "<?= BASE_URL ?>";
     </script>
     <script src="<?= BASE_URL ?>/js/chat.js"></script>
 </body>

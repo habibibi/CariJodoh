@@ -136,6 +136,19 @@ class UserModel
         return $profile;
     }
 
+    public function getName($userId) {
+        $query = "
+            SELECT nama_panggilan FROM profile
+            WHERE (user_id = :user_id)
+        ";
+
+        $this->database->query($query);
+        $this->database->bind('user_id', $userId);
+        $name = $this->database->fetch();
+
+        return $name->nama_panggilan;
+    }
+
     public function getAllUsers()
     {
         $query = "SELECT * FROM profile";
