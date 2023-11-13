@@ -19,42 +19,6 @@
     <div class='main-container'>
         <h1>Browse Articles</h1>
         <div class='card-list'>
-            <div class='card'>
-                <h2>How to be a Good Partner</h2>
-                <div class='author'>Author: John Doe</div>
-                <div class='card-content'>
-                    <div class='card-image'>
-                        <img class='article-image' src="https://lh3.googleusercontent.com/hwau7OVWx96XaME5KpRuJ0I_MscrerK6SbRH1UwYHYaxIDQQtn7RZK02LDSfBzCreidFgDsJeXyqDct6EZiH6vsV=w640-h400-e365-rj-sc0x00ffffff" alt="article-image">
-                    </div>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quam nibh, feugiat vel auctor id, vulputate at magna. Nulla magna nunc, aliquam at molestie varius, viverra vitae lorem. Aenean lobortis orci laoreet, vestibulum leo maximus, accumsan nibh. Aliquam in mi dignissim, facilisis urna sit amet, porttitor velit. Ut elit urna, pellentesque eget gravida eu, faucibus eu lacus. Mauris consectetur lectus eu luctus tempus. In placerat nisl enim, at sollicitudin ipsum sodales sit amet. Donec ut ligula nibh. Aenean eget ante lacus. Etiam vitae ipsum hendrerit, interdum purus in, rutrum ligula. Fusce in enim et urna pellentesque vestibulum. Donec ullamcorper ut purus ac condimentum. Nulla facilisi. Morbi tincidunt nunc in dui fringilla, ac consequat justo vestibulum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras nec velit congue arcu condimentum congue sit amet vitae ipsum.
-                    </p>
-                </div>
-            </div>
-            <div class='card'>
-                <h2>How to be a Good Partner</h2>
-                <div class='author'>Author: John Doe</div>
-                <div class='card-content'>
-                    <div class='card-image'>
-                        <img class='article-image' src="https://lh3.googleusercontent.com/hwau7OVWx96XaME5KpRuJ0I_MscrerK6SbRH1UwYHYaxIDQQtn7RZK02LDSfBzCreidFgDsJeXyqDct6EZiH6vsV=w640-h400-e365-rj-sc0x00ffffff" alt="article-image">
-                    </div>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quam nibh, feugiat vel auctor id, vulputate at magna. Nulla magna nunc, aliquam at molestie varius, viverra vitae lorem. Aenean lobortis orci laoreet, vestibulum leo maximus, accumsan nibh. Aliquam in mi dignissim, facilisis urna sit amet, porttitor velit. Ut elit urna, pellentesque eget gravida eu, faucibus eu lacus. Mauris consectetur lectus eu luctus tempus. In placerat nisl enim, at sollicitudin ipsum sodales sit amet. Donec ut ligula nibh. Aenean eget ante lacus. Etiam vitae ipsum hendrerit, interdum purus in, rutrum ligula. Fusce in enim et urna pellentesque vestibulum. Donec ullamcorper ut purus ac condimentum. Nulla facilisi. Morbi tincidunt nunc in dui fringilla, ac consequat justo vestibulum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras nec velit congue arcu condimentum congue sit amet vitae ipsum.
-                    </p>
-                </div>
-            </div>
-            <div class='card'>
-                <h2>How to be a Good Partner</h2>
-                <div class='author'>Author: John Doe</div>
-                <div class='card-content'>
-                    <div class='card-image'>
-                        <img class='article-image' src="https://lh3.googleusercontent.com/hwau7OVWx96XaME5KpRuJ0I_MscrerK6SbRH1UwYHYaxIDQQtn7RZK02LDSfBzCreidFgDsJeXyqDct6EZiH6vsV=w640-h400-e365-rj-sc0x00ffffff" alt="article-image">
-                    </div>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quam nibh, feugiat vel auctor id, vulputate at magna. Nulla magna nunc, aliquam at molestie varius, viverra vitae lorem. Aenean lobortis orci laoreet, vestibulum leo maximus, accumsan nibh. Aliquam in mi dignissim, facilisis urna sit amet, porttitor velit. Ut elit urna, pellentesque eget gravida eu, faucibus eu lacus. Mauris consectetur lectus eu luctus tempus. In placerat nisl enim, at sollicitudin ipsum sodales sit amet. Donec ut ligula nibh. Aenean eget ante lacus. Etiam vitae ipsum hendrerit, interdum purus in, rutrum ligula. Fusce in enim et urna pellentesque vestibulum. Donec ullamcorper ut purus ac condimentum. Nulla facilisi. Morbi tincidunt nunc in dui fringilla, ac consequat justo vestibulum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras nec velit congue arcu condimentum congue sit amet vitae ipsum.
-                    </p>
-                </div>
-            </div>
         </div>
     </div>
     <div class="pagination">
@@ -69,6 +33,7 @@
     ?>
     <?php
         echo '<script>const BASE_URL = "' . BASE_URL . '";</script>';
+        echo '<script>const API_KEY_SOAP = "' . API_KEY_SOAP . '";</script>';
     ?>
     <script src="<?= BASE_URL ?>/js/articles.js"></script>
 </body>

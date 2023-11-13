@@ -1,11 +1,12 @@
-let currentPage = 0;
+let currentPage = 1;
 let totalPages = 0;
 let prevButton = document.getElementById("prevPage");
 let nextButton = document.getElementById("nextPage");
 let pagination = document.getElementById("button-pagination");
+let cardList = document.querySelector(".card-list");
 
 function articleCard(title, author, imageDir, content) {
-    let result = `
+  let result = `
         <div class='card'>
             <h2>${title}</h2>
             <div class='author'>Author: ${author}</div>
@@ -17,27 +18,111 @@ function articleCard(title, author, imageDir, content) {
                     ${content}
                 </p>
             </div>
-        </div>`
-    return  result;
+        </div>`;
+  return result;
 }
 
-function loadArticle() {
-//     const xhr = new XMLHttpRequest();
-//     xhr.open('POST', , true);
-//     xhr.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
-//     xhr.add
-//     let body = 
-//     xhr.onload = function(){
-//         if (this.status == 200) {
-//             console.log(this.responseText);
-//         } else {
-//             console.log("Error");
-//         }
-//     }
-//     xhr.send(body);
+function xmlNodesToObject(node) {
+  const obj = {};
+
+  if (node.nodeType === 1) {
+    // element node
+    if (node.attributes.length > 0) {
+      obj["attributes"] = {};
+      for (let i = 0; i < node.attributes.length; i++) {
+        const attribute = node.attributes[i];
+        obj["attributes"][attribute.nodeName] = attribute.nodeValue;
+      }
+    }
+  } else if (node.nodeType === 3) {
+    // text node
+    return node.nodeValue.trim();
+  }
+
+  if (node.hasChildNodes()) {
+    for (let i = 0; i < node.childNodes.length; i++) {
+      const childNode = node.childNodes[i];
+      const nodeName = childNode.nodeName;
+
+      if (!obj[nodeName]) {
+        obj[nodeName] = xmlNodesToObject(childNode);
+      } else {
+        if (!obj[nodeName].push) {
+          obj[nodeName] = [obj[nodeName]];
+        }
+        obj[nodeName].push(xmlNodesToObject(childNode));
+      }
+    }
+  }
+
+  return obj;
 }
 
-loadArticle();
+function loadArticles() {
+  const xhr = new XMLHttpRequest();
+  const url = "http://localhost:8001/article";
+
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
+
+  let body = `<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+    <Body>
+      <getAllArticles xmlns="http://service.carijodoh/">
+        <page xmlns="">${currentPage}</page>
+        <apiKey xmlns="">${API_KEY_SOAP}</apiKey>
+      </getAllArticles>
+    </Body>
+  </Envelope>`;
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(xhr.responseText, "text/xml");
+        const data = xmlNodesToObject(xmlDoc.getElementsByTagName("return")[0]);
+        totalPages = data.pageCount["#text"];
+        cardList.innerHTML = ``;
+
+        if (totalPages == 0) {
+          cardList.innerHTML += `<h1 class="no-data">Maaf ya, gaada yg cocok :(</h1>`;
+        } else {
+          data.data.forEach((article) => {
+            // Decode base64 string to binary
+            var binaryString = atob(article.image["#text"]);
+
+            // Create a Uint8Array from the binary data
+            var uint8Array = new Uint8Array(binaryString.length);
+            for (var i = 0; i < binaryString.length; i++) {
+              uint8Array[i] = binaryString.charCodeAt(i);
+            }
+
+            // Create a Blob from the Uint8Array
+            var blob = new Blob([uint8Array], { type: "image/png" });
+
+            // Create a data URL from the Blob
+            const dataURL = URL.createObjectURL(blob);
+
+            cardList.innerHTML += articleCard(
+              article.title["#text"],
+              article.author["#text"],
+              dataURL,
+              article.content["#text"]
+            );
+          });
+        }
+
+        updatePaginationButtons();
+      } else {
+        console.error("Error:", xhr.status, xhr.statusText);
+      }
+    }
+  };
+
+  xhr.send(body);
+}
+
+// Call the function to make the SOAP request
+loadArticles();
 updatePaginationButtons();
 
 function updatePaginationButtons() {
@@ -46,7 +131,6 @@ function updatePaginationButtons() {
   } else {
     prevButton.disabled = false;
   }
-  console.log(currentPage, totalPages); 
 
   if (currentPage == totalPages || totalPages == 0) {
     nextButton.disabled = true;
