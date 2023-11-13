@@ -3,6 +3,7 @@ package carijodoh.middleware;
 import carijodoh.model.Logging;
 import carijodoh.util.HibernateUtil;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.w3c.dom.Node;
@@ -30,9 +31,10 @@ public class LoggerHandler implements SOAPHandler<SOAPMessageContext> {
             SOAPPart soapPart = smc.getMessage().getSOAPPart();
             SOAPEnvelope soapEnvelope = soapPart.getEnvelope();
             SOAPBody soapBody = soapEnvelope.getBody();
+            String apiKeyValue = getApiKey(soapBody);
 
             Node operation = soapBody.getChildNodes().item(1);
-            Logging logging = getLogging(operation, req);
+            Logging logging = getLogging(operation, req, apiKeyValue);
 
             SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
             Session session = sessionFactory.getCurrentSession();
@@ -43,7 +45,7 @@ public class LoggerHandler implements SOAPHandler<SOAPMessageContext> {
         }
     }
 
-    private Logging getLogging(Node operation, HttpServletRequest req) {
+    private Logging getLogging(Node operation, HttpServletRequest req, String apiKey) {
         String content = String.format("%s", operation.getLocalName());
 
         NodeList parameters = operation.getChildNodes();
@@ -56,6 +58,20 @@ public class LoggerHandler implements SOAPHandler<SOAPMessageContext> {
         logging.setEndpoint(req.getRequestURI());
         logging.setIP(req.getRemoteAddr());
         logging.setRequestedAt(LocalDateTime.now());
+
+        if(apiKey == null){
+            logging.setWebService("Unknown");
+            return logging;
+        }
+
+        if(apiKey.equals(Dotenv.load().get("API_KEY_PHP"))){
+            logging.setWebService("Plain Web Service");
+        } else if(apiKey.equals(Dotenv.load().get("API_KEY_REST"))){
+            logging.setWebService("REST Web Service");
+        } else {
+            logging.setWebService("Unknown");
+        }
+
         return logging;
     }
 
@@ -85,5 +101,23 @@ public class LoggerHandler implements SOAPHandler<SOAPMessageContext> {
 
     public void close(MessageContext messageContext) {
         // DO NOTHING
+    }
+
+    private String getApiKey(SOAPBody soapBody) {
+        NodeList methods = soapBody.getChildNodes();
+        for (int i = 0; i < methods.getLength(); i++) {
+            Node method = methods.item(i);
+            if(method.getLocalName() != null){
+                NodeList parameters = method.getChildNodes();
+                for(int j = 0; j < parameters.getLength(); j++){
+                    Node parameter = parameters.item(j);
+                    if (parameter.getLocalName() != null && parameter.getLocalName().equals("apiKey")) {
+                        return parameter.getTextContent();
+                    }
+                }
+            }
+
+        }
+        return null; // Parameter not found
     }
 }

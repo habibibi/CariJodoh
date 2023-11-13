@@ -40,4 +40,4 @@ build/
 
 .env
 db/
-
+src/main/resources/images/

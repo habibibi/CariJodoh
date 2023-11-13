@@ -28,6 +28,8 @@ public class Logging {
     @Column(nullable = false)
     private LocalDateTime requestedAt;
 
+    private String webService;
+
     public Logging() {
         // Do nothing
     }
@@ -66,5 +68,13 @@ public class Logging {
 
     public void setRequestedAt(LocalDateTime requestedAt) {
         this.requestedAt = requestedAt;
+    }
+
+    public String getWebService() {
+        return webService;
+    }
+
+    public void setWebService(String webService) {
+        this.webService = webService;
     }
 }

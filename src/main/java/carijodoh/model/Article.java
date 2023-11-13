@@ -2,7 +2,11 @@ package carijodoh.model;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
+import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Entity
 @XmlRootElement
@@ -24,6 +28,9 @@ public class Article implements Serializable {
 
     @Column(nullable = false)
     private String imagePath;
+
+    @Transient
+    private byte[] image;
 
     public Article() {}
 
@@ -72,5 +79,18 @@ public class Article implements Serializable {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public void setImage(){
+        if(this.imagePath != null){
+            try {
+                Path path = Paths.get(this.imagePath);
+
+                // Read all bytes from the file and set to the image byte array
+                this.image = Files.readAllBytes(path);
+            } catch (IOException e) {
+                // Do Nothing
+            }
+        }
     }
 }
