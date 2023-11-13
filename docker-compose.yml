@@ -26,6 +26,20 @@ services:
       service: rest-web
     networks:
       - cari-jodoh
+  mysql-soap:
+    extends:
+      file: ../tugas-besar-2-soap/docker-compose.yml
+      service: mysql-soap
+    networks:
+      - cari-jodoh
+  soap-web:
+    depends_on:
+      - mysql-soap
+    extends:
+      file: ../tugas-besar-2-soap/docker-compose.yml
+      service: soap-web
+    networks:
+      - cari-jodoh
   spa:
     extends:
       file: ../tugas-besar-2-spa/docker-compose.yml

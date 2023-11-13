@@ -11,3 +11,7 @@ cd ../tugas-besar-2-spa
 # REST IMAGE
 cd ../tugas-besar-2-rest
 ./scripts/build-image.sh
+
+# SOAP IMAGE
+cd ../tugas-besar-2-soap
+./scripts/build-image.sh
