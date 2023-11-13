@@ -96,12 +96,18 @@ public class ArticleRepository {
             CriteriaBuilder builder = session.getCriteriaBuilder();
             CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
             Root<Article> root = criteria.from(Article.class);
-            TypedQuery<Long> query = session.createQuery(criteria);
 
-            long count = query.getSingleResult();
-            return (int) Math.ceil((double) count / 6);
+            // Count query
+            criteria.select(builder.count(root));
+            TypedQuery<Long> countQuery = session.createQuery(criteria);
+            long count = countQuery.getSingleResult();
+
+            // Calculate page count
+            int pageSize = 6;
+            return (int) Math.ceil((double) count / pageSize);
         } catch (Exception e) {
             return 0;
         }
     }
+
 }
