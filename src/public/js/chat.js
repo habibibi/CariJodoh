@@ -14,8 +14,8 @@ function chatComponent(name, messages, isUser) {
   messageBody = "";
   for (let i = 0; i < messages.length; i++) {
     messageBody += `
-    <div class='message'>
-        <p>${messages[i]}</p>
+    <div class='div-message'>
+        <p class='message'>${messages[i]}</p>
     </div>`;
   }
   return (
@@ -89,12 +89,30 @@ function loadChat() {
         const data = xmlNodesToObject(xmlDoc.getElementsByTagName("return")[0]);
         chatContainer.innerHTML = ``;
         if (data && data.data && data.data instanceof Array) {
-          data.data.forEach((chat) => {
-            chatContainer.innerHTML += chatComponent(
-              chat.userIdSender["#text"] == user_id ? our_name : other_name,
-              [chat.message["#text"]],
-              chat.userIdSender["#text"] == user_id
-            );
+          let currentChat = null;
+          let chats = [];
+          data.data.forEach((chat, index, array) => {
+            if (currentChat == null) currentChat = chat.userIdSender["#text"];
+
+            if (currentChat != chat.userIdSender["#text"]) {
+              chatContainer.innerHTML += chatComponent(
+                chat.userIdSender["#text"] == user_id ? other_name : our_name,
+                chats,
+                chat.userIdSender["#text"] != user_id
+              );
+              chats = [];
+            }
+
+            chats.push(chat.message["#text"]);
+            currentChat = chat.userIdSender["#text"];
+
+            if (index === array.length - 1) {
+              chatContainer.innerHTML += chatComponent(
+                chat.userIdSender["#text"] == user_id ? our_name : other_name,
+                chats,
+                chat.userIdSender["#text"] == user_id
+              );
+            }
           });
           chatContainer.scrollTop = chatContainer.scrollHeight;
         } else if (data && data.data) {
@@ -121,6 +139,11 @@ function sendMessage() {
     document.getElementById("message-box").value === undefined ||
     document.getElementById("message-box").value === ""
   ) {
+    return;
+  }
+
+  if (document.getElementById("message-box").value.length > 900) {
+    showToast("Pesan tidak boleh lebih dari 900 karakter!");
     return;
   }
 
@@ -177,6 +200,7 @@ function deleteChat() {
     if (xhr.readyState === 4) {
       if (xhr.status === 200) {
         loadChat();
+        showToast("Chat berhasil di-delete!");
       } else {
         console.error("Error:", xhr.status, xhr.statusText);
       }
