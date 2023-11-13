@@ -11,18 +11,27 @@ const Article = () => {
 
   const resetImageInput = () => {
     if (imageInputRef.current) {
-      imageInputRef.current.value = '';
+      imageInputRef.current.value = "";
     }
   };
 
-  const handleImage = async (file) => {
-    const reader = new FileReader();
-    reader.onload = function (event) {
-      var res = event.target.result.split(',')[1];
-      setImage(res);
-    };
-    reader.readAsDataURL(file);
-  }
+  const handleImage = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const fileSizeLimit = 1024 * 1024;
+      if (file.size <= fileSizeLimit) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          var res = event.target.result.split(",")[1];
+          setImage(res);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        e.target.value = null;
+        toast.error("Gambar tidak boleh melebihi 1MB!");
+      }
+    }
+  };
 
   const addArticle = async (e) => {
     e.preventDefault();
@@ -42,6 +51,18 @@ const Article = () => {
       return;
     }
 
+    // Validasi Format
+    if (content.length > 900) {
+      toast.error("Isi tidak boleh melebihi 900 karakter!");
+      return;
+    } else if (title.length > 100) {
+      toast.error("Judul tidak boleh melebihi 100 karakter!");
+      return;
+    } else if (author.length > 100) {
+      toast.error("Penulis tidak boleh melebihi 100 karakter!");
+      return;
+    }
+
     const body = {
       author: author,
       title: title,
@@ -50,8 +71,15 @@ const Article = () => {
     };
 
     try {
-      const response = await Axios
-        .post(import.meta.env.VITE_API_URL+"/article", body);
+      const response = await Axios.post(
+        import.meta.env.VITE_API_URL + "/article",
+        body
+      );
+      setAuthor("");
+      setContent("");
+      setImage("");
+      setTitle("");
+      resetImageInput();
       toast.success(response.data.message);
     } catch (error) {
       toast.error(
@@ -112,7 +140,7 @@ const Article = () => {
             id="gambar"
             accept="image/*"
             className="w-full px-3 py-2 border bg-gray-100 rounded"
-            onChange={(e) => handleImage(e.target.files[0])}
+            onChange={(e) => handleImage(e)}
           />
         </div>
         <div className="flex justify-center">
