@@ -15,6 +15,15 @@ export default class ReportService {
   }
 
   async reportUser(data) {
+    // Error handling missing params
+    if (!data.user_id_reporter) {
+      throw CustomException(`Tidak ada param user_id_reporter`, 400);
+    } else if (!data.user_id_reported) {
+      throw CustomException(`Tidak ada param user_id_reported`, 400);
+    } else if (!data.report_detail) {
+      throw CustomException(`Tidak ada param report_detail`, 400);
+    }
+
     const { user_id_reporter, user_id_reported, report_detail } = data;
     const report = await prisma.report.findFirst({
       where: {
@@ -38,7 +47,7 @@ export default class ReportService {
     return createdReport;
   }
 
-  async blockUser(user_id) {
+  async blockUser(user_id, username, report_detail) {
     const apiUrl =
       process.env.PHP_URL +
       `user/delete/${user_id}?api_key=${process.env.API_KEY_PHP}`;
@@ -55,6 +64,23 @@ export default class ReportService {
     await prisma.report.deleteMany({
       where: {
         OR: [{ user_id_reported: +user_id }, { user_id_reporter: +user_id }],
+      },
+    });
+
+    await prisma.blocked.create({
+      data: {
+        user_id: +user_id,
+        username: username,
+        blocked_detail: report_detail,
+      },
+    });
+  }
+
+  async deleteReport(report_id) {
+    // If block succeded
+    await prisma.report.delete({
+      where: {
+        report_id: +report_id,
       },
     });
   }

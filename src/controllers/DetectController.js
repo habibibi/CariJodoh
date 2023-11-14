@@ -27,7 +27,7 @@ export default class DetectController {
 
   async getUserById(req, res) {
     try {
-      const user = await this.detectService.getUserById(req.params?.user_id);
+      const user = await this.detectService.getUserById(req.params.user_id);
       res
         .status(200)
         .json({ data: user, message: "Berhasil mendapatkan profile user" });
@@ -40,11 +40,13 @@ export default class DetectController {
 
   async blockUser(req, res) {
     try {
-      if (!req.params?.user_id) {
+      if (!req.params.user_id) {
         throw CustomException("User ID not found", 404);
+      } else if (!req.body.username) {
+        throw CustomException("Username not found", 404);
       }
 
-      await this.detectService.blockUser(req.params?.user_id);
+      await this.detectService.blockUser(req.params.user_id, req.body.username);
       res.status(200).json({ message: "Berhasil memblokir user!" });
     } catch (error) {
       res.status(error.code || 500).json({

@@ -19,7 +19,7 @@ detectRouter.get(
   detectController.getUserById.bind(detectController)
 );
 
-detectRouter.delete(
+detectRouter.post(
   "/users/:user_id",
   detectController.blockUser.bind(detectController)
 );
