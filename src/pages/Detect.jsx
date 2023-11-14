@@ -120,7 +120,7 @@ const Detect = () => {
   }, [debounced, currentPage, totalPages, paginationOffset]);
 
   return (
-    <div className="flex flex-col gap-8 px-36">
+    <div className="flex flex-col gap-8 md:px-36 px-4">
       <h1 className="text-center text-4xl font-bold">
         Detect Anomalies & Block Users
       </h1>
@@ -142,7 +142,7 @@ const Detect = () => {
       <h2 className="text-center text-2xl font-bold">
         There are {count} anomalies found.
       </h2>
-      <div className="grid grid-cols-2 gap-x-4 gap-y-4">
+      <div className="grid min-[425px]:grid-cols-2 gap-x-4 gap-y-4">
         {profiles.length > 0 &&
           profiles.map((el, idx) => (
             <DetectCard
