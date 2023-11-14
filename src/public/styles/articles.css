@@ -66,8 +66,30 @@ h1
 {
     height: 100%;
     width: auto;
+    max-width: 300px;
     object-fit: cover;
     aspect-ratio: auto;
+}
+
+@media screen and (max-width: 425px)
+{
+    .card-content
+    {
+        display: flex;
+        flex-direction: column;
+    }
+    .card-image
+    {
+        float: none;
+        margin-right: 0;
+        margin-bottom: 1rem;
+        align-self: center;
+    }
+    
+    .article-image
+    {
+        max-width: 100%;
+    }
 }
 
 
@@ -77,6 +99,7 @@ h1
     padding: 0;
     line-height: 1.5rem;
     text-align: justify;
+    word-wrap: break-word;
 }
 
 .card h2
