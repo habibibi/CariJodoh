@@ -35,15 +35,17 @@ const Article = () => {
 
   const addArticle = async (e) => {
     e.preventDefault();
-
+    let trimmedTitle = title.trim();
+    let trimmedAuthor = author.trim();
+    let trimmedContent = content.trim();
     // Validasi Kelengkapan
-    if (!title) {
+    if (!trimmedTitle) {
       toast.error("Masukkan judul artikel terlebih dahulu!");
       return;
-    } else if (!author) {
+    } else if (!trimmedAuthor) {
       toast.error("Masukkan penulis artikel terlebih dahulu!");
       return;
-    } else if (content < 50) {
+    } else if (trimmedContent < 50) {
       toast.error("Isi artikel minimal 50 karakter!");
       return;
     } else if (!image) {
@@ -52,21 +54,21 @@ const Article = () => {
     }
 
     // Validasi Format
-    if (content.length > 900) {
+    if (trimmedContent.length > 900) {
       toast.error("Isi tidak boleh melebihi 900 karakter!");
       return;
-    } else if (title.length > 100) {
+    } else if (trimmedTitle.length > 100) {
       toast.error("Judul tidak boleh melebihi 100 karakter!");
       return;
-    } else if (author.length > 100) {
+    } else if (trimmedAuthor.length > 100) {
       toast.error("Penulis tidak boleh melebihi 100 karakter!");
       return;
     }
 
     const body = {
-      author: author,
-      title: title,
-      content: content,
+      author: trimmedAuthor,
+      title: trimmedTitle,
+      content: trimmedContent,
       image: image,
     };
 
