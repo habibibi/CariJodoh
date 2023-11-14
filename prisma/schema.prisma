@@ -35,13 +35,3 @@ model Blocked {
 
   @@map("blocked")
 }
-
-model DateHistory {
-  history_id Int @id @default(autoincrement()) @map("history_id")
-  user_id_1 Int @map("user_id_1")
-  user_id_2 Int @map("user_id_2")
-  timestamp DateTime @default(now()) @map("timestamp")
-  location String @db.VarChar(255) @map("location")
-
-  @@map("date_history")
-}

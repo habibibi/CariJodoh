@@ -8,6 +8,13 @@ export class AuthService {
   }
 
   async login(data) {
+    // Error handling missing params
+    if (!data.username) {
+      throw CustomException(`Tidak ada param username`, 400);
+    } else if (!data.password) {
+      throw CustomException(`Tidak ada param password`, 400);
+    }
+
     const { username, password } = data;
 
     const user = await prisma.security.findFirst({
@@ -28,6 +35,13 @@ export class AuthService {
   }
 
   async register(data) {
+    // Error handling missing params
+    if (!data.username) {
+      throw CustomException(`Tidak ada param username`, 400);
+    } else if (!data.password) {
+      throw CustomException(`Tidak ada param password`, 400);
+    }
+
     const allUsers = await this.getAllUsers();
 
     for (let user of allUsers) {

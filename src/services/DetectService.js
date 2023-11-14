@@ -1,4 +1,5 @@
 import CustomException from "../error/CustomException.js";
+import prisma from "../../prisma/PrismaClient.js";
 
 export default class DetectService {
   async getAllUsers(page, search) {
@@ -93,7 +94,7 @@ export default class DetectService {
     return data;
   }
 
-  async blockUser(user_id) {
+  async blockUser(user_id, username) {
     const apiUrl =
       process.env.PHP_URL +
       `user/delete/${user_id}?api_key=${process.env.API_KEY_PHP}`;
@@ -110,6 +111,14 @@ export default class DetectService {
     await prisma.report.deleteMany({
       where: {
         OR: [{ user_id_reported: +user_id }, { user_id_reporter: +user_id }],
+      },
+    });
+
+    await prisma.blocked.create({
+      data: {
+        user_id: +user_id,
+        username: username,
+        blocked_detail: "-",
       },
     });
   }

@@ -16,9 +16,14 @@ reportRouter.get("/", reportController.getAllReports.bind(reportController));
 
 reportRouter.post("/", reportController.reportUser.bind(reportController));
 
-reportRouter.delete(
+reportRouter.post(
   "/block/:user_id",
   reportController.blockUser.bind(reportController)
+);
+
+reportRouter.delete(
+  "/:report_id",
+  reportController.deleteReport.bind(reportController)
 );
 
 export default reportRouter;

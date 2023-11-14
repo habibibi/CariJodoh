@@ -35,12 +35,35 @@ export default class ReportController {
 
   async blockUser(req, res) {
     try {
-      if (!req.params?.user_id) {
+      if (!req.params.user_id) {
         throw CustomException("User ID not found", 404);
+      } else if (!req.body.username) {
+        throw CustomException("Username not found", 404);
+      } else if (!req.body.report_detail) {
+        throw CustomException("report_detail not found", 404);
       }
 
-      await this.reportService.blockUser(req.params?.user_id);
+      await this.reportService.blockUser(
+        req.params.user_id,
+        req.body.username,
+        req.body.report_detail
+      );
+
       res.status(202).json({ message: "Berhasil memblokir user!" });
+    } catch (error) {
+      res.status(error.code || 500).json({
+        message: error.message || "Internal Server Error",
+      });
+    }
+  }
+
+  async deleteReport(req, res) {
+    try {
+      if (!req.params.report_id) {
+        throw CustomException("Report ID not found", 404);
+      }
+      await this.reportService.deleteReport(req.params.report_id);
+      res.status(202).json({ message: "Berhasil delete report!" });
     } catch (error) {
       res.status(error.code || 500).json({
         message: error.message || "Internal Server Error",
