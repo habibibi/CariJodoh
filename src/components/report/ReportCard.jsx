@@ -33,19 +33,19 @@ const DetectCard = ({
   };
 
   return (
-    <div className="flex flex-col gap-4 bg-[#ffd2da] rounded-xl p-4 w-3/4 mx-auto">
-      <div className="flex flex-row items-center gap-2">
+    <div className="flex flex-col gap-4 bg-[#ffd2da] rounded-xl p-4 w-full md:w-3/4 mx-auto">
+      <div className="flex flex-col lg:flex-row items-center lg:items-start gap-2">
         <div className="flex flex-col gap-2">
-          <p>
+          <p className="text-center lg:text-left">
             <strong>Pelapor:</strong> {user_id_reporter}
           </p>
-          <p>
+          <p className="text-center lg:text-left">
             <strong>Tersangka:</strong> {user_id_reported}
           </p>
         </div>
         <Link
           to={`/detect/${user_id_reported}`}
-          className="ml-auto h-full flex flex-row gap-2"
+          className="h-full flex flex-row gap-2 justify-center lg:justify-end lg:ml-auto"
         >
           <button className="h-full rounded-lg cursor-pointer p-2 border-2 bg-white">
             <strong>View Reported Profile!</strong>
@@ -65,7 +65,7 @@ const DetectCard = ({
         </button>
       </div>
       <div className="flex flex-col gap-4">
-        <h2 className="text-center text-xl font-semibold">Detail Report</h2>
+        <h2 className="text-center md:text-xl font-semibold">Detail Report</h2>
         <p className="border-[1px] p-4 border-black rounded-xl bg-white">
           {report_detail}
         </p>
