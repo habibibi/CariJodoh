@@ -45,22 +45,24 @@ const ProfileView = () => {
 
   return (
     <>
-      <div className="flex flex-col gap-8 px-36">
+      <div className="flex flex-col gap-8 md:px-36">
         {profile ? (
           <>
-            <h1 className="text-center text-4xl font-bold">
+            <h1 className="text-center text-xl md:text-4xl font-bold">
               Profile {profile?.nama_lengkap}
             </h1>
-            <div className="grid grid-cols-2 gap-x-12 gap-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
               <div className="flex flex-col gap-4">
-                <h2 className="text-2xl font-semibold">Informasi Nama</h2>
+                <h2 className="text-xl md:text-2xl font-semibold">
+                  Informasi Nama
+                </h2>
                 <div className="bg-[#ffd2da] p-4 rounded-xl">
                   <h1>Nama Lengkap: {profile?.nama_lengkap}</h1>
                   <h2>Nama Panggilan: {profile?.nama_panggilan}</h2>
                 </div>
               </div>
               <div className="flex flex-col gap-4">
-                <h2 className="text-2xl font-semibold">Profil</h2>
+                <h2 className="text-xl md:text-2xl font-semibold">Profil</h2>
                 <div className="bg-[#ffd2da] p-4 rounded-xl">
                   <p>Lokasi: {profile?.domisili}</p>
                   <p>Zodiak: {profile?.zodiak}</p>
@@ -70,31 +72,35 @@ const ProfileView = () => {
                 </div>
               </div>
               <div className="flex flex-col gap-4">
-                <h2 className="text-2xl font-semibold">Hobi</h2>
+                <h2 className="text-xl md:text-2xl font-semibold">Hobi</h2>
                 <div className="bg-[#ffd2da] p-4 rounded-xl">
                   <p className="text-addition">{profile?.hobi}</p>
                 </div>
               </div>
               <div className="flex flex-col gap-4">
-                <h2 className="text-2xl font-semibold">Interest</h2>
+                <h2 className="text-xl md:text-2xl font-semibold">Interest</h2>
                 <div className="bg-[#ffd2da] p-4 rounded-xl">
                   <p className="text-addition">{profile?.interest}</p>
                 </div>
               </div>
               <div className="flex flex-col gap-4">
-                <h2 className="text-2xl font-semibold">Ketidaksukaan</h2>
+                <h2 className="text-xl md:text-2xl font-semibold">
+                  Ketidaksukaan
+                </h2>
                 <div className="bg-[#ffd2da] p-4 rounded-xl">
                   <p className="text-addition">{profile?.ketidaksukaan}</p>
                 </div>
               </div>
               <div className="flex flex-col gap-4">
-                <h2 className="text-2xl font-semibold">MBTI</h2>
+                <h2 className="text-xl md:text-2xl font-semibold">MBTI</h2>
                 <div className="bg-[#ffd2da] p-4 rounded-xl">
                   <p className="text-addition">{profile?.mbti}</p>
                 </div>
               </div>
               <div className="flex flex-col gap-4">
-                <h2 className="text-2xl font-semibold">Love Language</h2>
+                <h2 className="text-xl md:text-2xl font-semibold">
+                  Love Language
+                </h2>
                 <div className="bg-[#ffd2da] p-4 rounded-xl">
                   <p className="text-addition">{profile?.love_language}</p>
                 </div>
