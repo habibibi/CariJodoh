@@ -36,6 +36,19 @@ class UserModel
         }
     }
 
+    public function isExist($userId){
+        // Check if user already exists
+        $query = 'SELECT * FROM user WHERE (user_id = :user_id) LIMIT 1';
+        $this->database->query($query);
+        $this->database->bind('user_id', $userId);
+        $user = $this->database->fetch();
+        if($user){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function register_admin($username, $password)
     {   
         // Check if user already exists
