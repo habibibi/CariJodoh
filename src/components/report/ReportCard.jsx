@@ -11,7 +11,7 @@ const DetectCard = ({
   setSelectedUserId,
   setReportDetail,
   setConfirm,
-  setCurrentPage,
+  refreshData,
 }) => {
   const tryBlock = () => {
     setConfirm(true);
@@ -25,7 +25,7 @@ const DetectCard = ({
         `${import.meta.env.VITE_API_URL}/report/${report_id}`
       );
       toast.success(response.data.message);
-      setCurrentPage(1);
+      refreshData();
     } catch (error) {
       console.log(error);
       toast.error(error.response?.data?.message || "Fetching data gagal!");
@@ -84,5 +84,5 @@ DetectCard.propTypes = {
   setSelectedUserId: PropTypes.func.isRequired,
   setReportDetail: PropTypes.func.isRequired,
   setConfirm: PropTypes.func.isRequired,
-  setCurrentPage: PropTypes.func.isRequired,
+  refreshData: PropTypes.func.isRequired,
 };

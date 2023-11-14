@@ -17,6 +17,28 @@ const Report = () => {
   const nextButtonRef = useRef(null);
   const paginationRef = useRef(null);
 
+  const fetchData = async () => {
+    try {
+      const response = await Axios.get(
+        `${import.meta.env.VITE_API_URL}/report?page=${currentPage}`
+      );
+      setReports(response.data.data.reports);
+      setTotalPages(response.data.data.totalPages);
+      setCount(response.data.data.totalReports);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response?.data?.message || "Fetching data gagal!");
+    }
+  };
+
+  const refreshData = () => {
+    if (currentPage == 1) {
+      fetchData();
+    } else {
+      setCurrentPage(1);
+    }
+  };
+
   const blockUser = async (e, user_id) => {
     e.preventDefault();
 
@@ -37,7 +59,8 @@ const Report = () => {
 
       setConfirm(false);
       toast.success(response.data.message);
-      setCurrentPage(1);
+
+      refreshData();
     } catch (error) {
       console.log(error);
       toast.error(error.response?.data?.message || "Fetching data gagal!");
@@ -152,7 +175,7 @@ const Report = () => {
                 setSelectedUserId={setSelectedUserId}
                 setReportDetail={setReportDetail}
                 setConfirm={setConfirm}
-                setCurrentPage={setCurrentPage}
+                refreshData={refreshData}
               />
             ))}
         </div>
