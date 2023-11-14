@@ -11,10 +11,13 @@ const ProfileView = () => {
 
   const blockUser = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await Axios.delete(
-        `${import.meta.env.VITE_API_URL}/detect/users/${user_id}`
+      const body = {
+        username: profile?.nama_lengkap || "Unknown",
+      };
+      const response = await Axios.post(
+        `${import.meta.env.VITE_API_URL}/detect/users/${user_id}`,
+        body
       );
       setConfirm(false);
       navigate("/detect");
@@ -33,7 +36,6 @@ const ProfileView = () => {
         );
         setProfile(response.data.data);
       } catch (error) {
-        console.log(error);
         toast.error(error.response?.data?.message || "Fetching data gagal!");
       }
     };

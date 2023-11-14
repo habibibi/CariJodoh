@@ -38,6 +38,7 @@ const Article = () => {
     let trimmedTitle = title.trim();
     let trimmedAuthor = author.trim();
     let trimmedContent = content.trim();
+
     // Validasi Kelengkapan
     if (!trimmedTitle) {
       toast.error("Masukkan judul artikel terlebih dahulu!");

@@ -12,34 +12,32 @@ const Report = () => {
   const [paginationOffset, setPaginationOffset] = useState(1);
   const [confirm, setConfirm] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
+  const [reportDetail, setReportDetail] = useState("");
   const prevButtonRef = useRef(null);
   const nextButtonRef = useRef(null);
   const paginationRef = useRef(null);
-
-  const fetchData = async () => {
-    try {
-      const response = await Axios.get(
-        `${import.meta.env.VITE_API_URL}/report?page=${currentPage}`
-      );
-      setReports(response.data.data.reports);
-      setTotalPages(response.data.data.totalPages);
-      setCount(response.data.data.totalReports);
-    } catch (error) {
-      console.log(error);
-      toast.error(error.response?.data?.message || "Fetching data gagal!");
-    }
-  };
 
   const blockUser = async (e, user_id) => {
     e.preventDefault();
 
     try {
-      const response = await Axios.delete(
-        `${import.meta.env.VITE_API_URL}/report/block/${user_id}`
+      const responseUser = await Axios.get(
+        `${import.meta.env.VITE_API_URL}/detect/users/${user_id}`
       );
+
+      const body = {
+        username: responseUser.data.data.nama_lengkap || "Unknown",
+        report_detail: reportDetail,
+      };
+
+      const response = await Axios.post(
+        `${import.meta.env.VITE_API_URL}/report/block/${user_id}`,
+        body
+      );
+
       setConfirm(false);
       toast.success(response.data.message);
-      fetchData();
+      setCurrentPage(1);
     } catch (error) {
       console.log(error);
       toast.error(error.response?.data?.message || "Fetching data gagal!");
@@ -147,11 +145,14 @@ const Report = () => {
             reports.map((el, idx) => (
               <ReportCard
                 key={idx}
+                report_id={el.report_id}
                 user_id_reporter={el.user_id_reporter}
                 user_id_reported={el.user_id_reported}
                 report_detail={el.report_detail}
                 setSelectedUserId={setSelectedUserId}
+                setReportDetail={setReportDetail}
                 setConfirm={setConfirm}
+                setCurrentPage={setCurrentPage}
               />
             ))}
         </div>
