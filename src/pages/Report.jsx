@@ -204,7 +204,7 @@ const Report = () => {
               <h1 className="mb-4 text-center text-xl">
                 Apakah anda betul ingin blokir user ini?
               </h1>
-              <div className="flex mx-auto">
+              <div className="flex justify-center">
                 <button
                   className="mr-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
                   onClick={() => setConfirm(false)}
