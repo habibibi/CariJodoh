@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 @Entity
 @XmlRootElement
@@ -23,15 +23,15 @@ public class Chat implements Serializable {
     @Column(nullable = false)
     private int userIdReceiver;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 900)
     private String message;
 
     @Column(nullable = false)
-    private LocalDateTime timestamp;
+    private Timestamp timestamp;
 
     public Chat() {}
 
-    public Chat(int userIdSender, int userIdReceiver, String message, LocalDateTime timestamp){
+    public Chat(int userIdSender, int userIdReceiver, String message, Timestamp timestamp){
         this.userIdSender = userIdSender;
         this.userIdReceiver = userIdReceiver;
         this.message = message;
@@ -50,7 +50,7 @@ public class Chat implements Serializable {
         return userIdSender;
     }
 
-    public LocalDateTime getTimestamp() {
+    public Timestamp getTimestamp() {
         return timestamp;
     }
 
@@ -66,7 +66,7 @@ public class Chat implements Serializable {
         this.message = message;
     }
 
-    public void setTimestamp(LocalDateTime timestamp) {
+    public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
     }
 

@@ -12,32 +12,38 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class ChatRepository {
-    public String createChat(int userIdSender, int userIdReceiver, String message){
+    public String createChat(int userIdSender, int userIdReceiver, String message) {
+        Session session = null;
         try {
-            Chat newChat = new Chat(userIdSender, userIdReceiver, message, LocalDateTime.now());
+            Chat newChat = new Chat(userIdSender, userIdReceiver, message, new Timestamp(System.currentTimeMillis()));
             SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-            Session session = sessionFactory.getCurrentSession();
+            session = sessionFactory.getCurrentSession();
 
             session.beginTransaction();
             session.save(newChat);
             session.getTransaction().commit();
 
             return "New chat created!";
-        } catch (Exception e){
+        } catch (Exception e) {
+            if (session != null && session.getTransaction().isActive()) {
+                session.getTransaction().rollback();
+            }
             return "Error creating chat";
         }
     }
 
-    public DataChat getChat(int userIdSender, int userIdReceiver){
+    public DataChat getChat(int userIdSender, int userIdReceiver) {
+        Session session = null;
         try {
             DataChat data = new DataChat();
 
             SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-            Session session = sessionFactory.getCurrentSession();
+            session = sessionFactory.getCurrentSession();
             session.beginTransaction();
 
             CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -66,14 +72,18 @@ public class ChatRepository {
 
             return data;
         } catch (Exception e) {
+            if (session != null && session.getTransaction().isActive()) {
+                session.getTransaction().rollback();
+            }
             return null;
         }
     }
 
     public String deleteChat(int userIdSender, int userIdReceiver) {
+        Session session = null;
         try {
             SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-            Session session = sessionFactory.getCurrentSession();
+            session = sessionFactory.getCurrentSession();
             session.beginTransaction();
 
             Query query = session.createQuery(
@@ -91,6 +101,9 @@ public class ChatRepository {
                 return "No chat found for deletion";
             }
         } catch (Exception e) {
+            if (session != null && session.getTransaction().isActive()) {
+                session.getTransaction().rollback();
+            }
             return "Error deleting chat";
         }
     }

@@ -15,7 +15,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 public class ArticleRepository {
-    public String createArticle(String author, String title, String content, byte[] image){
+    public String createArticle(String author, String title, String content, byte[] image) {
+        Session session = null;
         try {
             // Determine the path where you want to save the images within the resources directory
             String resourcesPath = "src/main/resources/images/";
@@ -44,24 +45,28 @@ public class ArticleRepository {
 
             Article newArticle = new Article(author, title, content, imagePath);
             SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-            Session session = sessionFactory.getCurrentSession();
+            session = sessionFactory.getCurrentSession();
 
             session.beginTransaction();
             session.save(newArticle);
             session.getTransaction().commit();
 
             return "New article created!";
-        } catch (Exception e){
+        } catch (Exception e) {
+            if (session != null && session.getTransaction().isActive()) {
+                session.getTransaction().rollback();
+            }
             return "Error creating article";
         }
     }
 
-    public DataPagination getAllArticles(int page){
+    public DataPagination getAllArticles(int page) {
+        Session session = null;
         try {
             DataPagination data = new DataPagination();
 
             SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-            Session session = sessionFactory.getCurrentSession();
+            session = sessionFactory.getCurrentSession();
             session.beginTransaction();
 
             CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -84,14 +89,18 @@ public class ArticleRepository {
 
             return data;
         } catch (Exception e) {
+            if (session != null && session.getTransaction().isActive()) {
+                session.getTransaction().rollback();
+            }
             return null;
         }
     }
 
     public int getPageCount() {
+        Session session = null;
         try {
             SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-            Session session = sessionFactory.getCurrentSession();
+            session = sessionFactory.getCurrentSession();
 
             CriteriaBuilder builder = session.getCriteriaBuilder();
             CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
@@ -106,6 +115,9 @@ public class ArticleRepository {
             int pageSize = 6;
             return (int) Math.ceil((double) count / pageSize);
         } catch (Exception e) {
+            if (session != null && session.getTransaction().isActive()) {
+                session.getTransaction().rollback();
+            }
             return 0;
         }
     }

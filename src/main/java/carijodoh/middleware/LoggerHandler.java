@@ -9,7 +9,7 @@ import org.hibernate.SessionFactory;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
@@ -57,7 +57,7 @@ public class LoggerHandler implements SOAPHandler<SOAPMessageContext> {
         logging.setDescription(content);
         logging.setEndpoint(req.getRequestURI());
         logging.setIP(req.getRemoteAddr());
-        logging.setRequestedAt(LocalDateTime.now());
+        logging.setRequestedAt(new Timestamp(System.currentTimeMillis()));
 
         if(apiKey == null){
             logging.setWebService("Unknown");
@@ -84,7 +84,6 @@ public class LoggerHandler implements SOAPHandler<SOAPMessageContext> {
             logToDatabase(smc);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -94,7 +93,6 @@ public class LoggerHandler implements SOAPHandler<SOAPMessageContext> {
             logToDatabase(smc);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
     }

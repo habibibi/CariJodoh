@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 @Entity
 @XmlRootElement
@@ -26,7 +26,7 @@ public class Logging {
     private String endpoint;
 
     @Column(nullable = false)
-    private LocalDateTime requestedAt;
+    private Timestamp requestedAt;
 
     private String webService;
 
@@ -62,11 +62,11 @@ public class Logging {
         this.endpoint = endpoint;
     }
 
-    public LocalDateTime getRequestedAt() {
+    public Timestamp getRequestedAt() {
         return this.requestedAt;
     }
 
-    public void setRequestedAt(LocalDateTime requestedAt) {
+    public void setRequestedAt(Timestamp requestedAt) {
         this.requestedAt = requestedAt;
     }
 
