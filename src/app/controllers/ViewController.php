@@ -82,6 +82,13 @@ class ViewController extends Controller {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'POST':
                     if($this->authMiddleware->checkAuthenticated()) {
+                        $userModel = $this->model("UserModel");
+                        if(!$userModel->isExist((int)$_POST['user_id_reported'])){
+                            header('Content-Type: application/json');
+                            http_response_code(405);
+                            echo json_encode(["message" => "User sudah terblokir!"]);
+                            return;
+                        }
                         $apiUrl = REST_API_URL . "report?api_key=" . API_KEY;
                         $data = array(
                             'user_id_reporter' => (int)$_POST['user_id_reporter'],
@@ -116,7 +123,7 @@ class ViewController extends Controller {
                         }
                         curl_close($ch);
                     } else {
-                        header('Location: ' . BASE_URL . '/user/login');
+                        throw new Exception('Method Not Allowed', 405);
                     }
                     break;
                 default:
