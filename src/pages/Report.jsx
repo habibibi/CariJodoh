@@ -12,32 +12,34 @@ const Report = () => {
   const [paginationOffset, setPaginationOffset] = useState(1);
   const [confirm, setConfirm] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
-  const [reportDetail, setReportDetail] = useState("");
   const prevButtonRef = useRef(null);
   const nextButtonRef = useRef(null);
   const paginationRef = useRef(null);
+
+  const fetchData = async () => {
+    try {
+      const response = await Axios.get(
+        `${import.meta.env.VITE_API_URL}/report?page=${currentPage}`
+      );
+      setReports(response.data.data.reports);
+      setTotalPages(response.data.data.totalPages);
+      setCount(response.data.data.totalReports);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response?.data?.message || "Fetching data gagal!");
+    }
+  };
 
   const blockUser = async (e, user_id) => {
     e.preventDefault();
 
     try {
-      const responseUser = await Axios.get(
-        `${import.meta.env.VITE_API_URL}/detect/users/${user_id}`
+      const response = await Axios.delete(
+        `${import.meta.env.VITE_API_URL}/report/block/${user_id}`
       );
-
-      const body = {
-        username: responseUser.data.data.nama_lengkap || "Unknown",
-        report_detail: reportDetail,
-      };
-
-      const response = await Axios.post(
-        `${import.meta.env.VITE_API_URL}/report/block/${user_id}`,
-        body
-      );
-
       setConfirm(false);
       toast.success(response.data.message);
-      setCurrentPage(1);
+      fetchData();
     } catch (error) {
       console.log(error);
       toast.error(error.response?.data?.message || "Fetching data gagal!");
@@ -135,7 +137,7 @@ const Report = () => {
 
   return (
     <>
-      <div className="flex flex-col gap-8 px-36">
+      <div className="flex flex-col gap-8 px-4 md:px-36">
         <h1 className="text-center text-4xl font-bold">Users{"'"} Reports</h1>
         <h2 className="text-center text-2xl font-bold">
           There are {count} report(s) available.
@@ -145,19 +147,16 @@ const Report = () => {
             reports.map((el, idx) => (
               <ReportCard
                 key={idx}
-                report_id={el.report_id}
                 user_id_reporter={el.user_id_reporter}
                 user_id_reported={el.user_id_reported}
                 report_detail={el.report_detail}
                 setSelectedUserId={setSelectedUserId}
-                setReportDetail={setReportDetail}
                 setConfirm={setConfirm}
-                setCurrentPage={setCurrentPage}
               />
             ))}
         </div>
         <div className="flex">
-          <div className="flex flex-row gap-[10px] mx-auto">
+          <div className="flex md:flex-row flex-col gap-[10px] mx-auto md:items-center md:justify-center">
             <button
               id="prevPage"
               className="p-1 bg-white border-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
@@ -177,7 +176,7 @@ const Report = () => {
       {confirm ? (
         <>
           <div className="fixed inset-0 flex items-center justify-center z-[999999]">
-            <div className="bg-white rounded-lg p-8 w-1/3 flex flex-col">
+            <div className="bg-white rounded-lg p-8 w-2/3 md:w-1/3 flex flex-col">
               <h1 className="mb-4 text-center text-xl">
                 Apakah anda betul ingin blokir user ini?
               </h1>
