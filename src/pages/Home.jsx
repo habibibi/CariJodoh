@@ -1,10 +1,21 @@
 import { useNavigate } from "react-router-dom";
 import Lock from "../assets/lock.webp";
+import Axios from "../config/Axios";
+import { toast } from "react-toastify";
 
 const Home = () => {
   const navigate = useNavigate();
-  const logout = () => {
-    localStorage.removeItem("jwtToken");
+  const logout = async () => {
+    try {
+      const response = await Axios.delete(
+        `${import.meta.env.VITE_API_URL}/session`,
+        { withCredentials: true }
+      );
+      toast.success(response.data.message);
+    } catch (error) {
+      // Do Nothing
+    }
+    localStorage.removeItem("session");
     navigate("/login");
   };
 

@@ -20,13 +20,13 @@ const Report = () => {
   const fetchData = async () => {
     try {
       const response = await Axios.get(
-        `${import.meta.env.VITE_API_URL}/report?page=${currentPage}`
+        `${import.meta.env.VITE_API_URL}/report?page=${currentPage}`,
+        { withCredentials: true }
       );
       setReports(response.data.data.reports);
       setTotalPages(response.data.data.totalPages);
       setCount(response.data.data.totalReports);
     } catch (error) {
-      console.log(error);
       toast.error(error.response?.data?.message || "Fetching data gagal!");
     }
   };
@@ -44,7 +44,8 @@ const Report = () => {
 
     try {
       const responseUser = await Axios.get(
-        `${import.meta.env.VITE_API_URL}/detect/users/${user_id}`
+        `${import.meta.env.VITE_API_URL}/users/${user_id}`,
+        { withCredentials: true }
       );
 
       const body = {
@@ -53,8 +54,9 @@ const Report = () => {
       };
 
       const response = await Axios.post(
-        `${import.meta.env.VITE_API_URL}/report/block/${user_id}`,
-        body
+        `${import.meta.env.VITE_API_URL}/report/${user_id}`,
+        body,
+        { withCredentials: true }
       );
 
       setConfirm(false);
@@ -62,7 +64,6 @@ const Report = () => {
 
       refreshData();
     } catch (error) {
-      console.log(error);
       toast.error(error.response?.data?.message || "Fetching data gagal!");
     }
   };
@@ -125,13 +126,13 @@ const Report = () => {
     const fetchData = async () => {
       try {
         const response = await Axios.get(
-          `${import.meta.env.VITE_API_URL}/report?page=${currentPage}`
+          `${import.meta.env.VITE_API_URL}/report?page=${currentPage}`,
+          { withCredentials: true }
         );
         setReports(response.data.data.reports);
         setTotalPages(response.data.data.totalPages);
         setCount(response.data.data.totalReports);
       } catch (error) {
-        console.log(error);
         toast.error(error.response?.data?.message || "Fetching data gagal!");
       }
     };

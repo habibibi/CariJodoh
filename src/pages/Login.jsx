@@ -4,7 +4,6 @@ import AuthImage from "../assets/auth-img.webp";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Axios from "../config/Axios";
-import { checkAuthenticationStatus } from "../config/VerifyAuth";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -12,7 +11,10 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const isAuthenticated = checkAuthenticationStatus();
+    const isAuthenticated =
+      localStorage.getItem("session") &&
+      new Date() <= new Date(localStorage.getItem("session"));
+
     if (isAuthenticated) {
       toast.error("Logout terlebih dahulu!");
       navigate("/");
@@ -35,18 +37,13 @@ const Login = () => {
 
     try {
       const response = await Axios.post(
-        `${import.meta.env.VITE_API_URL}/auth/login`,
-        body
+        `${import.meta.env.VITE_API_URL}/session`,
+        body,
+        { withCredentials: true }
       );
 
       toast.success(response.data.message);
-
-      localStorage.setItem("jwtToken", response.data.token);
-
-      Axios.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${response.data.token}`;
-
+      localStorage.setItem("session", response.data.expired);
       navigate("/");
     } catch (error) {
       toast.error(

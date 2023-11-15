@@ -76,7 +76,8 @@ const Article = () => {
     try {
       const response = await Axios.post(
         import.meta.env.VITE_API_URL + "/article",
-        body
+        body,
+        { withCredentials: true }
       );
       setAuthor("");
       setContent("");
