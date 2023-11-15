@@ -17,7 +17,7 @@ reportRouter.get("/", reportController.getAllReports.bind(reportController));
 reportRouter.post("/", reportController.reportUser.bind(reportController));
 
 reportRouter.post(
-  "/block/:user_id",
+  "/:user_id",
   reportController.blockUser.bind(reportController)
 );
 

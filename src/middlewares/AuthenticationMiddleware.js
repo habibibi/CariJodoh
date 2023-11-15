@@ -6,7 +6,8 @@ export default class AuthenticationMiddleware {
       if (req.query?.api_key && req.query?.api_key == process.env.API_KEY_PHP) {
         next();
       } else {
-        const token = req.header("Authorization")?.replace("Bearer ", "");
+        const token = req.cookies.token;
+
         if (!token) {
           res.status(401).json({
             message: "Unauthorized",
@@ -15,7 +16,6 @@ export default class AuthenticationMiddleware {
         }
 
         req.token = jwt.verify(token, process.env.SECRET_KEY);
-
         next();
       }
     } catch (error) {

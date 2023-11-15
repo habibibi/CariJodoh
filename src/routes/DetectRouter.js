@@ -12,15 +12,15 @@ detectRouter.use(
   authenticationMiddleware.authenticate.bind(authenticationMiddleware)
 );
 
-detectRouter.get("/users", detectController.getAllUsers.bind(detectController));
+detectRouter.get("/", detectController.getAllUsers.bind(detectController));
 
 detectRouter.get(
-  "/users/:user_id",
+  "/:user_id",
   detectController.getUserById.bind(detectController)
 );
 
 detectRouter.post(
-  "/users/:user_id",
+  "/:user_id",
   detectController.blockUser.bind(detectController)
 );
 
