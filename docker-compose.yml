@@ -19,9 +19,15 @@ services:
       - /app/node_modules
       - /app/prisma
     stdin_open: true
-    build:
-      context: .
-      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     restart: on-failure
+
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - 6380:6379
+    hostname: cache-rest-service
+    volumes:
+      - ./redis:/data

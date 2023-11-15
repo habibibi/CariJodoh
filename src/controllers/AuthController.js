@@ -19,7 +19,17 @@ export class AuthController {
         },
         secretKey
       );
-      res.status(201).json({ token, message: "Berhasil melakukan login." });
+
+      res.cookie("token", token, {
+        expires: new Date(Date.now() + 86400000),
+        secure: false,
+        httpOnly: true,
+      });
+
+      res.status(201).json({
+        expired: new Date(Date.now() + 86400000),
+        message: "Berhasil melakukan login.",
+      });
     } catch (error) {
       res.status(error.code || 500).json({
         message: error.message || "Internal Server Error",
@@ -34,6 +44,24 @@ export class AuthController {
       res
         .status(201)
         .json({ user: newUser, message: "Berhasil registrasi user baru." });
+    } catch (error) {
+      res.status(error.code || 500).json({
+        message: error.message || "Internal Server Error",
+      });
+    }
+  }
+
+  async logout(req, res) {
+    try {
+      res.cookie("token", "", {
+        expires: new Date(0),
+        secure: false,
+        httpOnly: true,
+      });
+
+      res.status(200).json({
+        message: "Berhasil logout.",
+      });
     } catch (error) {
       res.status(error.code || 500).json({
         message: error.message || "Internal Server Error",

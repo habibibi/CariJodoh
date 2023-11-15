@@ -1,5 +1,6 @@
 import prisma from "../../prisma/PrismaClient.js";
 import CustomException from "../error/CustomException.js";
+import bcrypt from "bcryptjs";
 
 export class AuthService {
   async getAllUsers() {
@@ -9,10 +10,8 @@ export class AuthService {
 
   async login(data) {
     // Error handling missing params
-    if (!data.username) {
-      throw CustomException(`Tidak ada param username`, 400);
-    } else if (!data.password) {
-      throw CustomException(`Tidak ada param password`, 400);
+    if (!data.username || !data.password) {
+      throw CustomException("Username and password are required", 400);
     }
 
     const { username, password } = data;
@@ -27,7 +26,9 @@ export class AuthService {
       throw CustomException("User not found", 404);
     }
 
-    if (user.password !== password) {
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
       throw CustomException("Invalid password", 401);
     }
 
@@ -36,24 +37,25 @@ export class AuthService {
 
   async register(data) {
     // Error handling missing params
-    if (!data.username) {
-      throw CustomException(`Tidak ada param username`, 400);
-    } else if (!data.password) {
-      throw CustomException(`Tidak ada param password`, 400);
+    if (!data.username || !data.password) {
+      throw CustomException("Username and password are required", 400);
     }
 
     const allUsers = await this.getAllUsers();
 
-    for (let user of allUsers) {
-      if (user.username === data.username) {
-        throw CustomException("Already registered", 409);
+    for (let existingUser of allUsers) {
+      if (existingUser.username === data.username) {
+        throw CustomException("Username already registered", 409);
       }
     }
+
+    const salt = bcrypt.genSaltSync(Number(process.env.SALT_ROUNDS));
+    const hashedPassword = bcrypt.hashSync(data.password, salt);
 
     const createdUser = await prisma.security.create({
       data: {
         username: data.username,
-        password: data.password,
+        password: hashedPassword,
       },
     });
     return createdUser;
