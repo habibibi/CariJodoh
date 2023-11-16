@@ -101,9 +101,9 @@ function loadProfiles(pageNumber) {
       let browserContainer = document.querySelector(".browser-container");
       if (response.pageCount == 0) {
         if (!browserContainer.querySelector(".no-data")) {
-          browserContainer.innerHTML += '<h1 class="no-data">Maaf ya, gaada yg cocok :(</h1>';
+          browserContainer.innerHTML +=
+            '<h1 class="no-data">Maaf ya, gaada yg cocok :(</h1>';
         }
-
       } else {
         if (browserContainer.querySelector(".no-data")) {
           browserContainer.querySelector(".no-data").remove();
@@ -142,7 +142,6 @@ function updatePaginationButtons() {
   } else {
     prevButton.disabled = false;
   }
-  console.log(currentPage, totalPages); 
 
   if (currentPage == totalPages || totalPages == 0) {
     nextButton.disabled = true;

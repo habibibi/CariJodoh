@@ -5,6 +5,7 @@
         </span>
         <ul>
             <li><a href="<?= BASE_URL ?>/recommendation">Recommendation</a></li>
+            <li><a href="<?= BASE_URL ?>/articles">Articles</a></li>
             <li><a href="<?= BASE_URL ?>/browse">Browse</a></li>
             <li><a href="<?= BASE_URL ?>/notification">Notification</a></li>
             <li><a href="<?= BASE_URL ?>/likes">Likes</a></li>
@@ -16,6 +17,7 @@
             </div>
             <ul class="dropdown-content">
                 <li><a href="<?= BASE_URL ?>/recommendation">Recommendation</a></li>
+                <li><a href="<?= BASE_URL ?>/articles">Articles</a></li>
                 <li><a href="<?= BASE_URL ?>/browse">Browse</a></li>
                 <li><a href="<?= BASE_URL ?>/notification">Notification</a></li>
                 <li><a href="<?= BASE_URL ?>/likes">Likes</a></li>
@@ -24,16 +26,4 @@
         </div>
     </div>
 </nav>
-<script>
-    let drop = false;
-    const buttonDropdown = document.querySelector(".dropbtn");
-    const dropdownNAV = document.querySelector(".dropdown-content");
-    buttonDropdown.addEventListener('click', function () {
-        drop = !drop;
-        if(drop){
-            dropdownNAV.style.display = "block";
-        } else {
-            dropdownNAV.style.display = "none";
-        }
-    })
-</script>
+<script src="<?= BASE_URL ?>/js/navbar.js"></script>

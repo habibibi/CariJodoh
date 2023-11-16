@@ -70,7 +70,7 @@
   cursor: pointer;
 }
 
-.view-button {
+.view-button, .chat-button {
   background-color: #ffd2da;
   font-family: "Poppins";
   border: 0;

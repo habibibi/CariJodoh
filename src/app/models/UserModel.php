@@ -36,6 +36,19 @@ class UserModel
         }
     }
 
+    public function isExist($userId){
+        // Check if user already exists
+        $query = 'SELECT * FROM user WHERE (user_id = :user_id) LIMIT 1';
+        $this->database->query($query);
+        $this->database->bind('user_id', $userId);
+        $user = $this->database->fetch();
+        if($user){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function register_admin($username, $password)
     {   
         // Check if user already exists
@@ -53,7 +66,7 @@ class UserModel
         $this->database->execute();
     }
 
-    public function register($username, $password, $fullName, $name, $age, $contact, $hobby, $interest, $tinggiBadan, $agama, $domisili, $loveLanguage, $mbti, $zodiac, $ketidaksukaan, $imageFile, $videoFile, $gender)
+    public function register($username, $email, $password, $fullName, $name, $age, $contact, $hobby, $interest, $tinggiBadan, $agama, $domisili, $loveLanguage, $mbti, $zodiac, $ketidaksukaan, $imageFile, $videoFile, $gender)
     {
         $options = [
             'cost' => 10,
@@ -63,9 +76,10 @@ class UserModel
         $this->isRegistered($username);
 
         // Insert user data into the 'user' table
-        $query = 'INSERT INTO user (username, password, role) VALUES (:username, :password, :role)';
+        $query = 'INSERT INTO user (username, email, password, role) VALUES (:username, :email, :password, :role)';
         $this->database->query($query);
         $this->database->bind('username', $username);
+        $this->database->bind('email', $email);
         $this->database->bind('password', password_hash($password, PASSWORD_DEFAULT, $options));
         $this->database->bind('role', 'user');
         $this->database->execute();
@@ -134,6 +148,27 @@ class UserModel
         $profile = $this->database->fetch();
 
         return $profile;
+    }
+
+    public function getName($userId) {
+        $query = "
+            SELECT nama_panggilan FROM profile
+            WHERE (user_id = :user_id)
+        ";
+
+        $this->database->query($query);
+        $this->database->bind('user_id', $userId);
+        $name = $this->database->fetch();
+
+        return $name->nama_panggilan;
+    }
+
+    public function getAllUsers()
+    {
+        $query = "SELECT * FROM profile";
+        $this->database->query($query);
+        $profiles = $this->database->fetchall();
+        return $profiles;
     }
 
     public function getProfiles($page = 1, $exclude_userid=null, $name=null, $interest=null, $agama=null, $mbti=null, $sortAttr='nama_lengkap', $isDesc=false)
@@ -452,5 +487,13 @@ class UserModel
         $this->database->query($query);
         $this->database->bind('user_id', $user_id);
         $this->database->execute();
+    }
+
+    public function getEmail($user_id){
+        $query = 'SELECT email FROM user WHERE (user_id = :user_id)';
+        $this->database->query($query);
+        $this->database->bind('user_id', $user_id);
+        $user = $this->database->fetch();
+        return $user->email;
     }
 }

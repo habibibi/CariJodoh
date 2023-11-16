@@ -142,7 +142,6 @@ function updatePaginationButtons() {
   } else {
     prevButton.disabled = false;
   }
-  console.log(currentPage, totalPages);
 
   if (currentPage == totalPages || totalPages == 0) {
     nextButton.disabled = true;
@@ -508,6 +507,16 @@ registerForm.addEventListener("submit", async function (e) {
 
   if (!imageFile) {
     showToast("Masukkan gambar muka anda terlebih dahulu.");
+    return;
+  }
+
+  if (imageFile && !imageFile.type.startsWith("image/")) {
+    showToast("Invalid image file. Please select a valid image.");
+    return;
+  }
+
+  if (videoFile && !videoFile.type.startsWith("video/")) {
+    showToast("Invalid video file. Please select a valid video.");
     return;
   }
 

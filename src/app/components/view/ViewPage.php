@@ -1,3 +1,7 @@
+<?php
+    $nonce = bin2hex(random_bytes(16));
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,6 +13,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@300&family=Poppins:wght@400;600;700&family=Sofadi+One&display=swap" rel="stylesheet">
         <link rel="shortcut icon" href="/public/images/icons/loveicon.png">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-<?= $nonce ?>'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; object-src 'none'; form-action 'self'; base-uri 'self';">
         <title><?= $this->data['profile']->nama_panggilan ?></title>
     </head>
     <body>
@@ -76,14 +81,43 @@
                         <p class="text-addition"><?= $this->data['profile']->love_language ?></p>
                     </div>
                 </div>
+                <div class="w-full flex">
+                    <button class="report-button">REPORT!</button>
+                </div>
             </div>
         </main>
         <?php
             include(__DIR__ . '/../main/Footer/Footer.php');
         ?>
-
-        <script>
+        <div class="popup-report">
+            <h1>Report User</h1>
+            <div class="flex-col gap-2">
+                <label>Alasan</label>
+                <textarea type="text" placeholder="Alasan Report" name="isi_report" id="isi_report"></textarea>
+            </div>
+            <div class="button-container-popup">
+                <button class="cancel-button"><strong>Cancel</strong></button>
+                <button class="add-button"><strong>Report</strong></button>
+            </div>
+        </div>
+        <div class="overlay"></div>
+        <script nonce="<?= $nonce ?>">
             const likeButton = document.querySelector(".like-button");
+            const openReport = document.querySelector(".report-button");
+            const cancelButton = document.querySelector(".cancel-button");
+            const reportButton = document.querySelector(".add-button");
+            const overlay = document.querySelector(".overlay");
+            const popupReport = document.querySelector(".popup-report");
+            
+            cancelButton.addEventListener('click', () => {
+                popupReport.style.display = 'none';
+                overlay.style.display = 'none';
+            });
+
+            openReport.addEventListener('click', () => {
+                popupReport.style.display = 'block';
+                overlay.style.display = 'block';
+            });
 
             likeButton.addEventListener('click', async function() {
                 const xhr = new XMLHttpRequest();
@@ -100,6 +134,38 @@
                         }
                     }
                 };
+            })
+
+            reportButton.addEventListener('click', async () => {
+                const deskripsiReport = document.getElementById("isi_report").value;
+                if (deskripsiReport) {
+                    const xhr = new XMLHttpRequest();
+                    xhr.open("POST", `/public/view/report/`);
+
+                    const formData = new FormData();
+                    formData.append("user_id_reporter", <?= $_SESSION['user_id'] ?>)
+                    formData.append("user_id_reported", <?= $this->data['profile']->user_id ?>)
+                    formData.append("report_detail", deskripsiReport)
+
+                    xhr.send(formData);
+
+                    xhr.onreadystatechange = function () {
+                        if (this.readyState === XMLHttpRequest.DONE) {
+                            if (this.status === 201) {
+                                popupReport.style.display = 'none';
+                                overlay.style.display = 'none';
+                                showToast("Berhasil report user!");
+                            } else {
+                                const response = JSON.parse(this.responseText);
+                                popupReport.style.display = 'none';
+                                overlay.style.display = 'none';
+                                showToast(response.message);
+                            }
+                        }
+                    };
+                } else {
+                    showToast("Lengkapi Form!");
+                }
             })
         </script>
     </body>

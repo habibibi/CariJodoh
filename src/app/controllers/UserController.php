@@ -68,6 +68,7 @@ class UserController extends Controller {
                     $userModel = $this->model('UserModel');
                     $formData = $_POST;
                     $username = $formData['username'];
+                    $email = $formData['email'];
                     $password = $formData['password'];
                     $fullName = $formData['fullName'];
                     $name = $formData['name'];
@@ -91,7 +92,7 @@ class UserController extends Controller {
                     $gender = $formData['gender'];
 
                     // Call the register method with the extracted data
-                    $userId = $userModel->register($username, $password, $fullName, $name, $age, $contact, $hobby, $interest, $tinggiBadan, $agama, $domisili, $loveLanguage, $mbti, $zodiac, $ketidaksukaan, $imageFile, $videoFile, $gender);
+                    $userId = $userModel->register($username, $email, $password, $fullName, $name, $age, $contact, $hobby, $interest, $tinggiBadan, $agama, $domisili, $loveLanguage, $mbti, $zodiac, $ketidaksukaan, $imageFile, $videoFile, $gender);
                     
                     if($this->middleware->checkAdmin()){
                         header('Content-Type: application/json');
@@ -328,6 +329,29 @@ class UserController extends Controller {
                         header('Content-Type: application/json');
                         http_response_code(200);
                         echo json_encode(["profiles" => $result, "pageCount" => $pageCount], JSON_NUMERIC_CHECK);
+                    } else {
+                        throw new Exception('Unauthorized', 401);
+                    }
+                    break;
+                default:
+                    throw new Exception('Method Not Allowed', 405);
+            }
+        } catch (Exception $e){
+            http_response_code($e->getCode());
+            exit;
+        }
+    }
+
+    public function users(){
+        try{
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'GET':
+                    if ($this->middleware->checkAdmin()){
+                        $userModel = $this->model('UserModel');
+                        $result = $userModel->getAllUsers();
+                        header('Content-Type: application/json');
+                        http_response_code(200);
+                        echo json_encode(["users" => $result], JSON_NUMERIC_CHECK);
                     } else {
                         throw new Exception('Unauthorized', 401);
                     }

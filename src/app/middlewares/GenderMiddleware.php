@@ -10,7 +10,7 @@ class GenderMiddleware
     }
 
     public function isDifferentGender($userId)
-    {
+    { 
         if (!isset($_SESSION['user_id'])) {
             throw new Exception('Unauthorized', 401);
         }
