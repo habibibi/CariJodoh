@@ -26,7 +26,7 @@ if (file_exists($envFilePath)) {
 }
 
 // Define DB Constants
-define('DB_HOST', 'config-php-db-1');
+define('DB_HOST', 'tugas-besar-2-config-php-db-1');
 define('DB_NAME', $_ENV['MYSQL_DATABASE']);
 define('DB_USER', $_ENV['MYSQL_USER']);
 define('DB_PASSWORD', $_ENV['MYSQL_PASSWORD']);
@@ -43,6 +43,7 @@ $loveLanguages = ['Words of Affirmation', 'Physical Touch', 'Quality Time', 'Rec
 $mbtiTypes = ['ISTJ', 'ENFP', 'INTP', 'ESFJ', 'INFJ', 'ENTP'];
 $zodiacSigns = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo'];
 $dislikes = ['Spiders', 'Snakes', 'Loud noise', 'Crowded places', 'Mushrooms', 'Darkness'];
+$email = ['13521124@std.stei.itb.ac.id', '13521140@std.stei.itb.ac.id', '13521169@std.stei.itb.ac.id'];
 $imageDirectory = __DIR__ . '/../../public/seed_profile_video/user_profile.webp';
 $videoDirectory = __DIR__ . '/../../public/seed_profile_video/user_video.mp4';
 
@@ -50,6 +51,7 @@ for ($i = 1; $i <= 100; $i++) {
     $user = [
         'username' => "user{$i}_username",
         'password' => "user{$i}_password",
+        'email' => $email[array_rand($email)],
         'fullName' => "User {$i}",
         'name' => 'User',
         'age' => rand(20, 40),
@@ -72,7 +74,7 @@ for ($i = 1; $i <= 100; $i++) {
 }
 
 // Define function
-function register($database, $username, $password, $fullName, $name, $age, $contact, $hobby, $interest, $tinggiBadan, $agama, $domisili, $loveLanguage, $mbti, $zodiac, $ketidaksukaan, $imageFile, $videoFile, $gender)
+function register($database, $username, $password, $email, $fullName, $name, $age, $contact, $hobby, $interest, $tinggiBadan, $agama, $domisili, $loveLanguage, $mbti, $zodiac, $ketidaksukaan, $imageFile, $videoFile, $gender)
     {
         $options = [
             'cost' => 10,
@@ -88,10 +90,11 @@ function register($database, $username, $password, $fullName, $name, $age, $cont
         }
 
         // Insert user data into the 'user' table
-        $query = 'INSERT INTO user (username, password, role) VALUES (:username, :password, :role)';
+        $query = 'INSERT INTO user (username, password, email, role) VALUES (:username, :password, :email, :role)';
         $database->query($query);
         $database->bind('username', $username);
         $database->bind('password', password_hash($password, PASSWORD_DEFAULT, $options));
+        $database->bind('email', $email);
         $database->bind('role', 'user');
         $database->execute();
 
@@ -151,7 +154,7 @@ try {
     $db = new Database(DB_PORT);
 
     foreach($users as $user){
-        register($db, $user['username'], $user['password'], $user['fullName'], $user['name'], $user['age'], $user['contact'], $user['hobby'], $user['interest'], $user['tinggiBadan'], $user['agama'], $user['domisili'], $user['loveLanguage'], $user['mbti'], $user['zodiac'], $user['ketidaksukaan'], $user['imageFile'], $user['videoFile'], $user['gender']);
+        register($db, $user['username'], $user['password'], $user['email'], $user['fullName'], $user['name'], $user['age'], $user['contact'], $user['hobby'], $user['interest'], $user['tinggiBadan'], $user['agama'], $user['domisili'], $user['loveLanguage'], $user['mbti'], $user['zodiac'], $user['ketidaksukaan'], $user['imageFile'], $user['videoFile'], $user['gender']);
     }
 } catch (PDOException) {
     // Database failed
