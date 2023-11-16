@@ -2,17 +2,15 @@ package carijodoh.util;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.mail.MessagingException;
-import jakarta.mail.NoSuchProviderException;
 import jakarta.mail.Transport;
-import jakarta.mail.internet.AddressException;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import java.util.Properties;
 
 public class EmailSender implements Runnable {
-    private String toEmail;
-    private String subject;
-    private String body;
+    private final String toEmail;
+    private final String subject;
+    private final String body;
 
     public EmailSender(String toEmail, String subject, String body) {
         this.toEmail = toEmail;
@@ -38,13 +36,14 @@ public class EmailSender implements Runnable {
             MimeMessage message = new MimeMessage(session);
 
             // Set the recipients, subject, and content of the message
+            message.setFrom(new InternetAddress(Dotenv.load().get("MAIL_SENDER", "13521124@std.stei.itb.ac.id")));
             message.setRecipients(jakarta.mail.Message.RecipientType.TO, InternetAddress.parse(toEmail));
             message.setSubject(subject);
             message.setText(body);
 
             // Authenticate and send the message
             Transport transport = session.getTransport("smtp");
-            transport.connect(Dotenv.load().get("MAILTRAP_USERNAME", ""), Dotenv.load().get("MAILTRAP_PASSWORD", ""));
+            transport.connect(Dotenv.load().get("MAIL_USERNAME", ""), Dotenv.load().get("MAIL_PASSWORD", ""));
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
         } catch (MessagingException e) {

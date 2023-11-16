@@ -4,10 +4,6 @@ import carijodoh.model.Chat;
 import carijodoh.model.DataChat;
 import carijodoh.util.EmailSender;
 import carijodoh.util.HibernateUtil;
-import io.github.cdimascio.dotenv.Dotenv;
-import jakarta.mail.Transport;
-import jakarta.mail.internet.InternetAddress;
-import jakarta.mail.internet.MimeMessage;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -19,7 +15,6 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
