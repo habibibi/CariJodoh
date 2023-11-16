@@ -19,6 +19,12 @@ const Article = () => {
     const file = e.target.files[0];
     if (file) {
       const fileSizeLimit = 1024 * 1024;
+      if (!file.type.startsWith("image/")) {
+        e.target.value = null;
+        setImage(null);
+        toast.error("File harus gambar!");
+        return;
+      }
       if (file.size <= fileSizeLimit) {
         const reader = new FileReader();
         reader.onload = function (event) {
@@ -28,6 +34,7 @@ const Article = () => {
         reader.readAsDataURL(file);
       } else {
         e.target.value = null;
+        setImage(null);
         toast.error("Gambar tidak boleh melebihi 1MB!");
       }
     }
