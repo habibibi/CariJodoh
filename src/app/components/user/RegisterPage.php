@@ -26,6 +26,7 @@
                         <h2>Daftarkan dirimu segera di sini!</h2>
                         <div class="main-form-register">
                             <input id="username" type="username" placeholder="Username"/>
+                            <input id="email" type="email" placeholder="Email"/>
                             <input id="password" type="password" placeholder="Password"/>
                             <input id="confirmPassword" type="password" placeholder="Confirm Password"/>
                             <button type="button" id="registerButton">DAFTAR</button>
@@ -156,12 +157,20 @@
             const section2 = document.getElementById("section2");
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
+            const email = document.getElementById("email").value;
             const confirmPassword = document.getElementById("confirmPassword").value;
 
             // Perform validation
             // Check username
             if (!username || username.length < 5){
                 showToast("Username minimal 5 karakter.");
+                return;
+            }
+
+            // Check email
+            const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+            if (regex.test(email) === false){
+                showToast("Email tidak valid.");
                 return;
             }
 
@@ -289,6 +298,7 @@
             const agama = section2.querySelector("#agama").value;
             const domisili = section2.querySelector("#domisili").value;
             const username = document.getElementById("username").value;
+            const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
             const confirmPassword = document.getElementById("confirmPassword").value;
             const loveLanguage = document.getElementById("loveLanguage").value;
@@ -350,6 +360,7 @@
             formData.append("agama", agama);
             formData.append("domisili", domisili);
             formData.append("username", username);
+            formData.append("email", email);
             formData.append("password", password);
             formData.append("loveLanguage", loveLanguage);
             formData.append("mbti", mbti);

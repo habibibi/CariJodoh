@@ -51,6 +51,7 @@
         echo '<script nonce="' . $nonce . '">const other_id = ' . $this->other_id . ';</script>';
         echo '<script nonce="' . $nonce . '">const our_name = "' . $this->our_name . '";</script>';
         echo '<script nonce="' . $nonce . '">const other_name = "' . $this->other_name . '";</script>';
+        echo '<script nonce="' . $nonce . '">const other_email = "' . $this->other_email . '";</script>';
     ?>
     <script nonce="<?= $nonce ?>">
         const BASE_URL = "<?= BASE_URL ?>";

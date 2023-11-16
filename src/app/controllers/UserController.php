@@ -68,6 +68,7 @@ class UserController extends Controller {
                     $userModel = $this->model('UserModel');
                     $formData = $_POST;
                     $username = $formData['username'];
+                    $email = $formData['email'];
                     $password = $formData['password'];
                     $fullName = $formData['fullName'];
                     $name = $formData['name'];
@@ -91,7 +92,7 @@ class UserController extends Controller {
                     $gender = $formData['gender'];
 
                     // Call the register method with the extracted data
-                    $userId = $userModel->register($username, $password, $fullName, $name, $age, $contact, $hobby, $interest, $tinggiBadan, $agama, $domisili, $loveLanguage, $mbti, $zodiac, $ketidaksukaan, $imageFile, $videoFile, $gender);
+                    $userId = $userModel->register($username, $email, $password, $fullName, $name, $age, $contact, $hobby, $interest, $tinggiBadan, $agama, $domisili, $loveLanguage, $mbti, $zodiac, $ketidaksukaan, $imageFile, $videoFile, $gender);
                     
                     if($this->middleware->checkAdmin()){
                         header('Content-Type: application/json');

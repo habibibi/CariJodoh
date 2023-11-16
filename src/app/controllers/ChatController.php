@@ -31,7 +31,8 @@ class ChatController extends Controller {
                         $userModel = $this->model("UserModel");
                         $our_name = $userModel->getName($_SESSION['user_id']);
                         $other_name = $userModel->getName($otherId);
-                        $chatView = $this->view('chat', 'ChatView', ['user_id' => $_SESSION['user_id'], 'other_id' => $otherId, 'our_name' => $our_name, 'other_name' => $other_name]);
+                        $other_email = $userModel->getEmail($otherId);
+                        $chatView = $this->view('chat', 'ChatView', ['user_id' => $_SESSION['user_id'], 'other_id' => $otherId, 'our_name' => $our_name, 'other_name' => $other_name, 'other_email' => $other_email]);
                         $chatView->render();
                     }
                     break;

@@ -66,7 +66,7 @@ class UserModel
         $this->database->execute();
     }
 
-    public function register($username, $password, $fullName, $name, $age, $contact, $hobby, $interest, $tinggiBadan, $agama, $domisili, $loveLanguage, $mbti, $zodiac, $ketidaksukaan, $imageFile, $videoFile, $gender)
+    public function register($username, $email, $password, $fullName, $name, $age, $contact, $hobby, $interest, $tinggiBadan, $agama, $domisili, $loveLanguage, $mbti, $zodiac, $ketidaksukaan, $imageFile, $videoFile, $gender)
     {
         $options = [
             'cost' => 10,
@@ -76,9 +76,10 @@ class UserModel
         $this->isRegistered($username);
 
         // Insert user data into the 'user' table
-        $query = 'INSERT INTO user (username, password, role) VALUES (:username, :password, :role)';
+        $query = 'INSERT INTO user (username, email, password, role) VALUES (:username, :email, :password, :role)';
         $this->database->query($query);
         $this->database->bind('username', $username);
+        $this->database->bind('email', $email);
         $this->database->bind('password', password_hash($password, PASSWORD_DEFAULT, $options));
         $this->database->bind('role', 'user');
         $this->database->execute();
@@ -486,5 +487,13 @@ class UserModel
         $this->database->query($query);
         $this->database->bind('user_id', $user_id);
         $this->database->execute();
+    }
+
+    public function getEmail($user_id){
+        $query = 'SELECT email FROM user WHERE (user_id = :user_id)';
+        $this->database->query($query);
+        $this->database->bind('user_id', $user_id);
+        $user = $this->database->fetch();
+        return $user->email;
     }
 }
