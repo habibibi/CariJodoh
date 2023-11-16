@@ -2,7 +2,12 @@ package carijodoh.repository;
 
 import carijodoh.model.Chat;
 import carijodoh.model.DataChat;
+import carijodoh.util.EmailSender;
 import carijodoh.util.HibernateUtil;
+import io.github.cdimascio.dotenv.Dotenv;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -13,8 +18,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Properties;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ChatRepository {
     public String createChat(int userIdSender, int userIdReceiver, String message) {
@@ -79,7 +86,7 @@ public class ChatRepository {
         }
     }
 
-    public String deleteChat(int userIdSender, int userIdReceiver) {
+    public String deleteChat(int userIdSender, int userIdReceiver, String email, String nameSender, String nameReceiver) {
         Session session = null;
         try {
             SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -96,6 +103,25 @@ public class ChatRepository {
             session.getTransaction().commit();
 
             if (deletedCount > 0) {
+                // Create an instance of EmailSender
+                EmailSender emailSender = new EmailSender(email, "Chat Dihapus oleh Temanmu",
+                        "Kepada " + nameReceiver + ",\n" +
+                        "Kami ingin memberitahukan bahwa chat Anda dengan " + nameSender + " telah dihapus. " +
+                        "Setiap pengguna memiliki hak untuk mengelola konten dalam akun CariJodoh, " +
+                        "termasuk penghapusan seluruh pesan yang telah dikirimkan. " +
+                        "Tindakan ini tidak dapat dipulihkan. Tetapi jangan khawatir, privasi dan keamanan " +
+                        "data Anda tetap menjadi prioritas kami.\n\nHormat kami,\n" +
+                        "Tim Security CariJodoh");
+
+                // Create an ExecutorService
+                ExecutorService executorService = Executors.newSingleThreadExecutor();
+
+                // Submit the EmailSender instance for execution
+                executorService.submit(emailSender);
+
+                // Shutdown the ExecutorService
+                executorService.shutdown();
+
                 return "Delete chat successful!";
             } else {
                 return "No chat found for deletion";

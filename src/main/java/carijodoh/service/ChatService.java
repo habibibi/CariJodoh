@@ -53,16 +53,19 @@ public class ChatService {
     public String deleteChat(
             @WebParam(name = "userIdSender") int userIdSender,
             @WebParam(name = "userIdReceiver") int userIdReceiver,
+            @WebParam(name = "email") String email,
+            @WebParam(name = "nameSender") String nameSender,
+            @WebParam(name = "nameReceiver") String nameReceiver,
             @WebParam(name = "apiKey") String apiKey){
         // Handle parameters
-        if(notValidInput(apiKey) || userIdReceiver == 0 || userIdSender == 0){
+        if(notValidInput(apiKey) || userIdReceiver == 0 || userIdSender == 0 || notValidInput(email) || notValidInput(nameSender) || notValidInput(nameReceiver)){
             return "Missing params";
         }
 
         if (!apiKey.equals(Dotenv.load().get("API_KEY_PHP")) && !apiKey.equals(Dotenv.load().get("API_KEY_REST"))) {
             return "Not authorized";
         } else {
-            return chatRepository.deleteChat(userIdSender, userIdReceiver);
+            return chatRepository.deleteChat(userIdSender, userIdReceiver, email, nameSender, nameReceiver);
         }
     }
 
