@@ -17,4 +17,4 @@ EXPOSE 3000
 COPY wait-for-mysql.sh /app/
 RUN chmod +x /app/wait-for-mysql.sh
 
-CMD ["/bin/sh", "/app/wait-for-mysql.sh", "mysql:3306", "/app/startup.sh"]
+CMD ["/bin/sh", "/app/wait-for-mysql.sh", "mysql-rest:3306", "/app/startup.sh"]
