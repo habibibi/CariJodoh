@@ -191,6 +191,9 @@ function deleteChat() {
       <deleteChat xmlns="http://service.carijodoh/">
         <userIdSender xmlns="">${user_id}</userIdSender>
         <userIdReceiver xmlns="">${other_id}</userIdReceiver>
+        <email xmlns="">${other_email}</email>
+        <nameSender xmlns="">${our_name}</nameSender>
+        <nameReceiver xmlns="">${other_name}</nameReceiver>
         <apiKey xmlns="">${API_KEY_SOAP}</apiKey>
       </deleteChat>
     </Body>
