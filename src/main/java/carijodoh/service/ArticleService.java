@@ -23,6 +23,11 @@ public class ArticleService {
             @WebParam(name = "content") String content,
             @WebParam(name = "image") String base64Image,
             @WebParam(name = "apiKey") String apiKey) throws IOException {
+        // Handle parameters
+        if(notValidInput(apiKey) || notValidInput(author) || notValidInput(title) || notValidInput(content) || notValidInput(base64Image)){
+            return "Missing Params";
+        }
+
         if (!apiKey.equals(Dotenv.load().get("API_KEY_PHP")) && !apiKey.equals(Dotenv.load().get("API_KEY_REST"))) {
             return "Not authorized";
         } else {
@@ -35,10 +40,19 @@ public class ArticleService {
     public DataPagination getAllArticles(
             @WebParam(name = "page") int page,
             @WebParam(name = "apiKey") String apiKey){
+        // Handle parameters
+        if(notValidInput(apiKey) || page == 0){
+            return new DataPagination();
+        }
+
         if (!apiKey.equals(Dotenv.load().get("API_KEY_PHP")) && !apiKey.equals(Dotenv.load().get("API_KEY_REST"))) {
             return new DataPagination();
         } else {
             return articleRepository.getAllArticles(page);
         }
+    }
+
+    private boolean notValidInput(String input) {
+        return input == null || input.trim().isEmpty();
     }
 }
