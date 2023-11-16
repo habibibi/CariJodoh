@@ -16,14 +16,14 @@ const ProfileView = () => {
         username: profile?.nama_lengkap || "Unknown",
       };
       const response = await Axios.post(
-        `${import.meta.env.VITE_API_URL}/detect/users/${user_id}`,
-        body
+        `${import.meta.env.VITE_API_URL}/users/${user_id}`,
+        body,
+        { withCredentials: true }
       );
       setConfirm(false);
       navigate("/detect");
       toast.success(response.data.message);
     } catch (error) {
-      console.log(error);
       toast.error(error.response?.data?.message || "Fetching data gagal!");
     }
   };
@@ -32,7 +32,7 @@ const ProfileView = () => {
     const fetchData = async () => {
       try {
         const response = await Axios.get(
-          `${import.meta.env.VITE_API_URL}/detect/users/${user_id}`
+          `${import.meta.env.VITE_API_URL}/users/${user_id}`
         );
         setProfile(response.data.data);
       } catch (error) {

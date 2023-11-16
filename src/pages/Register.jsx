@@ -5,7 +5,6 @@ import Axios from "../config/Axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { checkAuthenticationStatus } from "../config/VerifyAuth";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -14,7 +13,10 @@ const Register = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const isAuthenticated = checkAuthenticationStatus();
+    const isAuthenticated =
+      localStorage.getItem("session") &&
+      new Date() <= new Date(localStorage.getItem("session"));
+
     if (isAuthenticated) {
       toast.error("Logout terlebih dahulu!");
       navigate("/");
@@ -52,8 +54,9 @@ const Register = () => {
 
     try {
       const response = await Axios.post(
-        `${import.meta.env.VITE_API_URL}/auth/register`,
-        body
+        `${import.meta.env.VITE_API_URL}/security`,
+        body,
+        { withCredentials: true }
       );
       toast.success(response.data.message);
       navigate("/login");

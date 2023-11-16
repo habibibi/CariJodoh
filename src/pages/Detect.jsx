@@ -78,13 +78,13 @@ const Detect = () => {
         const response = await Axios.get(
           `${
             import.meta.env.VITE_API_URL
-          }/detect/users?search=${debounced}&page=${currentPage}`
+          }/users?search=${debounced}&page=${currentPage}`,
+          { withCredentials: true }
         );
         setProfiles(response.data.data.users);
         setTotalPages(response.data.totalPages);
         setCount(response.data.totalAnomalies);
       } catch (error) {
-        console.log(error);
         toast.error(error.response?.data?.message || "Fetching data gagal!");
       }
     };

@@ -22,12 +22,12 @@ const DetectCard = ({
   const ignoreReport = async () => {
     try {
       const response = await Axios.delete(
-        `${import.meta.env.VITE_API_URL}/report/${report_id}`
+        `${import.meta.env.VITE_API_URL}/report/${report_id}`,
+        { withCredentials: true }
       );
       toast.success(response.data.message);
       refreshData();
     } catch (error) {
-      console.log(error);
       toast.error(error.response?.data?.message || "Fetching data gagal!");
     }
   };
