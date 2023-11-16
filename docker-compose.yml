@@ -18,9 +18,16 @@ services:
       service: mysql-rest
     networks:
       - cari-jodoh
+  redis:
+    extends:
+      file: ../tugas-besar-2-rest/docker-compose.yml
+      service: redis
+    networks:
+      - cari-jodoh
   rest-web:
     depends_on:
       - mysql-rest
+      - redis
     extends:
       file: ../tugas-besar-2-rest/docker-compose.yml
       service: rest-web
