@@ -5,6 +5,7 @@ import DetectRouter from "./routes/DetectRouter.js";
 import ReportRouter from "./routes/ReportRouter.js";
 import ArticleRouter from "./routes/ArticleRouter.js";
 import cookieParser from "cookie-parser";
+import hpp from "hpp";
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(
     exposedHeaders: ["set-cookie"],
   })
 );
+app.use(hpp());
 app.use(cookieParser());
 app.use(express.json({ limit: "2mb" }));
 

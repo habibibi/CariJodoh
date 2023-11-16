@@ -1,6 +1,7 @@
 import prisma from "../../prisma/PrismaClient.js";
 import CustomException from "../error/CustomException.js";
 import bcrypt from "bcryptjs";
+import client from "../config/redis.js";
 
 export class AuthService {
   async getAllUsers() {
@@ -59,5 +60,30 @@ export class AuthService {
       },
     });
     return createdUser;
+  }
+
+  async getSecurityById(security_id) {
+    const cacheKey = `security:${security_id}`;
+    const cachedData = await client.get(cacheKey);
+
+    if (cachedData) {
+      return cachedData;
+    }
+
+    const security = await prisma.security.findFirst({
+      where: {
+        security_id: +security_id,
+      },
+      select: {
+        username: true,
+      },
+    });
+
+    if (security) {
+      await client.set(cacheKey, security.username);
+      return security.username;
+    } else {
+      throw CustomException("Security not found", 404);
+    }
   }
 }

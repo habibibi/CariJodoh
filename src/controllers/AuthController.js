@@ -13,7 +13,7 @@ export class AuthController {
       const user = await this.authService.login(data);
       const token = jwt.sign(
         {
-          user_id: user.id,
+          user_id: user.security_id,
           username: user.username,
           exp: Math.floor(Date.now() / 1000) + 86400,
         },
@@ -29,6 +29,7 @@ export class AuthController {
       res.status(201).json({
         expired: new Date(Date.now() + 86400000),
         message: "Berhasil melakukan login.",
+        security_id: user.security_id,
       });
     } catch (error) {
       res.status(error.code || 500).json({
@@ -61,6 +62,22 @@ export class AuthController {
 
       res.status(200).json({
         message: "Berhasil logout.",
+      });
+    } catch (error) {
+      res.status(error.code || 500).json({
+        message: error.message || "Internal Server Error",
+      });
+    }
+  }
+
+  async getSecurityById(req, res) {
+    try {
+      const security = await this.authService.getSecurityById(
+        req.params.security_id
+      );
+      res.status(200).json({
+        data: security,
+        message: "Berhasil mendapatkan username security",
       });
     } catch (error) {
       res.status(error.code || 500).json({
