@@ -124,7 +124,7 @@ function loadChat() {
           );
         }
       } else {
-        console.error("Error:", xhr.status, xhr.statusText);
+        showToast("Gagal load chat!");
       }
     }
   };
@@ -171,7 +171,7 @@ function sendMessage() {
         loadChat();
         document.getElementById("message-box").value = "";
       } else {
-        console.error("Error:", xhr.status, xhr.statusText);
+        showToast("Gagal kirim pesan!");
       }
     }
   };
@@ -202,7 +202,7 @@ function deleteChat() {
         loadChat();
         showToast("Chat berhasil di-delete!");
       } else {
-        console.error("Error:", xhr.status, xhr.statusText);
+        showToast("Gagal delete chat!");
       }
     }
   };

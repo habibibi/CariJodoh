@@ -1,3 +1,6 @@
+<?php
+    $nonce = bin2hex(random_bytes(16));
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@300&family=Poppins:wght@400;600;700&family=Sofadi+One&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/public/images/icons/loveicon.png">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-<?= $nonce ?>'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; object-src 'none'; form-action 'self'; base-uri 'self'; connect-src 'self' http://localhost:8001;">
     <title>Chat</title>
 </head>
 <body>
@@ -42,13 +46,13 @@
     </div>
     <div class="overlay"></div>
     <?php
-        echo '<script>const API_KEY_SOAP = "' . API_KEY_SOAP . '";</script>';
-        echo '<script>const user_id = ' . $this->user_id . ';</script>';
-        echo '<script>const other_id = ' . $this->other_id . ';</script>';
-        echo '<script>const our_name = "' . $this->our_name . '";</script>';
-        echo '<script>const other_name = "' . $this->other_name . '";</script>';
+        echo '<script nonce="' . $nonce . '">const API_KEY_SOAP = "' . API_KEY_SOAP . '";</script>';
+        echo '<script nonce="' . $nonce . '">const user_id = ' . $this->user_id . ';</script>';
+        echo '<script nonce="' . $nonce . '">const other_id = ' . $this->other_id . ';</script>';
+        echo '<script nonce="' . $nonce . '">const our_name = "' . $this->our_name . '";</script>';
+        echo '<script nonce="' . $nonce . '">const other_name = "' . $this->other_name . '";</script>';
     ?>
-    <script>
+    <script nonce="<?= $nonce ?>">
         const BASE_URL = "<?= BASE_URL ?>";
     </script>
     <script src="<?= BASE_URL ?>/js/chat.js"></script>
