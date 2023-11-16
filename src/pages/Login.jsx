@@ -44,6 +44,7 @@ const Login = () => {
 
       toast.success(response.data.message);
       localStorage.setItem("session", response.data.expired);
+      localStorage.setItem("security_id", response.data.security_id);
       navigate("/");
     } catch (error) {
       toast.error(
