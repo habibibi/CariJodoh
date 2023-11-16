@@ -32,7 +32,8 @@ const ProfileView = () => {
     const fetchData = async () => {
       try {
         const response = await Axios.get(
-          `${import.meta.env.VITE_API_URL}/users/${user_id}`
+          `${import.meta.env.VITE_API_URL}/users/${user_id}`,
+          { withCredentials: true }
         );
         setProfile(response.data.data);
       } catch (error) {
