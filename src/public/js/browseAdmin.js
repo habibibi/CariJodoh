@@ -510,6 +510,16 @@ registerForm.addEventListener("submit", async function (e) {
     return;
   }
 
+  if (imageFile && !imageFile.type.startsWith("image/")) {
+    showToast("Invalid image file. Please select a valid image.");
+    return;
+  }
+
+  if (videoFile && !videoFile.type.startsWith("video/")) {
+    showToast("Invalid video file. Please select a valid video.");
+    return;
+  }
+
   // AJAX
   const xhr = new XMLHttpRequest();
   xhr.open("POST", "/public/user/register");

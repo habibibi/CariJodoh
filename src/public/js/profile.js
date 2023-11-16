@@ -179,6 +179,18 @@ document.getElementById("saveButton").addEventListener("click", function () {
     return;
   }
 
+  if (imageFile && !imageFile.type.startsWith("image/")) {
+    showToast("Invalid image file. Please select a valid image.");
+    return;
+  }
+
+  if (videoFile && !videoFile.type.startsWith("video/")) {
+    showToast("Invalid video file. Please select a valid video.");
+    return;
+  }
+
+  console.log(imageFile, videoFile);
+
   formData = new FormData();
   formData.append("fullName", fullName);
   formData.append("name", name);
