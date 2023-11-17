@@ -32,12 +32,22 @@ const Register = () => {
       return;
     }
 
-    if (username < 5) {
+    if (username.length < 5) {
       toast.error("Username minimal 5 karakter");
       return;
     }
 
-    if (password < 5) {
+    if (username.match(/[^a-zA-Z0-9_]/g)) {
+      toast.error("Username hanya boleh mengandung huruf, angka, dan underscore");
+      return;
+    }
+
+    if (username.match(/^[^a-zA-Z]/g)) {
+      toast.error("Username harus diawali dengan huruf");
+      return;
+    }
+
+    if (password.length < 5) {
       toast.error("Password minimal 5 karakter");
       return;
     }

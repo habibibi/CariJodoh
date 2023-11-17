@@ -30,6 +30,11 @@ const Login = () => {
       return;
     }
 
+    if (username.length < 5) {
+      toast.error("Username minimal 5 karakter");
+      return;
+    }
+
     const body = {
       username: username,
       password: password,
