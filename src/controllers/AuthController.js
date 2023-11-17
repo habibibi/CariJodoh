@@ -60,7 +60,7 @@ export class AuthController {
         httpOnly: true,
       });
 
-      res.status(200).json({
+      res.status(202).json({
         message: "Berhasil logout.",
       });
     } catch (error) {

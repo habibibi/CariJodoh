@@ -9,8 +9,8 @@ export default class AuthenticationMiddleware {
         const token = req.cookies.token;
 
         if (!token) {
-          res.status(401).json({
-            message: "Unauthorized",
+          res.status(403).json({
+            message: "Forbidden Access",
           });
           return;
         }

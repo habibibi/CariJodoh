@@ -24,7 +24,7 @@ export class AuthService {
     });
 
     if (!user) {
-      throw CustomException("User not found", 404);
+      throw CustomException("User not found", 401);
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
@@ -42,10 +42,13 @@ export class AuthService {
       throw CustomException("Username and password are required", 400);
     }
 
-    let usernameRegex = /^[a-zA-Z][a-zA-Z0-9._]{4,49}$/
+    let usernameRegex = /^[a-zA-Z][a-zA-Z0-9._]{4,49}$/;
 
     if (!usernameRegex.test(data.username)) {
-      throw CustomException("Username must be 5-50 characters long, start with an alphabet, and only contain alphanumeric characters and underscores.", 400);
+      throw CustomException(
+        "Username must be 5-50 characters long, start with an alphabet, and only contain alphanumeric characters and underscores.",
+        400
+      );
     }
 
     const allUsers = await this.getAllUsers();

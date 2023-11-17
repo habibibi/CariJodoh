@@ -47,7 +47,7 @@ export default class DetectController {
       }
 
       await this.detectService.blockUser(req.params.user_id, req.body.username);
-      res.status(200).json({ message: "Berhasil memblokir user!" });
+      res.status(202).json({ message: "Berhasil memblokir user!" });
     } catch (error) {
       res.status(error.code || 500).json({
         message: error.message || "Internal Server Error",
