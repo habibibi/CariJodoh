@@ -2,6 +2,39 @@
 
 ![Logo CariJodoh](src/public/images/assets/logo.webp){width=50%}
 
+---
+# _UPDATES_
+## Deskripsi Singkat Pembaharuan
+
+> <h3>Selamat <i>dating</i> lagi para pejuang cinta!</h3>
+
+<div align="justify">
+    <p>Teruntuk kalian yang masih mencari cinta sejati, CariJodoh kembali hadir dengan beragam fitur baru yang tidak kalah menarik! Pokoknya, jangan sampai ketinggalan menggunakan <i>chat</i> untuk mengobrol dengan calon pasangan Anda! Laporkanlah pengguna yang menurut Anda patut dicurigai atau tidak bertingkah semestinya. Pada versi terbaru kami ini, tersedia pula berbagai artikel tentang kencan yang bisa Anda baca untuk memperoleh tips dan trik memperlancar hubungan Anda.</p>
+    <p>Anda juga dapat menghapus seluruh <i>chat</i> Anda dengan satu per satu teman Anda di sini. Namun jangan khawatir, keamanan data Anda tetap menjadi prioritas kami, dengan kehadiran <b>Tim <i>Security</i> CariJodoh!</b></p>
+</div>
+
+## Beberapa Tangkapan Layar Tambahan Fitur
+- Fitur _Chat_ dan _Delete Chat_
+  - ![SS](docs/visualisasi/chat.png)
+  - ![SS](docs/visualisasi/delete_chat.png)
+- Fitur _Report User_
+  - ![SS](docs/visualisasi/report_user.png)
+- Fitur Baca Artikel
+  - ![SS](docs/visualisasi/artikel.png)
+
+## Pembagian Tugas (Tambahan Fitur)
+
+|        Fitur         |          Jenis          |       NIM Pembuat        |
+| :------------------: | :---------------------: | :----------------------: |
+|        _Chat_        | _Frontend_<br>_Backend_ | `13521XXX`<br>`13521XXX` |
+|    _Delete Chat_     | _Frontend_<br>_Backend_ | `13521XXX`<br>`13521XXX` |
+|    _Report User_     | _Frontend_<br>_Backend_ | `13521XXX`<br>`13521XXX` |
+|     Baca Artikel     | _Frontend_<br>_Backend_ | `13521XXX`<br>`13521XXX` |
+
+
+
+
+---
 ## Deskripsi Singkat
 
 > <h3>Halo para pejuang cinta!</h3>
@@ -43,23 +76,23 @@ docker compose up -d
 5. Jalankan _script_ berikut pada terminal untuk membuat _user seed_
 
 ```
-docker exec -it tugas-besar-1-web-1 php "./app/seed/seed_users.php"
+docker exec -it tugas-besar-1-v3-web-1 php "./app/seed/seed_users.php"
 ```
 
 6. Jalankan _script_ berikut pada terminal untuk membuat _admin seed_
 
 ```
-docker exec -it tugas-besar-1-web-1 php "./app/seed/seed_admin.php"
+docker exec -it tugas-besar-1-v3-web-1 php "./app/seed/seed_admin.php"
 ```
 
 7. Jalankan dua _command_ berikut untuk memberikan akses _image_ dan _video_.
 
 ```
-docker exec -it tugas-besar-1-web-1 chmod -R 777 /var/www/html/public/videos
+docker exec -it tugas-besar-1-v3-web-1 chmod -R 777 /var/www/html/public/videos
 ```
 
 ```
-docker exec -it tugas-besar-1-web-1 chmod -R 777 /var/www/html/public/images/profile
+docker exec -it tugas-besar-1-v3-web-1 chmod -R 777 /var/www/html/public/images/profile
 ```
 
 8. Buka _browser_ favorit dan masukkan URL berikut untuk memulai aplikasi
