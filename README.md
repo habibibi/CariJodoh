@@ -22,16 +22,37 @@
 - Fitur Baca Artikel
   - ![SS](docs/visualisasi/artikel.png)
 
+## OWASP Handling
+Dilakukannya beberapa OWASP Handling yaitu HTML CSS Injection, File Upload Vulnerabilities, SQL Injection, dan HTTP Parameter Pollution
+
+## SQL Injection
+Injeksi adalah trik yang dilakukan terhadap aplikasi dengan cara mengirimkan data berupa command yang “tidak diinginkan” ke interpreter. Interpreter, seperti SQL, OS Shell, LDAP, XPath, Hibernate, atau lainnya, langsung mengambil string masukan mentah-mentah lalu mengeksekusinya. SQL injection masih rentan terjadi di berbagai aplikasi, padahal pencegahannya mudah. Jika sampai terjadi, dampaknya bisa parah, karena seisi basis data bisa dibaca hingga diubah. Penyerang mendapatkan akses terhadap akun pengguna, bahkan akses di level sistem operasi.
+
+Cara mengatasi potensi serangan SQL Injection dalam implementasi class Database adalah dengan menggunakan parameterized query. Pada kelas Database, terdapat metode bind yang digunakan untuk menyisipkan parameter ke dalam query. 
+
+## HTML CSS Injection
+Injeksi HTML dikenal juga sebagai XSS (Cross-Site Scripting), terjadi ketika data mentah dari penyerang dikirim ke browser pengguna. Ada berbagai metode dan atribut yang dapat digunakan untuk me-render konten HTML. Jika dibiarkan berjalan dengan masukan yang tidak dibersihkan dan keluarannya tidak di-encode, injeksi HTML menjadi rentan. Akibatnya, penyerang bisa mencuri session dan data sensitif pengguna, menyamar sebagai pengguna, menulis ulang halaman web, hingga redirect pengguna ke situs penipuan atau malware.
+
+Cara mengatasinya adalah dengan penggunaan Content Security Policy (CSP) pada header seluruh file HTML. CSP adalah mekanisme keamanan yang memungkinkan pengaturan kebijakan untuk mengendalikan sumber daya yang diizinkan di halaman web dan memitigasi risiko XSS. Dapat dilihat pada seluruh components file html memiliki meta CSP dalam headernya.
+
+## File Upload Vulnerabilities
+Kerentanan ini adalah masalah aplikasi berbasis web, yang memungkinkan hacker mengunggah file, yang di dalamnya terdapat kode berbahaya, untuk dieksekusi di server. Lagi-lagi, hacker dapat memasukkan halaman phishing ke dalam situs web atau merusak situs web tersebut. Lebih bahaya lagi, hacker akan mendapat beberapa informasi internal server web kemudian menjualnya.
+
+Cara untuk menghandlenya adalah dengan memeriksa file yang telah diupload oleh user apakah tipenya image atau video. Dapat dilihat implementasinya pada register dan update profile.
+
+## HTTP Parameter Pollution
+Polusi Parameter HTTP adalah salah satu masalah keamanan web yang menguji respons aplikasi, ketika menerima beberapa parameter HTTP dengan nama yang sama. Misalnya, parameter nama pengguna disertakan sebagai parameter GET atau POST sebanyak dua kali.
+
+Cara handlenya adalah dengan memastikan bahwa parameter dari setiap request front-end tidak memiliki parameter yang duplikat. Dapat dilihat pada setiap request tidak ada parameter yang duplikat.
+
 ## Pembagian Tugas (Tambahan Fitur)
 
 |        Fitur         |          Jenis          |       NIM Pembuat        |
 | :------------------: | :---------------------: | :----------------------: |
-|        _Chat_        | _Frontend_<br>_Backend_ | `13521XXX`<br>`13521XXX` |
-|    _Delete Chat_     | _Frontend_<br>_Backend_ | `13521XXX`<br>`13521XXX` |
-|    _Report User_     | _Frontend_<br>_Backend_ | `13521XXX`<br>`13521XXX` |
-|     Baca Artikel     | _Frontend_<br>_Backend_ | `13521XXX`<br>`13521XXX` |
-
-
+|        _Chat_        | _Frontend_<br>_Backend_ | `13521169`<br>`13521169` |
+|    _Delete Chat_     | _Frontend_<br>_Backend_ | `13521140`<br>`13521169` |
+|    _Report User_     | _Frontend_<br>_Backend_ | `13521124`<br>`13521124` |
+|     Baca Artikel     | _Frontend_<br>_Backend_ | `13521169`<br>`13521124` |
 
 
 ---
