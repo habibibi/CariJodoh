@@ -102,7 +102,7 @@ const Article = () => {
   return (
     <div className="mb-5">
       <div className="flex justify-center mt-5">
-        <h1 className="font-['Garamond'] text-3xl font-bold">TAMBAH ARTIKEL</h1>
+        <h1 className="text-3xl font-bold">TAMBAH ARTIKEL</h1>
       </div>
 
       <form className="max-w-2xl mx-auto p-4 bg-[#FFD2DA] rounded shadow mt-10">
