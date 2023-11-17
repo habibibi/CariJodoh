@@ -40,16 +40,24 @@ const Navbar = () => {
           {open ? (
             <ul className="absolute flex flex-col lg:hidden bg-[#ffd2da] w-full right-0 top-[100%]">
               <li className="p-[1rem] text-center font-semibold border-y-[1px] border-black">
-                <Link to="/">Home</Link>
+                <Link to="/" onClick={() => setOpen(false)}>
+                  Home
+                </Link>
               </li>
               <li className="p-[1rem] text-center font-semibold border-b-[1px] border-black">
-                <Link to="/detect">Detect</Link>
+                <Link to="/detect" onClick={() => setOpen(false)}>
+                  Detect
+                </Link>
               </li>
               <li className="p-[1rem] text-center font-semibold border-b-[1px] border-black">
-                <Link to="/report">Report</Link>
+                <Link to="/report" onClick={() => setOpen(false)}>
+                  Report
+                </Link>
               </li>
               <li className="p-[1rem] text-center font-semibold">
-                <Link to="/article">Article</Link>
+                <Link to="/article" onClick={() => setOpen(false)}>
+                  Article
+                </Link>
               </li>
             </ul>
           ) : (

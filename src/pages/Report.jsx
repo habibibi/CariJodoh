@@ -201,13 +201,13 @@ const Report = () => {
       {confirm ? (
         <>
           <div className="fixed inset-0 flex items-center justify-center z-[999999]">
-            <div className="bg-white rounded-lg p-8 w-2/3 md:w-1/3 flex flex-col">
+            <div className="bg-white rounded-lg p-8 w-5/6 lg:w-1/3 flex flex-col">
               <h1 className="mb-4 text-center text-xl">
                 Apakah anda betul ingin blokir user ini?
               </h1>
-              <div className="flex justify-center">
+              <div className="flex mx-auto flex-col sm:flex-row gap-4 sm:gap-0">
                 <button
-                  className="mr-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                  className="sm:mr-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
                   onClick={() => setConfirm(false)}
                 >
                   Cancel

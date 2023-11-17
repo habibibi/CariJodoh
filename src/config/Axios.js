@@ -9,6 +9,7 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
+      localStorage.removeItem("security_id");
       localStorage.removeItem("session");
       history.push("/login");
       window.location.reload();
