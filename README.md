@@ -30,18 +30,26 @@
   - ![SS](docs/pop_up2.png)
 
 
-  ## Pembagian Tugas
+## OWASP Handling
+Pada SPA, dilakukannya OWASP handling yaitu File Upload Vulnerabilities
+
+### File Upload Vulnerabilities
+Kerentanan ini adalah masalah aplikasi berbasis web, yang memungkinkan hacker mengunggah file, yang di dalamnya terdapat kode berbahaya, untuk dieksekusi di server. Lagi-lagi, hacker dapat memasukkan halaman phishing ke dalam situs web atau merusak situs web tersebut. Lebih bahaya lagi, hacker akan mendapat beberapa informasi internal server web kemudian menjualnya.
+
+Cara handlenya adalah dengan memeriksa tipe dari file sesungguhnya sebelum dilakukannya request pada web service REST. Karena di aplikasi memerlukan input file gambar untuk artikel, maka diperiksa terlebih dahulu tipenya apakah image atau tidak.
+
+## Pembagian Tugas
 
 |        Halaman       |        Jenis         |       NIM Pembuat        |
 | :------------------: | :------------------: | :----------------------: |
-|       _Login_        |      _Frontend_      | `13521XXX`<br>`13521XXX` |
-|      _Register_      |      _Frontend_      |        `13521XXX`        |
-|        _Home_        |      _Frontend_      |        `13521XXX`        |
-|       _Detect_       |      _Frontend_      |        `13521XXX`        |
-|       _Report_       |      _Frontend_      |        `13521XXX`        |
-|  _Suspected Profile_ |      _Frontend_      |        `13521XXX`        |
-|    Tambah Artikel    |      _Frontend_      |        `13521XXX`        |
-|       _Header_       |      _Frontend_      |        `13521XXX`        |
-|       _Footer_       |      _Frontend_      |        `13521XXX`        |
-|     _Pagination_     |      _Frontend_      |        `13521XXX`        |
-|   _Confirm Pop Up_   |      _Frontend_      |        `13521XXX`        |
+|       _Login_        |      _Frontend_      |        `13521124`        |
+|      _Register_      |      _Frontend_      |        `13521124`        |
+|        _Home_        |      _Frontend_      |        `13521124`        |
+|       _Detect_       |      _Frontend_      |        `13521169`        |
+|       _Report_       |      _Frontend_      |        `13521140`        |
+|  _Suspected Profile_ |      _Frontend_      |        `13521124`        |
+|    Tambah Artikel    |      _Frontend_      |        `13521140`        |
+|       _Header_       |      _Frontend_      |        `13521140`        |
+|       _Footer_       |      _Frontend_      |        `13521169`        |
+|     _Pagination_     |      _Frontend_      |        `13521124`        |
+|   _Confirm Pop Up_   |      _Frontend_      |        `13521169`        |
