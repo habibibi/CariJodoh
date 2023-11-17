@@ -8,7 +8,7 @@ const axiosInstance = Axios.create();
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response && error.response.status === 401) {
+    if (error.response && error.response.status === 403) {
       localStorage.removeItem("security_id");
       localStorage.removeItem("session");
       history.push("/login");
