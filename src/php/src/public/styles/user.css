@@ -1,0 +1,123 @@
+.container {
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../images/assets/background-login.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.login-outer {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+}
+
+.login-form-section {
+  width: 60%;
+  height: 100%;
+  display: flex;
+}
+
+.login-title-section {
+  width: 40%;
+}
+
+.login-title {
+  margin: 0 auto;
+  text-align: center;
+  font-size: 48px;
+  margin-top: 3rem;
+}
+
+.login-title h1 {
+  -webkit-text-stroke-width: 0.5px;
+  -webkit-text-stroke-color: white;
+  letter-spacing: 0;
+  font-family: "Sofadi One";
+}
+
+.login-form {
+  background-color: #ff91a4;
+  width: 80%;
+  margin: auto auto;
+  border: 3px solid black;
+  border-radius: 20px;
+}
+
+.login-form-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  align-items: center;
+}
+
+.login-form-container h1 {
+  font-size: 52px;
+  padding: 1rem 0;
+}
+
+.main-form-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 50%;
+}
+
+.main-form-login input {
+  width: 100%;
+  padding: 1rem;
+  font-size: larger;
+}
+
+.main-form-login button {
+  width: 100%;
+  padding: 1rem;
+  font-size: larger;
+  background-color: #ef74a0;
+}
+
+.login-register {
+  margin-top: 1rem;
+  font-size: larger;
+}
+
+@media (max-width: 1000px) {
+  .container {
+    width: auto;
+    height: auto;
+  }
+  .login-outer {
+    flex-direction: column-reverse;
+    gap: 1.5rem;
+  }
+  .login-form-section,
+  .login-title-section {
+    margin: 0 auto;
+    width: 80%;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    min-height: 100vh;
+  }
+  .login-form-section,
+  .login-title-section {
+    margin: 0 auto;
+    width: 95%;
+  }
+  .login-form {
+    width: 100%;
+  }
+  .login-title,
+  .login-form-container h1 {
+    font-size: 24px;
+  }
+
+  .login-form-container h2 {
+    font-size: 18px;
+  }
+}
