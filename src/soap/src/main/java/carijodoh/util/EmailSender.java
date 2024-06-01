@@ -47,7 +47,7 @@ public class EmailSender implements Runnable {
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
         } catch (MessagingException e) {
-            // Do Nothing
+            e.printStackTrace();
         }
     }
 }
