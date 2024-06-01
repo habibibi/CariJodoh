@@ -1,0 +1,32 @@
+version: "3.8"
+services:
+  mysql-rest:
+    image: mysql:latest
+    hostname: db-rest
+    ports:
+      - "3308:3306"
+    env_file: .env
+    volumes:
+      - ./mysql:/var/lib/mysql
+    restart: unless-stopped
+
+  rest-web:
+    image: tubes-2-rest:latest
+    hostname: rest-web
+    env_file: .env
+    volumes:
+      - ./:/app
+      - /app/node_modules
+      - /app/prisma
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    restart: on-failure
+
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - 6380:6379
+    volumes:
+      - ./redis:/data

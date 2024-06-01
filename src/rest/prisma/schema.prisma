@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Security {
+  security_id Int @id @default(autoincrement()) @map("security_id")
+  username String @map("username") @unique
+  password String @map("password")
+
+  @@map("security")
+}
+
+model Report {
+  report_id Int @id @default(autoincrement()) @map("report_id")
+  user_id_reporter Int @map("user_id_reporter")
+  user_id_reported Int @map("user_id_reported")
+  report_detail String @db.VarChar(255) @map("report_detail")
+
+  @@map("report")
+}
+
+model Blocked {
+  blocked_id Int @id @default(autoincrement()) @map("blocked_id")
+  user_id Int @map("user_id")
+  username String @db.VarChar(255) @map("username")
+  blocked_detail String @db.VarChar(255) @map("blocked_detail")
+
+  @@map("blocked")
+}
