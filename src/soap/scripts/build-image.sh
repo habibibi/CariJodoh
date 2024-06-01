@@ -1,0 +1,1 @@
+docker image build -t tubes-2-soap:latest .

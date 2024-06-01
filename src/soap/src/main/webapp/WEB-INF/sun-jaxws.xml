@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoints xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime" version="2.0">
+    <endpoint
+            name="ArticleWebService"
+            implementation="carijodoh.service.ArticleService"
+            url-pattern="/article"/>
+    <endpoint
+            name="ChatWebService"
+            implementation="carijodoh.service.ChatService"
+            url-pattern="/chat"/>
+</endpoints>
