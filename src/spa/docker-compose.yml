@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  spa:
+    image: tubes-2-spa:latest
+    container_name: tubes-2-spa
+    ports:
+      - "5173:5173"
+    volumes:
+      - ".:/app"
+      - "/app/node_modules"
+    env_file:
+      - .env
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    stdin_open: true
+    tty: true
