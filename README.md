@@ -1,9 +1,9 @@
 # CariJodoh
-> Dibangun untuk memenuhi Tugas Besar IF3110 Pengembangan Aplikasi Berbasis Web
+> Dibangun untuk memenuhi Tugas Besar IF3110 Pengembangan Aplikasi Berbasis Web  
 ## Deskripsi Singkat
 <div align="justify">
 
-CariJodoh adalah sebuah platform yang bertujuan untuk membantu pengguna untuk mencari pasangan, berteman, dan berkomunikasi dengan satu sama lain melalu _chat system_. Platform ini menggabungkan arsitektur server yang beragam: sebuah Single Page Application (SPA) berbasis React, sebuah server monolitik yang ditenagai oleh _vanilla_ PHP, sebuah server REST yang didorong oleh Express.js, dan sebuah server SOAP berbasis Java yang menggunakan JAX-WS. Detail dari setiap server disediakan dalam folder masing-masing di dalam _src_.
+CariJodoh adalah sebuah platform yang bertujuan untuk membantu pengguna untuk mencari pasangan, berteman, dan berkomunikasi dengan satu sama lain melalu _chat system_. Platform ini menggabungkan arsitektur server yang beragam: sebuah Single Page Application (SPA) berbasis React, sebuah server monolitik yang ditenagai oleh _vanilla_ PHP, sebuah server REST yang didorong oleh Express.js, dan sebuah server SOAP berbasis Java yang menggunakan JAX-WS. Repository ini merupakan gabungan dari empat repository berbeda. Detail dari setiap server disediakan dalam folder masing-masing di dalam _src_.
 </div>
 
 ## _Requirements_
@@ -11,6 +11,11 @@ CariJodoh adalah sebuah platform yang bertujuan untuk membantu pengguna untuk me
 - Docker Engine. [[Link Download untuk pengguna Windows]](https://www.docker.com/products/docker-desktop/)
 - WSL 2 atau OS yang mampu menjalankan script .sh  
 _tested on windows 11 and WSL 2_
+
+## _Setup_
+
+1. Salin file .env.example dan ganti namanya menjadi .env di dalam setiap folder server.
+2. Ubah value pada .env sesuai kebutuhan
 
 ## Menjalankan Server
 
@@ -35,4 +40,9 @@ http://localhost:8080/public/user/login
 atau masukkan URL berikut untuk memulai aplikasi sebagai anggota tim _security_.
 ```
 http://localhost:5173/
+```
+5. (optional) Lakukan seeding akun user dan admin pada server php dengan perintah:
+```
+docker exec -it cari-jodoh-php-web-1 php "./app/seed/seed_users.php"
+docker exec -it cari-jodoh-php-web-1 php "./app/seed/seed_admin.php"
 ```

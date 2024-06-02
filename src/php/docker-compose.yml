@@ -9,7 +9,7 @@ services:
     volumes:
       - ./src:/var/www/html
   mysql:
-    image: mysql:latest
+    image: mysql:5.7.16
     ports:
       - 3307:3306
     hostname: db-tubes-1

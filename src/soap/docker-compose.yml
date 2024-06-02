@@ -8,7 +8,7 @@ services:
     volumes:
       - ./src:/app/src
   mysql-soap:
-    image: mysql:latest
+    image: mysql:5.7.16
     ports:
       - "3309:3306"
     env_file: .env

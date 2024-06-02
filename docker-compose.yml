@@ -1,4 +1,5 @@
 version: "3.9"
+name: cari-jodoh
 services:
   php-web:
     extends:
