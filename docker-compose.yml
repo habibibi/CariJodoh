@@ -2,25 +2,25 @@ version: "3.9"
 services:
   php-web:
     extends:
-      file: ../tugas-besar-2-php/docker-compose.yml
+      file: ./src/php/docker-compose.yml
       service: web
     networks:
       - cari-jodoh
   php-db:
     extends:
-      file: ../tugas-besar-2-php/docker-compose.yml
+      file: ./src/php/docker-compose.yml
       service: mysql
     networks:
       - cari-jodoh
   mysql-rest:
     extends:
-      file: ../tugas-besar-2-rest/docker-compose.yml
+      file: ./src/rest/docker-compose.yml
       service: mysql-rest
     networks:
       - cari-jodoh
   redis:
     extends:
-      file: ../tugas-besar-2-rest/docker-compose.yml
+      file: ./src/rest/docker-compose.yml
       service: redis
     networks:
       - cari-jodoh
@@ -29,13 +29,13 @@ services:
       - mysql-rest
       - redis
     extends:
-      file: ../tugas-besar-2-rest/docker-compose.yml
+      file: ./src/rest/docker-compose.yml
       service: rest-web
     networks:
       - cari-jodoh
   mysql-soap:
     extends:
-      file: ../tugas-besar-2-soap/docker-compose.yml
+      file: ./src/soap/docker-compose.yml
       service: mysql-soap
     networks:
       - cari-jodoh
@@ -43,13 +43,13 @@ services:
     depends_on:
       - mysql-soap
     extends:
-      file: ../tugas-besar-2-soap/docker-compose.yml
+      file: ./src/soap/docker-compose.yml
       service: soap-web
     networks:
       - cari-jodoh
   spa:
     extends:
-      file: ../tugas-besar-2-spa/docker-compose.yml
+      file: ./src/spa/docker-compose.yml
       service: spa
     networks:
       - cari-jodoh

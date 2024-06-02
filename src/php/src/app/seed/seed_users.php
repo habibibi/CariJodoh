@@ -26,7 +26,7 @@ if (file_exists($envFilePath)) {
 }
 
 // Define DB Constants
-define('DB_HOST', 'tugas-besar-2-config-php-db-1');
+define('DB_HOST', 'carijodoh-php-db-1');
 define('DB_NAME', $_ENV['MYSQL_DATABASE']);
 define('DB_USER', $_ENV['MYSQL_USER']);
 define('DB_PASSWORD', $_ENV['MYSQL_PASSWORD']);

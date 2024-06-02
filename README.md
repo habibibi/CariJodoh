@@ -1,45 +1,27 @@
-# CONFIG: Aplikasi CariJodoh
-
+# CariJodoh
+> Dibangun untuk memenuhi Tugas Besar IF3110 Pengembangan Aplikasi Berbasis Web
 ## Deskripsi Singkat
 <div align="justify">
-    <p>CONFIG adalah _repository_ yang berisi berbagai pengaturan awal yang diperlukan oleh CariJodoh, sebuah aplikasi kencan. Agar dapat menjalankan serta menggunakan aplikasi tersebut, ikuti langkah-langkah berikut ini.
+
+CariJodoh adalah sebuah platform yang bertujuan untuk membantu pengguna untuk mencari pasangan, berteman, dan berkomunikasi dengan satu sama lain melalu _chat system_. Platform ini menggabungkan arsitektur server yang beragam: sebuah Single Page Application (SPA) berbasis React, sebuah server monolitik yang ditenagai oleh _vanilla_ PHP, sebuah server REST yang didorong oleh Express.js, dan sebuah server SOAP berbasis Java yang menggunakan JAX-WS. Detail dari setiap server disediakan dalam folder masing-masing di dalam _src_.
 </div>
 
 ## _Requirements_
 
-- Docker Desktop. [Klik _link_ ini untuk melakukan instalasi](https://www.docker.com/products/docker-desktop/).
-
-## Instalasi Aplikasi CariJodoh
-
-1. _Clone_ 5 (lima) buah repositori dengan memasukkan _script_ berikut pada terminal
-
-```
-git clone -b main https://gitlab.informatika.org/if3110-2023-02-35/tugas-besar-2-config.git
-```
-```
-git clone -b main https://gitlab.informatika.org/if3110-2023-02-35/tugas-besar-2-php.git
-```
-```
-git clone -b main https://gitlab.informatika.org/if3110-2023-02-35/tugas-besar-2-rest.git
-```
-```
-git clone -b main https://gitlab.informatika.org/if3110-2023-02-35/tugas-besar-2-soap.git
-```
-```
-git clone -b main https://gitlab.informatika.org/if3110-2023-02-35/tugas-besar-2-spa.git
-```
+- Docker Engine. [[Link Download untuk pengguna Windows]](https://www.docker.com/products/docker-desktop/)
+- WSL 2 atau OS yang mampu menjalankan script .sh  
+_tested on windows 11 and WSL 2_
 
 ## Menjalankan Server
 
-1. Buka Docker Desktop.
-2. Masuk ke folder "tugas-besar-2-config" hasil _clone_, lalu jalankan _script_ berikut pada terminal.
+1. Jalankan Docker engine atau Docker Desktop untuk pengguna windows.
+2. Masuk ke folder _repository_ hasil _clone_, lalu jalankan _script_ berikut pada terminal.
 
 ```
-cd ../tugas-besar-2-config
 ./build-image.sh
 ```
 
-3. Lalu jalankan _script_ berikut pada terminal.
+3. Lalu jalankan perintah berikut pada terminal.
 
 ```
 docker compose up -d

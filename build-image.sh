@@ -1,17 +1,21 @@
 #!/bin/bash
 
 # PHP IMAGE
-cd ../tugas-besar-2-php
+cd ./src/php
 ./scripts/build-image.sh
+cd ../..
 
 # SPA IMAGE
-cd ../tugas-besar-2-spa
+cd ./src/spa
 ./scripts/build-image.sh
+cd ../..
 
 # REST IMAGE
-cd ../tugas-besar-2-rest
+cd ./src/rest
 ./scripts/build-image.sh
+cd ../..
 
 # SOAP IMAGE
-cd ../tugas-besar-2-soap
+cd ./src/soap
 ./scripts/build-image.sh
+cd ../..
