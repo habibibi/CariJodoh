@@ -1,6 +1,6 @@
 # Aplikasi Berbasis Web: CariJodoh
 
-![Logo CariJodoh](src/public/images/assets/logo.webp){width=50%}
+<img src="src/public/images/assets/logo.webp" alt="Logo CariJodoh" width="50%">
 
 ---
 # _UPDATES_
